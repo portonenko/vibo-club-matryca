@@ -73,19 +73,22 @@ exports.handler = async (event) => {
     const totalMinor = line_items.reduce((s, li) => s + li.quantity * li.price_data.unit_amount, 0);
     const totalMajor = (totalMinor / 100).toFixed(2);
 
+    const meta = {
+      types: [primary + 'x' + primaryQty].concat(addons.map(a => a.type + 'x' + qOf(a.qty))).join(','),
+      lang,
+      name: String(body.name || '').slice(0, 80),
+      email: String(body.email || '').slice(0, 120),
+      summary: String(body.summary || '').slice(0, 490),
+      people: String(body.people || '').slice(0, 480),
+      people2: String(body.people2 || '').slice(0, 480),
+    };
+
     const params = {
       mode: 'payment',
       locale: lang,
       'line_items': line_items,
-      metadata: {
-        types: [primary + 'x' + primaryQty].concat(addons.map(a => a.type + 'x' + qOf(a.qty))).join(','),
-        lang,
-        name: String(body.name || '').slice(0, 80),
-        email: String(body.email || '').slice(0, 120),
-        summary: String(body.summary || '').slice(0, 490),
-        people: String(body.people || '').slice(0, 480),
-        people2: String(body.people2 || '').slice(0, 480),
-      },
+      metadata: meta,                          // on the Checkout Session
+      payment_intent_data: { metadata: meta }, // copied to the Payment (visible in Payments)
       success_url: `${origin}/?paid=1&type=${primary}&val=${totalMajor}&cur=${p.currency.toUpperCase()}`,
       cancel_url: `${origin}/?canceled=1`,
     };
