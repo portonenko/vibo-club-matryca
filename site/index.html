@@ -657,8 +657,6 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
           <div class="co-form">
             <div class="field"><label data-i18n="co_name">Imię</label><input id="co-name" type="text" autocomplete="name"></div>
             <div class="field"><label data-i18n="co_email">E-mail</label><input id="co-email" type="email" autocomplete="email"></div>
-            <div class="field"><label data-i18n="co_pass">Hasło</label><input id="co-pass" type="password" autocomplete="new-password"></div>
-            <div class="field"><label data-i18n="co_pass2">Powtórz hasło</label><input id="co-pass2" type="password" autocomplete="new-password"></div>
             <label class="co-check"><input type="checkbox" id="co-terms"><span data-i18n-html="co_terms">Akceptuję <a onclick="goTerms()">regulamin</a> i <a onclick="goPrivacy()">politykę prywatności</a>.</span></label>
           </div>
           <div class="co-order">
@@ -863,7 +861,7 @@ const I18N={
   h_czakry:'Czakry',h_fizyka:'Fizyka',h_energia:'Energia',h_emocja:'Emocja',h_razem:'Razem',
   pa_sila:'Siła przodków',pa_kod:'Kod siły',
   sell_small:'· PDF natychmiast',sell_btn:'Zamów pełen rozbiór',sell_bonus:'🎁 W prezencie: Matryca Marki Osobistej — Twój kod sukcesu w pracy i biznesie.',
-  co_h1:'Załóż konto i zamów',co_sub:'Konto pozwala zapisać Twoje raporty i wrócić do nich w każdej chwili.',co_name:'Imię',co_email:'E-mail',co_pass:'Hasło',co_pass2:'Powtórz hasło',co_terms:'Akceptuję <a onclick="goTerms()">regulamin</a> i <a onclick="goPrivacy()">politykę prywatności</a>.',co_order:'Twoje zamówienie',co_total:'Razem',co_pay:'Zapłać',co_err_fields:'Uzupełnij wszystkie pola.',co_err_email:'Podaj poprawny e-mail.',co_err_pass:'Hasła nie są takie same.',co_err_terms:'Zaakceptuj regulamin i politykę.',co_err_dates:'Uzupełnij datę urodzenia (DD.MM.RRRR) dla każdej osoby.',
+  co_h1:'Twoje dane i zamówienie',co_sub:'Podaj e-mail — na ten adres wyślemy Twój raport.',co_name:'Imię',co_email:'E-mail',co_pass:'Hasło',co_pass2:'Powtórz hasło',co_terms:'Akceptuję <a onclick="goTerms()">regulamin</a> i <a onclick="goPrivacy()">politykę prywatności</a>.',co_order:'Twoje zamówienie',co_total:'Razem',co_pay:'Zapłać',co_err_fields:'Uzupełnij wszystkie pola.',co_err_email:'Podaj poprawny e-mail.',co_err_pass:'Hasła nie są takie same.',co_err_terms:'Zaakceptuj regulamin i politykę.',co_err_dates:'Uzupełnij datę urodzenia (DD.MM.RRRR) dla każdej osoby.',
   trust1:'Bezpieczna płatność',trust2:'✦ PDF natychmiast po opłacie',trust3:'♢ Płatność jednorazowa',
   lock_sub:'odkryjesz w pełnym rozbiorze PDF',lock_btn:'Odblokuj pełny rozbiór · ',lock_count:'Jeszcze {n} rozdziałów',
   feat_eyebrow:'Jak to działa',feat_h2:'Trzy kroki do <em>Twojej mapy</em>',
@@ -934,7 +932,7 @@ const I18N={
   h_czakry:'Chakras',h_fizyka:'Physical',h_energia:'Energy',h_emocja:'Emotion',h_razem:'Total',
   pa_sila:'Ancestral power',pa_kod:'Power code',
   sell_small:'· PDF instantly',sell_btn:'Order the full report',sell_bonus:'🎁 Free gift: your Personal Brand Matrix — your success code at work and in business.',
-  co_h1:'Create account & order',co_sub:'An account lets you save your reports and come back to them anytime.',co_name:'Name',co_email:'E-mail',co_pass:'Password',co_pass2:'Repeat password',co_terms:'I accept the <a onclick="goTerms()">terms</a> and <a onclick="goPrivacy()">privacy policy</a>.',co_order:'Your order',co_total:'Total',co_pay:'Pay',co_err_fields:'Please fill in all fields.',co_err_email:'Enter a valid e-mail.',co_err_pass:'Passwords do not match.',co_err_terms:'Please accept the terms.',co_err_dates:'Enter a date of birth (DD.MM.YYYY) for each person.',
+  co_h1:'Your details & order',co_sub:'Enter the e-mail where we will send your report.',co_name:'Name',co_email:'E-mail',co_pass:'Password',co_pass2:'Repeat password',co_terms:'I accept the <a onclick="goTerms()">terms</a> and <a onclick="goPrivacy()">privacy policy</a>.',co_order:'Your order',co_total:'Total',co_pay:'Pay',co_err_fields:'Please fill in all fields.',co_err_email:'Enter a valid e-mail.',co_err_pass:'Passwords do not match.',co_err_terms:'Please accept the terms.',co_err_dates:'Enter a date of birth (DD.MM.YYYY) for each person.',
   trust1:'Secure payment',trust2:'✦ PDF right after payment',trust3:'♢ One-time payment',
   lock_sub:'unlock them in the full PDF report',lock_btn:'Unlock the full report · ',lock_count:'{n} more chapters',
   feat_eyebrow:'How it works',feat_h2:'Three steps to <em>your map</em>',
@@ -1005,7 +1003,7 @@ const I18N={
   h_czakry:'Chakren',h_fizyka:'Physis',h_energia:'Energie',h_emocja:'Emotion',h_razem:'Gesamt',
   pa_sila:'Ahnenkraft',pa_kod:'Kraftcode',
   sell_small:'· PDF sofort',sell_btn:'Vollständige Analyse bestellen',sell_bonus:'🎁 Geschenk: deine Persönliche Marken-Matrix — dein Erfolgscode in Beruf und Business.',
-  co_h1:'Konto erstellen & bestellen',co_sub:'Mit einem Konto kannst du deine Berichte speichern und jederzeit darauf zugreifen.',co_name:'Name',co_email:'E-Mail',co_pass:'Passwort',co_pass2:'Passwort wiederholen',co_terms:'Ich akzeptiere die <a onclick="goTerms()">AGB</a> und <a onclick="goPrivacy()">Datenschutzerklärung</a>.',co_order:'Deine Bestellung',co_total:'Gesamt',co_pay:'Bezahlen',co_err_fields:'Bitte fülle alle Felder aus.',co_err_email:'Gib eine gültige E-Mail ein.',co_err_pass:'Passwörter stimmen nicht überein.',co_err_terms:'Bitte akzeptiere die AGB.',co_err_dates:'Gib für jede Person ein Geburtsdatum (TT.MM.JJJJ) ein.',
+  co_h1:'Deine Daten & Bestellung',co_sub:'Gib die E-Mail an, an die wir deinen Bericht senden.',co_name:'Name',co_email:'E-Mail',co_pass:'Passwort',co_pass2:'Passwort wiederholen',co_terms:'Ich akzeptiere die <a onclick="goTerms()">AGB</a> und <a onclick="goPrivacy()">Datenschutzerklärung</a>.',co_order:'Deine Bestellung',co_total:'Gesamt',co_pay:'Bezahlen',co_err_fields:'Bitte fülle alle Felder aus.',co_err_email:'Gib eine gültige E-Mail ein.',co_err_pass:'Passwörter stimmen nicht überein.',co_err_terms:'Bitte akzeptiere die AGB.',co_err_dates:'Gib für jede Person ein Geburtsdatum (TT.MM.JJJJ) ein.',
   trust1:'Sichere Zahlung',trust2:'✦ PDF sofort nach der Zahlung',trust3:'♢ Einmalige Zahlung',
   lock_sub:'im vollständigen PDF-Bericht freischalten',lock_btn:'Vollständige Analyse freischalten · ',lock_count:'Noch {n} Kapitel',
   feat_eyebrow:'So funktioniert es',feat_h2:'Drei Schritte zu <em>deiner Karte</em>',
@@ -1719,11 +1717,9 @@ function submitCheckout(){
   const err=document.getElementById('co-err');
   const name=(document.getElementById('co-name').value||'').trim();
   const email=(document.getElementById('co-email').value||'').trim();
-  const p1=document.getElementById('co-pass').value||'', p2=document.getElementById('co-pass2').value||'';
   const terms=document.getElementById('co-terms').checked;
-  if(!name||!email||!p1||!p2){err.textContent=L().co_err_fields;return;}
+  if(!name||!email){err.textContent=L().co_err_fields;return;}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){err.textContent=L().co_err_email;return;}
-  if(p1!==p2){err.textContent=L().co_err_pass;return;}
   if(!terms){err.textContent=L().co_err_terms;return;}
   const checked=CO_ITEMS.filter(it=>it.checked);
   for(const it of checked){ for(const p of it.people){ if(!/^\d{2}\.\d{2}\.\d{4}$/.test((p.date||'').trim())){ err.textContent=L().co_err_dates; return; } } }

@@ -74,13 +74,10 @@ exports.handler = async (event) => {
     const totalMajor = (totalMinor / 100).toFixed(2);
 
     const meta = {
-      types: [primary + 'x' + primaryQty].concat(addons.map(a => a.type + 'x' + qOf(a.qty))).join(','),
-      lang,
-      name: String(body.name || '').slice(0, 80),
+      zamowienie: String(body.summary || '').slice(0, 490), // czytelne podsumowanie
       email: String(body.email || '').slice(0, 120),
-      summary: String(body.summary || '').slice(0, 490),
-      people: String(body.people || '').slice(0, 480),
-      people2: String(body.people2 || '').slice(0, 480),
+      produkty: [primary + '×' + primaryQty].concat(addons.map(a => a.type + '×' + qOf(a.qty))).join(', '),
+      jezyk: lang,
     };
 
     const params = {
