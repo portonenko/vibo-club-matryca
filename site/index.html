@@ -21,6 +21,16 @@
 <meta name="twitter:title" content="Matryca Losu — oblicz swój kod za darmo">
 <meta name="twitter:description" content="Darmowy kalkulator Matrycy Losu + pełny rozbiór PDF.">
 <meta name="twitter:image" content="https://vibo.club/hero.png">
+<!-- Google Analytics (GA4) with Consent Mode — analytics only after cookie consent (RODO) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BYMMYNSVSM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
+  try{ if(localStorage.getItem('vibo_cookies')==='1') gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+  gtag('config','G-BYMMYNSVSM');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Parisienne&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -1750,7 +1760,7 @@ function showView(v){
   document.body.classList.toggle('subpage', v!=='home');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
+function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
 /* swipe od lewej krawędzi w prawo = powrót (telefon) */
 let _swX=0,_swY=0;
 document.addEventListener('touchstart',e=>{const t=e.changedTouches[0];_swX=t.clientX;_swY=t.clientY;},{passive:true});
