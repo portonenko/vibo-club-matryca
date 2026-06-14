@@ -82,6 +82,7 @@ exports.handler = async (event) => {
         lang,
         name: String(body.name || '').slice(0, 80),
         email: String(body.email || '').slice(0, 120),
+        summary: String(body.summary || '').slice(0, 490),
         people: String(body.people || '').slice(0, 480),
         people2: String(body.people2 || '').slice(0, 480),
       },

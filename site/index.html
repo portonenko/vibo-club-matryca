@@ -1732,10 +1732,12 @@ function submitCheckout(){
   const addons=checked.filter(it=>it.addon).map(it=>({type:it.type,qty:it.qty}));
   const peopleArr=checked.map(it=>({t:it.type,q:it.qty,ppl:it.people.map(p=>({n:p.name,g:p.gender==='male'?'m':'k',d:p.date}))}));
   const peopleStr=JSON.stringify(peopleArr);
+  // czytelne podsumowanie zamówienia (widoczne w Stripe)
+  const summary=name+' · '+checked.map(it=>coName(it.type)+' ×'+it.qty+': '+it.people.map(p=>(p.name||'—')+'/'+(p.gender==='male'?'M':'K')+'/'+p.date).join(', ')).join(' | ');
   const pay=document.getElementById('co-pay');
   CHECKOUT_BUSY=true;
   if(pay){pay.disabled=true;pay.style.opacity='.7';pay.textContent=(L().pay_loading||'…');}
-  checkoutFetch({primary:primaryItem.type, primaryQty:primaryItem.qty, addons, lang:CURLANG, name, email, people:peopleStr.slice(0,480), people2:peopleStr.slice(480,960)},0)
+  checkoutFetch({primary:primaryItem.type, primaryQty:primaryItem.qty, addons, lang:CURLANG, name, email, summary:summary.slice(0,490), people:peopleStr.slice(0,480), people2:peopleStr.slice(480,960)},0)
     .catch(()=>{err.textContent=L().alert_pay_err||'Płatność chwilowo niedostępna. Spróbuj ponownie.';})
     .finally(()=>{CHECKOUT_BUSY=false; if(pay){pay.disabled=false;pay.style.opacity='';coTotal();}});
 }
