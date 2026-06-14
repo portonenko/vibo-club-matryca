@@ -474,6 +474,17 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
 
   .sell-bonus{display:none;margin:0 auto 16px;max-width:460px;font-size:14px;color:var(--gold-deep);background:rgba(184,153,90,.1);border:1px dashed rgba(184,153,90,.5);border-radius:12px;padding:11px 15px;line-height:1.5}
 
+  /* ---- promo bar (Nów / Gwiazda Szczęścia) ---- */
+  .promo{position:relative;z-index:8;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,#d6b878,#bf9c54);color:#3a2f10;padding:11px 46px 11px 22px;font-size:14px;text-align:center;cursor:pointer;box-shadow:inset 0 -1px 0 rgba(120,90,30,.25)}
+  .promo-txt{font-family:'Lora',serif;line-height:1.4}
+  .promo-txt b{font-weight:600}
+  .promo-moon{font-size:15px}
+  .promo-cta{text-decoration:underline;font-weight:600;white-space:nowrap;margin-left:4px}
+  .promo-x{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#3a2f10;font-size:21px;line-height:1;cursor:pointer;opacity:.65}
+  .promo-x:hover{opacity:1}
+  .promo.hide{display:none}
+  @media(max-width:600px){.promo{font-size:12.5px;padding:10px 36px 10px 14px;gap:5px}.promo-cta{display:block;margin:2px auto 0}}
+
   /* ---- page back button ---- */
   .page-back{display:none;position:fixed;left:16px;top:74px;z-index:30;background:var(--cream-2);border:1px solid rgba(184,153,90,.3);color:var(--ink-soft);font-family:'Lora',serif;font-size:14px;padding:8px 16px;border-radius:30px;cursor:pointer;box-shadow:0 6px 18px rgba(120,100,60,.12);transition:all .2s}
   @media(max-width:600px){.page-back{top:64px;left:12px;padding:7px 14px;font-size:13px}}
@@ -510,6 +521,11 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
 </head>
 <body>
 <main>
+
+  <div class="promo" id="promo" onclick="buyProduct('star')">
+    <span class="promo-txt"><span class="promo-moon">🌙</span> <span data-i18n-html="promo_txt">Jutro <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.</span> <span class="promo-cta" data-i18n="promo_cta">Odbierz ją →</span></span>
+    <button class="promo-x" aria-label="X" onclick="event.stopPropagation();closePromo()">×</button>
+  </div>
 
   <nav>
     <div class="navbar">
@@ -892,7 +908,7 @@ const I18N={
   m_h2d:'Zanim przeczytasz interpretację',
   m_p7:'Unikaj głównego błędu — nie dziel energii na „dobre” i „złe”. Takie nie istnieją. Każda z 22 energii to ogromne spektrum: może być Twoją siłą (w plusie) albo tworzyć napięcie (w minusie). Moje autorskie raporty PDF mają jeden cel — delikatnie i głęboko przeprowadzić Twoje energie w ich maksymalny, twórczy plus.',
   m_btn:'Oblicz swoją matrycę',
-  back:'Wróć',legal_updated:'Ostatnia aktualizacja: 06.2026.',cookie_ok:'Akceptuję',cookie_txt:'Używamy plików cookie, aby strona działała poprawnie i była wygodniejsza. Korzystając z vibo, akceptujesz naszą <a onclick="goPrivacy()">politykę prywatności</a>.',
+  back:'Wróć',legal_updated:'Ostatnia aktualizacja: 06.2026.',cookie_ok:'Akceptuję',promo_txt:'Jutro <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.',promo_cta:'Odbierz ją →',cookie_txt:'Używamy plików cookie, aby strona działała poprawnie i była wygodniejsza. Korzystając z vibo, akceptujesz naszą <a onclick="goPrivacy()">politykę prywatności</a>.',
   art_h1:'Artykuły',art_lead:'Wkrótce pojawią się tu teksty o Matrycy Losu, energiach i pracy z nimi.',art_soon:'Wkrótce',art_prep:'Pierwszy artykuł jest w przygotowaniu.',
   rev_h1:'Opinie',rev_sub:'Prawdziwe wiadomości od naszych klientów',rev_place:'Miejsce na opinię klienta.',
   pr_h1:'Cennik',pr_lead:'Pełne, autorskie raporty PDF — gotowe od razu po opłacie.',
@@ -963,7 +979,7 @@ const I18N={
   m_h2d:'Before you read the interpretation',
   m_p7:'Avoid the main mistake — do not divide energies into “good” and “bad”. They do not exist. Each of the 22 energies is a vast spectrum: it can be your strength (in plus) or create tension (in minus). My authorial PDF reports have one goal — to gently and deeply guide your energies into their maximum, creative plus.',
   m_btn:'Calculate your matrix',
-  back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
+  back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',promo_txt:'Tomorrow is the <b>New Moon</b> — the best time to activate your <b>Star of Happiness</b>.',promo_cta:'Get it →',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
   art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, energies and working with them will appear here soon.',art_soon:'Coming soon',art_prep:'The first article is in preparation.',
   rev_h1:'Reviews',rev_sub:'Real messages from our clients',rev_place:'Space for a customer review.',
   pr_h1:'Pricing',pr_lead:'Full, authorial PDF reports — ready right after payment.',
@@ -1034,7 +1050,7 @@ const I18N={
   m_h2d:'Bevor du die Auslegung liest',
   m_p7:'Vermeide den Hauptfehler — teile die Energien nicht in „gut“ und „böse“ ein. Solche gibt es nicht. Jede der 22 Energien ist ein riesiges Spektrum: Sie kann deine Stärke sein (im Plus) oder Spannung erzeugen (im Minus). Meine PDF-Berichte haben ein Ziel — deine Energien sanft und tief in ihr maximales, schöpferisches Plus zu führen.',
   m_btn:'Berechne deine Matrix',
-  back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
+  back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',promo_txt:'Morgen ist <b>Neumond</b> — die beste Zeit, deinen <b>Stern des Glücks</b> zu aktivieren.',promo_cta:'Jetzt holen →',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
   art_h1:'Artikel',art_lead:'Hier erscheinen bald Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',
   rev_h1:'Bewertungen',rev_sub:'Echte Nachrichten unserer Kundinnen',rev_place:'Platz für eine Kundenbewertung.',
   pr_h1:'Preise',pr_lead:'Vollständige PDF-Berichte — fertig direkt nach der Zahlung.',
@@ -1773,6 +1789,8 @@ function showView(v){
   document.body.classList.toggle('subpage', v!=='home');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function closePromo(){ try{localStorage.setItem('vibo_promo_v1','1');}catch(e){} const p=document.getElementById('promo'); if(p)p.classList.add('hide'); }
+(function(){ let h=false; try{h=localStorage.getItem('vibo_promo_v1')==='1';}catch(e){} if(h){const p=document.getElementById('promo'); if(p)p.classList.add('hide');} })();
 function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); if(window.fbq){ fbq('consent','grant'); fbq('track','PageView'); } const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
 /* swipe od lewej krawędzi w prawo = powrót (telefon) */
 let _swX=0,_swY=0;
