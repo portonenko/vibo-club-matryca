@@ -31,6 +31,14 @@
   try{ if(localStorage.getItem('vibo_cookies')==='1') gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
   gtag('config','G-BYMMYNSVSM');
 </script>
+<!-- Meta Pixel (consent-gated: tracking only after cookie acceptance) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('consent','revoke');
+fbq('init','400261284817380');
+try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq('track','PageView'); } }catch(e){}
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=400261284817380&ev=PageView&noscript=1"/></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Parisienne&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -1737,6 +1745,12 @@ const SUCCESS_COPY={
   en:{h1:'Thank you for your payment!',p:'Your full PDF report is being prepared — we will send it to your e-mail within a few minutes.',btn:'Back to home'},
   de:{h1:'Vielen Dank für Ihre Zahlung!',p:'Ihr vollständiger PDF-Bericht wird vorbereitet — wir senden ihn innerhalb weniger Minuten an Ihre E-Mail.',btn:'Zurück zur Startseite'}
 };
+function trackPurchase(value,currency,type){
+  try{ if(window.gtag) gtag('event','purchase',{value:value,currency:currency,items:[{item_id:type||'order'}]}); }catch(e){}
+  try{ if(window.fbq) fbq('track','Purchase',{value:value,currency:currency}); }catch(e){}
+  // Google Ads conversion (label uzupełnić po założeniu konwersji):
+  try{ if(window.gtag && window.GADS_CONV) gtag('event','conversion',{send_to:window.GADS_CONV,value:value,currency:currency}); }catch(e){}
+}
 function handleReturn(){
   const q=new URLSearchParams(location.search);
   if(q.get('paid')==='1'){
@@ -1745,6 +1759,7 @@ function handleReturn(){
     document.getElementById('suc-p').textContent=c.p;
     document.getElementById('suc-btn').textContent=c.btn;
     showView('success');
+    trackPurchase(parseFloat(q.get('val'))||0, q.get('cur')||'PLN', q.get('type')||'');
     history.replaceState(null,'',location.pathname);
   }else if(q.get('canceled')==='1'){
     history.replaceState(null,'',location.pathname);
@@ -1760,7 +1775,7 @@ function showView(v){
   document.body.classList.toggle('subpage', v!=='home');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
+function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); if(window.fbq){ fbq('consent','grant'); fbq('track','PageView'); } const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
 /* swipe od lewej krawędzi w prawo = powrót (telefon) */
 let _swX=0,_swY=0;
 document.addEventListener('touchstart',e=>{const t=e.changedTouches[0];_swX=t.clientX;_swY=t.clientY;},{passive:true});

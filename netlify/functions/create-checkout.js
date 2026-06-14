@@ -69,6 +69,10 @@ exports.handler = async (event) => {
       price_data: { currency: p.currency, unit_amount: ad[a.type], product_data: { name: NAMES[lang][a.type] } },
     })));
 
+    // order total (major units) for ad-conversion tracking on the success page
+    const totalMinor = line_items.reduce((s, li) => s + li.quantity * li.price_data.unit_amount, 0);
+    const totalMajor = (totalMinor / 100).toFixed(2);
+
     const params = {
       mode: 'payment',
       locale: lang,
@@ -81,7 +85,7 @@ exports.handler = async (event) => {
         people: String(body.people || '').slice(0, 480),
         people2: String(body.people2 || '').slice(0, 480),
       },
-      success_url: `${origin}/?paid=1&type=${primary}`,
+      success_url: `${origin}/?paid=1&type=${primary}&val=${totalMajor}&cur=${p.currency.toUpperCase()}`,
       cancel_url: `${origin}/?canceled=1`,
     };
     if (body.email) params.customer_email = String(body.email).slice(0, 120);
