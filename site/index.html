@@ -1460,8 +1460,35 @@ function pick(section,energy,g){
   if(v==null)return null;
   if(typeof v==='object'&&(v.m!==undefined||v.k!==undefined))v=v[g]||v.m||v.k;
   return v;}
-function ageEnergy(d){const keys=['C5','C15','C25','C35','C45','C55','C65','C75'];
-  const i=Math.min(7,Math.max(0,Math.floor((d.age||0)/10)));return d[keys[i]];}
+/* Energia roku — z linii wieku matrycy. Pełny wiek (floor): połowy roku NIE
+   przesuwają energii; trzyma się od urodzin do następnych urodzin. */
+function ageEnergy(d){
+  const age=Math.floor(d.age||0);
+  const eff=((age%80)+80)%80, dec=Math.floor(eff/10), yr=Math.floor(eff-dec*10);
+  const segs=[
+    {s:'A',m:'C5', subs:['C1r5','C2r5','C3r5','C5r5','C6r5','C7r5']},
+    {s:'F',m:'C15',subs:['C1r15','C2r15','C3r15','C5r15','C6r15','C7r15']},
+    {s:'B',m:'C25',subs:['C1r25','C2r25','C3r25','C5r25','C6r25','C7r25']},
+    {s:'G',m:'C35',subs:['C1r35','C2r35','C3r35','C5r35','C6r35','C7r35']},
+    {s:'C',m:'C45',subs:['C1r45','C2r45','C3r45','C5r45','C6r45','C7r45']},
+    {s:'H',m:'C55',subs:['C1r55','C2r55','C3r55','C5r55','C6r55','C7r55']},
+    {s:'D',m:'C65',subs:['C1r65','C2r65','C3r65','C5r65','C6r65','C7r65']},
+    {s:'I',m:'C75',subs:['C1r75','C2r75','C3r75','C5r75','C6r75','C7r75']},
+  ];
+  const seg=segs[dec]; let key;
+  switch(yr){
+    case 0: key=seg.s; break;
+    case 1: key=seg.subs[0]; break;
+    case 2: key=seg.subs[1]; break;
+    case 3: case 4: key=seg.subs[2]; break;
+    case 5: key=seg.m; break;
+    case 6: key=seg.subs[3]; break;
+    case 7: key=seg.subs[4]; break;
+    case 8: case 9: key=seg.subs[5]; break;
+    default: key=seg.m;
+  }
+  return d[key];
+}
 function accItem(title,energy,bodyHtml,open){
   const arc=ARCANA[energy]?' · '+ARCANA[energy][0]:'';
   return `<div class="acc-item${open?' open':''}"><div class="acc-head" onclick="this.parentElement.classList.toggle('open')">${title}<span class="chev">›</span></div><div class="acc-body"><div class="acc-pos"><div class="pl">${L().u_energy} ${energy}${arc}</div>${bodyHtml}</div></div></div>`;
