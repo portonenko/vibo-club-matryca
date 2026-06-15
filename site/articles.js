@@ -107,7 +107,7 @@ window.ARTICLES = {
         <div class="art-ebook-b">
           <b>Nützliches Lernmaterial</b>
           <p>Wenn du jeden der 22 Archetypen im Detail kennenlernen, ihre Stärken und Schwächen verstehen und Methoden lernen möchtest, jede Energie ins Plus zu führen — lade den kostenlosen Leitfaden mit der vollständigen Beschreibung aller 22 Energien herunter.</p>
-          <a class="btn btn-gold" href="https://drive.google.com/file/d/1Twt5b0jlX4UQ6FfDtSIztFYL0ZAXZO2n/view" target="_blank" rel="noopener">Kostenloses E-Book herunterladen</a>
+          <a class="btn btn-gold" href="https://drive.google.com/file/d/1aZD-Rhs5CQ5aIfHcymh55FjoXkEleRZO/view" target="_blank" rel="noopener">Kostenloses E-Book herunterladen</a>
         </div>
       </div>
       <h2>Bereit, deinen persönlichen Code zu entdecken?</h2>
