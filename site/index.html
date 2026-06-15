@@ -1542,7 +1542,7 @@ function setType(t){
   document.getElementById('err').textContent='';
   document.getElementById('en-err').textContent='';
   applyCopy();
-  if(isEnergy){ document.getElementById('person2').style.display='none'; return; }
+  if(isEnergy){ document.getElementById('person2').style.display='none'; if(typeof trackView==='function')trackView('energia-dnia','vibo — energia dnia'); return; }
   document.getElementById('person2').style.display = t==='compat' ? 'flex' : 'none';
   document.getElementById('legend2').style.display = 'none';
   document.getElementById('result').classList.remove('show');
@@ -1857,14 +1857,30 @@ function handleReturn(){
 }
 
 /* view switching (menu) */
-function showView(v){
+/* ===== Analytics: virtual page views for the single-page app ===== */
+const VIEW_SLUG={home:'',method:'o-metodzie',articles:'artykuly',reviews:'opinie',pricing:'cennik',privacy:'polityka-prywatnosci',terms:'regulamin',account:'konto',success:'dziekujemy',checkout:'zamowienie',article:'artykul',energy:'energia-dnia'};
+function trackView(slug,title){
+  const path='/'+(slug||'');
+  try{ if(window.gtag) gtag('event','page_view',{page_title:title||document.title,page_location:location.origin+'/'+(slug?('#'+slug):''),page_path:path}); }catch(e){}
+  try{ if(window.fbq) fbq('track','PageView'); }catch(e){}
+}
+function showView(v,opts){
+  opts=opts||{};
   document.querySelector('nav').classList.remove('open');
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
   const el=document.getElementById('view-'+v); if(el) el.classList.add('active');
   document.querySelectorAll('.menu a').forEach(a=>a.classList.toggle('active', a.dataset.v===v));
   document.body.classList.toggle('subpage', v!=='home');
   window.scrollTo({top:0,behavior:'smooth'});
+  const slug=VIEW_SLUG[v]!==undefined?VIEW_SLUG[v]:v;
+  if(!opts.noPush){ try{ history.pushState({v:v}, '', slug? ('#'+slug) : location.pathname); }catch(e){} }
+  trackView(slug, 'vibo — '+v);
 }
+window.addEventListener('popstate',function(e){
+  const v=(e.state&&e.state.v)|| (location.hash? hashToView(location.hash.slice(1)) : 'home');
+  if(v) showView(v,{noPush:true});
+});
+function hashToView(slug){ for(const k in VIEW_SLUG){ if(VIEW_SLUG[k]===slug) return k; } return 'home'; }
 function closePromo(){ try{localStorage.setItem('vibo_promo_v2','1');}catch(e){} const p=document.getElementById('promo'); if(p)p.classList.add('hide'); }
 (function(){ let h=false; try{h=localStorage.getItem('vibo_promo_v2')==='1';}catch(e){} const p=document.getElementById('promo'); if(!p)return; p.classList.add('hide'); if(h)return; setTimeout(()=>{p.classList.remove('hide');p.classList.add('promo-in');},4000); })();
 function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); if(window.fbq){ fbq('consent','grant'); fbq('track','PageView'); } const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
@@ -1894,6 +1910,10 @@ if('IntersectionObserver' in window){
   if(I18N[saved]){CURLANG=saved;const lb=document.querySelector('.lang-btn');if(lb)lb.textContent=saved.toUpperCase()+' ▾';}
   applyStatic();applyCopy();renderLegal();renderArticles();
   handleReturn();
+  // открытие нужного раздела по ссылке-хэшу (vibo.club/#cennik)
+  if(location.hash && location.hash.length>1 && !new URLSearchParams(location.search).get('paid')){
+    const v=hashToView(location.hash.slice(1)); if(v&&v!=='home') showView(v,{noPush:true});
+  }
 })();
 </script>
 </body>
