@@ -568,7 +568,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
 <main>
 
   <div class="promo" id="promo" onclick="buyProduct('star')">
-    <span class="promo-txt"><span class="promo-moon">🌙</span> <span data-i18n-html="promo_txt">Jutro <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.</span> <span class="promo-cta" data-i18n="promo_cta">Odbierz ją →</span></span>
+    <span class="promo-txt"><span class="promo-moon">🌙</span> <span data-i18n-html="promo_txt">Dziś <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.</span> <span class="promo-cta" data-i18n="promo_cta">Odbierz ją →</span></span>
     <button class="promo-x" aria-label="X" onclick="event.stopPropagation();closePromo()">×</button>
   </div>
 
@@ -1031,7 +1031,7 @@ const I18N={
   m_h2d:'Before you read the interpretation',
   m_p7:'Avoid the main mistake — do not divide energies into “good” and “bad”. They do not exist. Each of the 22 energies is a vast spectrum: it can be your strength (in plus) or create tension (in minus). My authorial PDF reports have one goal — to gently and deeply guide your energies into their maximum, creative plus.',
   m_btn:'Calculate your matrix',
-  back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',promo_txt:'Tomorrow is the <b>New Moon</b> — the best time to activate your <b>Star of Happiness</b>.',promo_cta:'Get it →',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
+  back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',promo_txt:'Today is the <b>New Moon</b> — the best time to activate your <b>Star of Happiness</b>.',promo_cta:'Get it →',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
   art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, the energies and working with them.',art_read:'Read',art_back:'← All articles',art_soon:'Coming soon',art_prep:'The first article is in preparation.',
   rev_h1:'Reviews',rev_sub:'Real messages from our clients',rev_place:'Space for a customer review.',
   pr_h1:'Pricing',pr_lead:'Full, authorial PDF reports — ready right after payment.',
@@ -1102,7 +1102,7 @@ const I18N={
   m_h2d:'Bevor du die Auslegung liest',
   m_p7:'Vermeide den Hauptfehler — teile die Energien nicht in „gut“ und „böse“ ein. Solche gibt es nicht. Jede der 22 Energien ist ein riesiges Spektrum: Sie kann deine Stärke sein (im Plus) oder Spannung erzeugen (im Minus). Meine PDF-Berichte haben ein Ziel — deine Energien sanft und tief in ihr maximales, schöpferisches Plus zu führen.',
   m_btn:'Berechne deine Matrix',
-  back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',promo_txt:'Morgen ist <b>Neumond</b> — die beste Zeit, deinen <b>Stern des Glücks</b> zu aktivieren.',promo_cta:'Jetzt holen →',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
+  back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',promo_txt:'Heute ist <b>Neumond</b> — die beste Zeit, deinen <b>Stern des Glücks</b> zu aktivieren.',promo_cta:'Jetzt holen →',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
   art_h1:'Artikel',art_lead:'Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_read:'Lesen',art_back:'← Alle Artikel',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',
   rev_h1:'Bewertungen',rev_sub:'Echte Nachrichten unserer Kundinnen',rev_place:'Platz für eine Kundenbewertung.',
   pr_h1:'Preise',pr_lead:'Vollständige PDF-Berichte — fertig direkt nach der Zahlung.',
@@ -1865,8 +1865,8 @@ function showView(v){
   document.body.classList.toggle('subpage', v!=='home');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function closePromo(){ try{localStorage.setItem('vibo_promo_v1','1');}catch(e){} const p=document.getElementById('promo'); if(p)p.classList.add('hide'); }
-(function(){ let h=false; try{h=localStorage.getItem('vibo_promo_v1')==='1';}catch(e){} const p=document.getElementById('promo'); if(!p)return; p.classList.add('hide'); if(h)return; setTimeout(()=>{p.classList.remove('hide');p.classList.add('promo-in');},4000); })();
+function closePromo(){ try{localStorage.setItem('vibo_promo_v2','1');}catch(e){} const p=document.getElementById('promo'); if(p)p.classList.add('hide'); }
+(function(){ let h=false; try{h=localStorage.getItem('vibo_promo_v2')==='1';}catch(e){} const p=document.getElementById('promo'); if(!p)return; p.classList.add('hide'); if(h)return; setTimeout(()=>{p.classList.remove('hide');p.classList.add('promo-in');},4000); })();
 function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); if(window.fbq){ fbq('consent','grant'); fbq('track','PageView'); } const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
 /* swipe od lewej krawędzi w prawo = powrót (telefon) */
 let _swX=0,_swY=0;
