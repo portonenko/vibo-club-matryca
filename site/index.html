@@ -113,6 +113,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   .btn-gold:hover{filter:brightness(1.05);transform:translateY(-1px)}
   .err{color:#c0584f;text-align:left;font-size:14px;margin-top:10px;min-height:0;empty-cells:hide}
   .err:empty{margin:0}
+  .age-hint{font-family:'Lora',serif;font-size:13px;color:var(--gold-deep);margin-top:5px;min-height:15px;letter-spacing:.3px}
 
   .result{display:none;margin-top:8px}
   .result.show{display:block;animation:fade .8s ease}
@@ -623,7 +624,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
         <div class="form" id="matrix-form">
           <div class="prow">
             <div class="field"><label id="lab-name1">Imię</label><input id="name1" type="text" placeholder="Imię"></div>
-            <div class="field p1"><label id="lab1">Data urodzenia</label><input id="dob" type="text" inputmode="numeric" placeholder="DD.MM.RRRR" maxlength="10"></div>
+            <div class="field p1"><label id="lab1">Data urodzenia</label><input id="dob" type="text" inputmode="numeric" placeholder="DD.MM.RRRR" maxlength="10"><div class="age-hint" id="age1"></div></div>
             <div class="field"><label data-i18n="f_plec">Płeć</label>
               <div class="seg">
                 <button type="button" class="seg-btn active" data-i18n="f_kobieta" onclick="setGender(1,'female',this)">Kobieta</button>
@@ -633,7 +634,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
           </div>
           <div class="prow" id="person2" style="display:none">
             <div class="field"><label data-i18n="f_imiepartnera">Imię partnera</label><input id="name2" type="text" placeholder="Imię partnera"></div>
-            <div class="field p2"><label data-i18n="f_datapartnera">Data partnera</label><input id="dob2" type="text" inputmode="numeric" placeholder="DD.MM.RRRR" maxlength="10"></div>
+            <div class="field p2"><label data-i18n="f_datapartnera">Data partnera</label><input id="dob2" type="text" inputmode="numeric" placeholder="DD.MM.RRRR" maxlength="10"><div class="age-hint" id="age2"></div></div>
             <div class="field"><label data-i18n="f_plecpartnera">Płeć partnera</label>
               <div class="seg">
                 <button type="button" class="seg-btn active" data-i18n="f_kobieta" onclick="setGender(2,'female',this)">Kobieta</button>
@@ -960,6 +961,7 @@ const I18N={
   m_h2d:'Zanim przeczytasz interpretację',
   m_p7:'Unikaj głównego błędu — nie dziel energii na „dobre” i „złe”. Takie nie istnieją. Każda z 22 energii to ogromne spektrum: może być Twoją siłą (w plusie) albo tworzyć napięcie (w minusie). Moje autorskie raporty PDF mają jeden cel — delikatnie i głęboko przeprowadzić Twoje energie w ich maksymalny, twórczy plus.',
   m_btn:'Oblicz swoją matrycę',
+  age_label:'Wiek',
   back:'Wróć',legal_updated:'Ostatnia aktualizacja: 06.2026.',cookie_ok:'Akceptuję',promo_txt:'Dziś <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.',promo_cta:'Odbierz ją →',cookie_txt:'Używamy plików cookie, aby strona działała poprawnie i była wygodniejsza. Korzystając z vibo, akceptujesz naszą <a onclick="goPrivacy()">politykę prywatności</a>.',
   art_h1:'Artykuły',art_lead:'Teksty o Matrycy Losu, energiach i pracy z nimi.',art_read:'Czytaj',art_back:'← Wszystkie artykuły',art_soon:'Wkrótce',art_prep:'Pierwszy artykuł jest w przygotowaniu.',
   rev_h1:'Opinie',rev_sub:'Prawdziwe wiadomości od naszych klientów',rev_place:'Miejsce na opinię klienta.',
@@ -1031,6 +1033,7 @@ const I18N={
   m_h2d:'Before you read the interpretation',
   m_p7:'Avoid the main mistake — do not divide energies into “good” and “bad”. They do not exist. Each of the 22 energies is a vast spectrum: it can be your strength (in plus) or create tension (in minus). My authorial PDF reports have one goal — to gently and deeply guide your energies into their maximum, creative plus.',
   m_btn:'Calculate your matrix',
+  age_label:'Age',
   back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',promo_txt:'Today is the <b>New Moon</b> — the best time to activate your <b>Star of Happiness</b>.',promo_cta:'Get it →',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
   art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, the energies and working with them.',art_read:'Read',art_back:'← All articles',art_soon:'Coming soon',art_prep:'The first article is in preparation.',
   rev_h1:'Reviews',rev_sub:'Real messages from our clients',rev_place:'Space for a customer review.',
@@ -1102,6 +1105,7 @@ const I18N={
   m_h2d:'Bevor du die Auslegung liest',
   m_p7:'Vermeide den Hauptfehler — teile die Energien nicht in „gut“ und „böse“ ein. Solche gibt es nicht. Jede der 22 Energien ist ein riesiges Spektrum: Sie kann deine Stärke sein (im Plus) oder Spannung erzeugen (im Minus). Meine PDF-Berichte haben ein Ziel — deine Energien sanft und tief in ihr maximales, schöpferisches Plus zu führen.',
   m_btn:'Berechne deine Matrix',
+  age_label:'Alter',
   back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',promo_txt:'Heute ist <b>Neumond</b> — die beste Zeit, deinen <b>Stern des Glücks</b> zu aktivieren.',promo_cta:'Jetzt holen →',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
   art_h1:'Artikel',art_lead:'Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_read:'Lesen',art_back:'← Alle Artikel',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',
   rev_h1:'Bewertungen',rev_sub:'Echte Nachrichten unserer Kundinnen',rev_place:'Platz für eine Kundenbewertung.',
@@ -1557,6 +1561,17 @@ function attachFmt(el){el.addEventListener('input',e=>{
 });}
 const dob=document.getElementById('dob'), dob2=document.getElementById('dob2');
 attachFmt(dob); attachFmt(dob2);
+function showAge(el,ageEl){
+  if(!el||!ageEl)return;
+  const m=String(el.value).trim().match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if(!m){ageEl.textContent='';return;}
+  const d=+m[1],mo=+m[2],y=+m[3], nowY=new Date().getFullYear();
+  if(d<1||d>31||mo<1||mo>12||y<1900||y>nowY){ageEl.textContent='';return;}
+  const a=calcAge(d,mo,y);
+  ageEl.textContent=(a>=0)?((L().age_label||'Wiek')+' '+a):'';
+}
+if(dob) dob.addEventListener('input',()=>showAge(dob,document.getElementById('age1')));
+if(dob2) dob2.addEventListener('input',()=>showAge(dob2,document.getElementById('age2')));
 
 /* ===== Energia dnia ===== */
 const ARCANA_EN=['','The Magician','The High Priestess','The Empress','The Emperor','The Hierophant','The Lovers','The Chariot','Justice','The Hermit','Wheel of Fortune','Strength','The Hanged Man','Death','Temperance','The Devil','The Tower','The Star','The Moon','The Sun','Judgement','The World','The Fool'];
