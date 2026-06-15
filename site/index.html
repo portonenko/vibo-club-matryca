@@ -478,6 +478,40 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
 
   .sell-bonus{display:none;margin:0 auto 16px;max-width:460px;font-size:14px;color:var(--gold-deep);background:rgba(184,153,90,.1);border:1px dashed rgba(184,153,90,.5);border-radius:12px;padding:11px 15px;line-height:1.5}
 
+  /* ---- artykuły ---- */
+  .art-list{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:30px}
+  @media(max-width:680px){.art-list{grid-template-columns:1fr}}
+  .art-card{background:var(--cream-2);border:1px solid rgba(184,153,90,.22);border-radius:20px;overflow:hidden;cursor:pointer;box-shadow:0 16px 36px rgba(120,100,60,.08);transition:transform .2s,box-shadow .2s}
+  .art-card:hover{transform:translateY(-3px);box-shadow:0 22px 46px rgba(120,100,60,.16)}
+  .art-card-img{height:170px;background-size:cover;background-position:center}
+  .art-card-b{padding:20px 22px 24px}
+  .art-card-b h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--ink);line-height:1.15;margin-bottom:8px}
+  .art-card-b p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin-bottom:12px}
+  .art-card-more{color:var(--gold-deep);font-size:13px;font-weight:600;letter-spacing:.4px}
+  /* article reader */
+  .art-page{max-width:760px}
+  .art-cover{height:300px;border-radius:22px;margin:0 0 8px;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+  .art-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,25,40,.05),rgba(30,25,40,.62))}
+  .art-cover-ov{position:relative;z-index:2;padding:30px 32px;color:#fff}
+  .art-cover-ov .art-eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#f0d9a0;margin-bottom:10px}
+  .art-cover-ov h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,46px);font-weight:600;line-height:1.08;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+  .art-cover-ov p{font-size:16px;color:#f2ecdd;margin-top:8px;max-width:560px}
+  @media(max-width:600px){.art-cover{height:240px}.art-cover-ov{padding:20px}}
+  .art-content{margin-top:30px}
+  .art-content h2{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin:30px 0 10px}
+  .art-content p{color:var(--ink);font-weight:400;line-height:1.8;margin-bottom:16px}
+  .art-content ul{list-style:none;margin:10px 0 20px}
+  .art-content li{padding-left:26px;position:relative;margin-bottom:12px;color:var(--ink);line-height:1.7}
+  .art-content li::before{content:"✦";position:absolute;left:0;color:var(--gold)}
+  .art-link{color:var(--gold-deep);font-weight:600;cursor:pointer;border-bottom:1px solid rgba(184,153,90,.45)}
+  .art-link:hover{color:var(--ink)}
+  .art-ebook{display:flex;gap:16px;align-items:flex-start;background:radial-gradient(120% 170% at 0% 0%,#4a3f6e,#2c2647 60%,#1f1b33);color:#f3e9d4;border-radius:18px;padding:24px 26px;margin:28px 0}
+  .art-ebook-ic{font-size:26px;flex-shrink:0}
+  .art-ebook-b b{font-family:'Cormorant Garamond',serif;font-size:21px;color:#ecd29a;display:block;margin-bottom:6px}
+  .art-ebook-b p{color:#e9e0cb;font-size:14.5px;line-height:1.6;margin-bottom:16px}
+  .art-ebook .btn-gold{display:inline-block;text-decoration:none}
+  .art-cta{text-align:center;margin-top:30px}
+
   /* ---- promo bar (Nów / Gwiazda Szczęścia) ---- */
   .promo{position:relative;z-index:8;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
     background:radial-gradient(120% 180% at 50% -40%, #4a3f6e 0%, #2c2647 45%, #1f1b33 100%);
@@ -737,13 +771,14 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   <div id="view-articles" class="view">
     <div class="page">
       <h1 data-i18n="art_h1">Artykuły</h1>
-      <p class="lead" data-i18n="art_lead">Wkrótce pojawią się tu teksty o Matrycy Losu, energiach i pracy z nimi.</p>
-      <div class="review-grid">
-        <div class="review-card"><b data-i18n="art_soon">Wkrótce</b><p data-i18n="art_prep">Pierwszy artykuł jest w przygotowaniu.</p></div>
-        <div class="review-card"><b data-i18n="art_soon">Wkrótce</b><p data-i18n="art_prep">Pierwszy artykuł jest w przygotowaniu.</p></div>
-        <div class="review-card"><b data-i18n="art_soon">Wkrótce</b><p data-i18n="art_prep">Pierwszy artykuł jest w przygotowaniu.</p></div>
-      </div>
+      <p class="lead" data-i18n="art_lead">Teksty o Matrycy Losu, energiach i pracy z nimi.</p>
+      <div class="art-list" id="art-list"></div>
     </div>
+  </div>
+
+  <!-- ARTYKUŁ (czytnik) -->
+  <div id="view-article" class="view">
+    <article class="page art-page" id="article-body"></article>
   </div>
 
   <!-- OPINIE -->
@@ -877,6 +912,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
 </div>
 
 <script src="legal.js"></script>
+<script src="articles.js"></script>
 <script>
 /* ============ i18n (PL / EN / DE) ============ */
 const I18N={
@@ -925,7 +961,7 @@ const I18N={
   m_p7:'Unikaj głównego błędu — nie dziel energii na „dobre” i „złe”. Takie nie istnieją. Każda z 22 energii to ogromne spektrum: może być Twoją siłą (w plusie) albo tworzyć napięcie (w minusie). Moje autorskie raporty PDF mają jeden cel — delikatnie i głęboko przeprowadzić Twoje energie w ich maksymalny, twórczy plus.',
   m_btn:'Oblicz swoją matrycę',
   back:'Wróć',legal_updated:'Ostatnia aktualizacja: 06.2026.',cookie_ok:'Akceptuję',promo_txt:'Jutro <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.',promo_cta:'Odbierz ją →',cookie_txt:'Używamy plików cookie, aby strona działała poprawnie i była wygodniejsza. Korzystając z vibo, akceptujesz naszą <a onclick="goPrivacy()">politykę prywatności</a>.',
-  art_h1:'Artykuły',art_lead:'Wkrótce pojawią się tu teksty o Matrycy Losu, energiach i pracy z nimi.',art_soon:'Wkrótce',art_prep:'Pierwszy artykuł jest w przygotowaniu.',
+  art_h1:'Artykuły',art_lead:'Teksty o Matrycy Losu, energiach i pracy z nimi.',art_read:'Czytaj',art_back:'← Wszystkie artykuły',art_soon:'Wkrótce',art_prep:'Pierwszy artykuł jest w przygotowaniu.',
   rev_h1:'Opinie',rev_sub:'Prawdziwe wiadomości od naszych klientów',rev_place:'Miejsce na opinię klienta.',
   pr_h1:'Cennik',pr_lead:'Pełne, autorskie raporty PDF — gotowe od razu po opłacie.',
   pr_full_d:'Pełen rozbiór osobisty: charakter, talenty, finanse, relacje i przeznaczenie.',
@@ -996,7 +1032,7 @@ const I18N={
   m_p7:'Avoid the main mistake — do not divide energies into “good” and “bad”. They do not exist. Each of the 22 energies is a vast spectrum: it can be your strength (in plus) or create tension (in minus). My authorial PDF reports have one goal — to gently and deeply guide your energies into their maximum, creative plus.',
   m_btn:'Calculate your matrix',
   back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',promo_txt:'Tomorrow is the <b>New Moon</b> — the best time to activate your <b>Star of Happiness</b>.',promo_cta:'Get it →',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
-  art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, energies and working with them will appear here soon.',art_soon:'Coming soon',art_prep:'The first article is in preparation.',
+  art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, the energies and working with them.',art_read:'Read',art_back:'← All articles',art_soon:'Coming soon',art_prep:'The first article is in preparation.',
   rev_h1:'Reviews',rev_sub:'Real messages from our clients',rev_place:'Space for a customer review.',
   pr_h1:'Pricing',pr_lead:'Full, authorial PDF reports — ready right after payment.',
   pr_full_d:'A full personal reading: character, talents, finances, relationships and destiny.',
@@ -1067,7 +1103,7 @@ const I18N={
   m_p7:'Vermeide den Hauptfehler — teile die Energien nicht in „gut“ und „böse“ ein. Solche gibt es nicht. Jede der 22 Energien ist ein riesiges Spektrum: Sie kann deine Stärke sein (im Plus) oder Spannung erzeugen (im Minus). Meine PDF-Berichte haben ein Ziel — deine Energien sanft und tief in ihr maximales, schöpferisches Plus zu führen.',
   m_btn:'Berechne deine Matrix',
   back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',promo_txt:'Morgen ist <b>Neumond</b> — die beste Zeit, deinen <b>Stern des Glücks</b> zu aktivieren.',promo_cta:'Jetzt holen →',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
-  art_h1:'Artikel',art_lead:'Hier erscheinen bald Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',
+  art_h1:'Artikel',art_lead:'Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_read:'Lesen',art_back:'← Alle Artikel',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',
   rev_h1:'Bewertungen',rev_sub:'Echte Nachrichten unserer Kundinnen',rev_place:'Platz für eine Kundenbewertung.',
   pr_h1:'Preise',pr_lead:'Vollständige PDF-Berichte — fertig direkt nach der Zahlung.',
   pr_full_d:'Eine vollständige persönliche Analyse: Charakter, Talente, Finanzen, Beziehungen und Bestimmung.',
@@ -1650,6 +1686,7 @@ function setLang(code,el){
   applyStatic();
   applyCopy();
   renderLegal();
+  renderArticles();
   if(CURRENT){const d=CURRENT[0],g=GENDER[1]==='male'?'m':'k';
     document.getElementById('diagram').innerHTML=buildSVG(CURRENT,TYPE==='compat');
     if(TYPE!=='compat'){renderPurpose(d);renderHealth(d);}
@@ -1667,6 +1704,28 @@ function renderLegal(){
   if(!lib)return;
   const pb=document.getElementById('privacy-body'); if(pb)pb.innerHTML=lib.privacy+legalFoot();
   const tb=document.getElementById('terms-body'); if(tb)tb.innerHTML=lib.terms+legalFoot();
+}
+
+/* ===== Articles ===== */
+function articleList(){ return (window.ARTICLES&&window.ARTICLES[CURLANG])||(window.ARTICLES&&window.ARTICLES.pl)||[]; }
+function renderArticles(){
+  const grid=document.getElementById('art-list'); if(!grid)return;
+  grid.innerHTML=articleList().map(a=>
+    `<div class="art-card" onclick="openArticle('${a.id}')">`+
+      `<div class="art-card-img" style="background-image:url('${a.cover}')"></div>`+
+      `<div class="art-card-b"><h3>${a.title}</h3><p>${a.excerpt}</p><span class="art-card-more">${(L().art_read||'Czytaj')} →</span></div>`+
+    `</div>`
+  ).join('');
+}
+function openArticle(id){
+  const a=articleList().find(x=>x.id===id)||articleList()[0]; if(!a)return;
+  const box=document.getElementById('article-body'); if(!box)return;
+  box.innerHTML=
+    `<div class="art-cover" style="background-image:url('${a.cover}')"><div class="art-cover-ov">`+
+      `<div class="art-eyebrow">${a.kicker||''}</div><h1>${a.title}</h1><p>${a.sub}</p>`+
+    `</div></div><div class="art-content">${a.html}</div>`+
+    `<div class="art-cta"><button class="btn btn-gold" onclick="showView('articles')">${(L().art_back||'← Artykuły')}</button></div>`;
+  showView('article');
 }
 
 /* ===== Stripe checkout ===== */
@@ -1833,7 +1892,7 @@ if('IntersectionObserver' in window){
     saved = bl.startsWith('de')?'de' : bl.startsWith('en')?'en' : 'pl';
   }
   if(I18N[saved]){CURLANG=saved;const lb=document.querySelector('.lang-btn');if(lb)lb.textContent=saved.toUpperCase()+' ▾';}
-  applyStatic();applyCopy();renderLegal();
+  applyStatic();applyCopy();renderLegal();renderArticles();
   handleReturn();
 })();
 </script>
