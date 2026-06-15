@@ -1167,10 +1167,20 @@ function calcAge(day,month,year){
   const dob=new Date(year,month-1,day); const dn=new Date(today.getFullYear(),dob.getMonth(),dob.getDate());
   let age=today.getFullYear()-dob.getFullYear(); if(today<dn) age-=1; return age;
 }
+/* dokładny wiek z ułamkiem (do energii roku — przełączanie na półroczu) */
+function exactAgeNow(day,month,year){
+  const now=new Date();
+  let last=new Date(now.getFullYear(),month-1,day);
+  if(now<last) last=new Date(now.getFullYear()-1,month-1,day);
+  const next=new Date(last.getFullYear()+1,month-1,day);
+  const whole=last.getFullYear()-year;
+  const frac=(now-last)/(next-last);
+  return whole+frac;
+}
 function calculateMatrix(str){
   const p=str.split('.'); if(p.length!==3) return null;
   const dd=+p[0], mm=+p[1], yy=+p[2]; if(!dd||!mm||!yy) return null;
-  const cr=checkResult; const age=calcAge(dd,mm,yy);
+  const cr=checkResult; const age=calcAge(dd,mm,yy); const exactAge=exactAgeNow(dd,mm,yy);
   const A=cr(dd),B=cr(mm),C=cr(yy),D=cr(A+B+C),E=cr(A+B+C+D);
   const F=cr(A+B),G=cr(B+C),H=cr(C+D),I=cr(D+A);
   const L2=cr(F+G+H+I),L1=cr(L2+E);
@@ -1189,7 +1199,7 @@ function calculateMatrix(str){
   const C2r55=cr(C55+H),C1r55=cr(C2r55+H),C3r55=cr(C55+C2r55),C6r55=cr(C55+D),C7r55=cr(C6r55+D),C5r55=cr(C55+C6r55);
   const C2r65=cr(C65+D),C1r65=cr(C2r65+D),C3r65=cr(C65+C2r65),C6r65=cr(C65+I),C7r65=cr(C6r65+I),C5r65=cr(C65+C6r65);
   const C2r75=cr(C75+I),C1r75=cr(C2r75+I),C3r75=cr(C75+C2r75),C6r75=cr(C75+A),C7r75=cr(C6r75+A),C5r75=cr(C75+C6r75);
-  const m={age,A,B,C,D,E,F,G,H,I,J,K,L,M,L1,L2,O,P,Q,N,F1,F2,G1,G2,H1,H2,I1,I2,S,T,R,R1,R2,
+  const m={age,exactAge,A,B,C,D,E,F,G,H,I,J,K,L,M,L1,L2,O,P,Q,N,F1,F2,G1,G2,H1,H2,I1,I2,S,T,R,R1,R2,
     C5,C15,C25,C35,C45,C55,C65,C75,
     C1r5,C2r5,C3r5,C5r5,C6r5,C7r5,C1r15,C2r15,C3r15,C5r15,C6r15,C7r15,
     C1r25,C2r25,C3r25,C5r25,C6r25,C7r25,C1r35,C2r35,C3r35,C5r35,C6r35,C7r35,
@@ -1463,8 +1473,11 @@ function pick(section,energy,g){
 /* Energia roku — z linii wieku matrycy. Pełny wiek (floor): połowy roku NIE
    przesuwają energii; trzyma się od urodzin do następnych urodzin. */
 function ageEnergy(d){
-  const age=Math.floor(d.age||0);
-  const eff=((age%80)+80)%80, dec=Math.floor(eff/10), yr=Math.floor(eff-dec*10);
+  // okres przełącza się na półroczu: dopóki od urodzin minęło <~pół roku,
+  // jesteś jeszcze w poprzednim okresie → bierzemy floor(wiek − 0.5)
+  const ex=(d.exactAge!=null)?d.exactAge:(d.age||0);
+  const idx=Math.max(0,Math.floor(ex-0.5));
+  const eff=((idx%80)+80)%80, dec=Math.floor(eff/10), yr=Math.floor(eff-dec*10);
   const segs=[
     {s:'A',m:'C5', subs:['C1r5','C2r5','C3r5','C5r5','C6r5','C7r5']},
     {s:'F',m:'C15',subs:['C1r15','C2r15','C3r15','C5r15','C6r15','C7r15']},
