@@ -4,23 +4,23 @@
 // Prices are defined server-side only — the client cannot set the amount.
 // Amounts are in the smallest currency unit (grosze / cents).
 const PRICES = {
-  pl: { currency: 'pln', full: 5500, child: 4500, compat: 4500, month: 2500, star: 3300 },
-  en: { currency: 'usd', full: 1400, child: 1100, compat: 1100, month: 700, star: 900 },
-  de: { currency: 'eur', full: 1300, child: 1100, compat: 1100, month: 600, star: 800 },
+  pl: { currency: 'pln', full: 5500, child: 4500, compat: 4500, month: 2500, star: 3300, finance: 14400, relation: 14400, horary: 4500, horary3: 8000, horary5: 13000, horary10: 23000, solar: 29900 },
+  en: { currency: 'usd', full: 1400, child: 1100, compat: 1100, month: 700, star: 900, finance: 3600, relation: 3600, horary: 1100, horary3: 2000, horary5: 3200, horary10: 5700, solar: 7500 },
+  de: { currency: 'eur', full: 1300, child: 1100, compat: 1100, month: 600, star: 800, finance: 3300, relation: 3300, horary: 1000, horary3: 1800, horary5: 3000, horary10: 5300, solar: 6900 },
 };
 
 // Discounted prices when an item is added as an add-on to a main purchase.
 // (star keeps its full price even as an add-on)
 const ADDON = {
-  pl: { full: 3500, child: 2500, compat: 2500, month: 2500, star: 3300 },
-  en: { full: 900, child: 700, compat: 700, month: 700, star: 900 },
-  de: { full: 800, child: 600, compat: 600, month: 600, star: 800 },
+  pl: { full: 3500, child: 2500, compat: 2500, month: 2500, star: 3300, finance: 14400, relation: 14400, horary: 4500, horary3: 8000, horary5: 13000, horary10: 23000, solar: 29900 },
+  en: { full: 900, child: 700, compat: 700, month: 700, star: 900, finance: 3600, relation: 3600, horary: 1100, horary3: 2000, horary5: 3200, horary10: 5700, solar: 7500 },
+  de: { full: 800, child: 600, compat: 600, month: 600, star: 800, finance: 3300, relation: 3300, horary: 1000, horary3: 1800, horary5: 3000, horary10: 5300, solar: 6900 },
 };
 
 const NAMES = {
-  pl: { full: 'Matryca Pełna — raport PDF', child: 'Matryca Dziecka — raport PDF', compat: 'Matryca Zgodności — raport PDF', month: 'Prognoza na miesiąc — PDF', star: 'Gwiazda Szczęścia' },
-  en: { full: 'Full Matrix — PDF report', child: 'Child Matrix — PDF report', compat: 'Compatibility Matrix — PDF report', month: 'Monthly forecast — PDF', star: 'Star of Happiness' },
-  de: { full: 'Vollständige Matrix — PDF-Bericht', child: 'Kind-Matrix — PDF-Bericht', compat: 'Kompatibilitäts-Matrix — PDF-Bericht', month: 'Monatsprognose — PDF', star: 'Stern des Glücks' },
+  pl: { full: 'Matryca Pełna — raport PDF', child: 'Matryca Dziecka — raport PDF', compat: 'Matryca Zgodności — raport PDF', month: 'Prognoza na miesiąc — PDF', star: 'Gwiazda Szczęścia', finance: 'Formuła Finansowa — analiza indywidualna', relation: 'Astrologiczny Portret Relacji — analiza indywidualna', horary: 'Pytanie horarne — odpowiedź astrologiczna', horary3: 'Pytania horarne — pakiet 3', horary5: 'Pytania horarne — pakiet 5', horary10: 'Pytania horarne — pakiet 10', solar: 'Prognoza roczna (solár) — analiza indywidualna' },
+  en: { full: 'Full Matrix — PDF report', child: 'Child Matrix — PDF report', compat: 'Compatibility Matrix — PDF report', month: 'Monthly forecast — PDF', star: 'Star of Happiness', finance: 'Financial Formula — personal analysis', relation: 'Astrological Relationship Portrait — personal analysis', horary: 'Horary question — astrological answer', horary3: 'Horary questions — pack of 3', horary5: 'Horary questions — pack of 5', horary10: 'Horary questions — pack of 10', solar: 'Yearly forecast (Solar Return) — personal analysis' },
+  de: { full: 'Vollständige Matrix — PDF-Bericht', child: 'Kind-Matrix — PDF-Bericht', compat: 'Kompatibilitäts-Matrix — PDF-Bericht', month: 'Monatsprognose — PDF', star: 'Stern des Glücks', finance: 'Finanz-Formel — persönliche Analyse', relation: 'Astrologisches Beziehungsporträt — persönliche Analyse', horary: 'Horar-Frage — astrologische Antwort', horary3: 'Horar-Fragen — 3er-Paket', horary5: 'Horar-Fragen — 5er-Paket', horary10: 'Horar-Fragen — 10er-Paket', solar: 'Jahresprognose (Solar Return) — persönliche Analyse' },
 };
 
 // Flatten a nested object into Stripe's bracket form-encoding.
@@ -47,7 +47,7 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}');
     const lang = ['pl', 'en', 'de'].includes(body.lang) ? body.lang : 'pl';
-    const ALLOWED = ['full', 'child', 'compat', 'month', 'star'];
+    const ALLOWED = ['full', 'child', 'compat', 'month', 'star', 'finance', 'relation', 'horary', 'horary3', 'horary5', 'horary10', 'solar'];
     const qOf = q => Math.max(1, Math.min(10, parseInt(q, 10) || 1));
     const p = PRICES[lang], ad = ADDON[lang];
     const origin = event.headers.origin || event.headers.Origin || 'https://vibo.club';
@@ -61,12 +61,18 @@ exports.handler = async (event) => {
       .map(a => (typeof a === 'string' ? { type: a, qty: 1 } : a))
       .filter(a => a && ALLOWED.includes(a.type) && a.type !== primary);
 
-    const line_items = [{
-      quantity: primaryQty,
-      price_data: { currency: p.currency, unit_amount: p[primary], product_data: { name: NAMES[lang][primary] } },
-    }].concat(addons.map(a => ({
+    // The star (Gwiazda Szczęścia) as the main item must NOT unlock the matrix add-on discount.
+    const starPrimary = primary === 'star';
+    // Primary item: 1st copy full price, każda kolejna w cenie dodatku (np. 2. pełna matryca = 35 zł). Star = bez rabatu.
+    const primaryLines = (starPrimary || primaryQty <= 1)
+      ? [{ quantity: primaryQty, price_data: { currency: p.currency, unit_amount: p[primary], product_data: { name: NAMES[lang][primary] } } }]
+      : [
+          { quantity: 1, price_data: { currency: p.currency, unit_amount: p[primary], product_data: { name: NAMES[lang][primary] } } },
+          { quantity: primaryQty - 1, price_data: { currency: p.currency, unit_amount: ad[primary], product_data: { name: NAMES[lang][primary] + ' (kolejna)' } } },
+        ];
+    const line_items = primaryLines.concat(addons.map(a => ({
       quantity: qOf(a.qty),
-      price_data: { currency: p.currency, unit_amount: ad[a.type], product_data: { name: NAMES[lang][a.type] } },
+      price_data: { currency: p.currency, unit_amount: (starPrimary ? p[a.type] : ad[a.type]), product_data: { name: NAMES[lang][a.type] } },
     })));
 
     // order total (major units) for ad-conversion tracking on the success page
@@ -78,6 +84,9 @@ exports.handler = async (event) => {
       email: String(body.email || '').slice(0, 120),
       produkty: [primary + '×' + primaryQty].concat(addons.map(a => a.type + '×' + qOf(a.qty))).join(', '),
       jezyk: lang,
+      // браузерные cookie Facebook — для серверной атрибуции покупки (Conversions API)
+      fbp: String(body.fbp || '').slice(0, 120),
+      fbc: String(body.fbc || '').slice(0, 200),
     };
 
     const params = {
@@ -86,7 +95,8 @@ exports.handler = async (event) => {
       'line_items': line_items,
       metadata: meta,                          // on the Checkout Session
       payment_intent_data: { metadata: meta }, // copied to the Payment (visible in Payments)
-      success_url: `${origin}/?paid=1&type=${primary}&val=${totalMajor}&cur=${p.currency.toUpperCase()}`,
+      // {CHECKOUT_SESSION_ID} → дедуп браузерного и серверного события Purchase
+      success_url: `${origin}/?paid=1&type=${primary}&val=${totalMajor}&cur=${p.currency.toUpperCase()}&sid={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?canceled=1`,
     };
     if (body.email) params.customer_email = String(body.email).slice(0, 120);

@@ -28,9 +28,12 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
-  try{ if(localStorage.getItem('vibo_cookies')==='1') gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+  try{ if(localStorage.getItem('vibo_cookies')==='1') gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'}); }catch(e){}
   gtag('config','G-BYMMYNSVSM');
+  gtag('config','AW-18239191834'); // Google Ads
 </script>
+<!-- Google Ads purchase conversion disabled: liczona przez import z GA4 (uniknięcie podwójnego liczenia) -->
+<!-- <script>window.GADS_CONV='AW-18239191834/w4AhCJrj378cEJr2j_lD';</script> -->
 <!-- Meta Pixel (consent-gated: tracking only after cookie acceptance) -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -64,7 +67,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 
   /* ---------- HERO (sky dissolving into cream) ---------- */
-  .hero{position:relative;overflow:hidden;padding-bottom:64px;min-height:56vh}
+  .hero{position:relative;overflow:hidden;padding-bottom:130px;min-height:56vh}
   .hero-sky{position:absolute;inset:0;z-index:0;
     background:url('hero.png') no-repeat top center;background-size:cover;}
   /* seamless dissolve of the photo's bottom into the cream content */
@@ -238,6 +241,11 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
 
   footer{padding:70px 0 50px;text-align:center;color:var(--ink-faint);font-size:13px;letter-spacing:1px}
   footer .logo{display:block;margin-bottom:14px;font-size:18px;color:var(--gold-deep)}
+  .foot-pay{margin-top:14px;font-size:12px;color:var(--ink-faint);letter-spacing:.3px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.6}
+  .social{display:flex;justify-content:center;gap:14px;margin:0 0 18px}
+  .social a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--gold-deep);color:var(--gold-deep);transition:background .2s,color .2s}
+  .social a:hover{background:var(--gold-deep);color:#fff}
+  .social svg{width:19px;height:19px}
 
   /* polish / a11y */
   a:focus-visible,button:focus-visible,input:focus-visible,.tab:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
@@ -463,6 +471,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   .co-qty{display:inline-flex;align-items:center;gap:14px;margin-bottom:12px}
   .co-qty button{width:28px;height:28px;border-radius:50%;border:1px solid rgba(184,153,90,.4);background:var(--cream-2);color:var(--ink);font-size:17px;line-height:1;cursor:pointer}
   .co-qty span{min-width:16px;text-align:center;font-size:15px;color:var(--ink)}
+  .co-plabel{font-family:'Lora',serif;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-deep);margin:8px 0 3px}
   .co-person{display:flex;gap:8px;margin-bottom:9px;flex-wrap:wrap;align-items:center}
   .co-pin{flex:1;min-width:96px;height:42px;background:#fff;border:1px solid rgba(184,153,90,.35);border-radius:10px;padding:0 12px;font-family:'Lora',serif;font-size:14px;color:var(--ink)}
   .co-pin:focus{outline:none;border-color:var(--gold)}
@@ -513,6 +522,14 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   .art-ebook-b p{color:#e9e0cb;font-size:14.5px;line-height:1.6;margin-bottom:16px}
   .art-ebook .btn-gold{display:inline-block;text-decoration:none}
   .art-cta{text-align:center;margin-top:30px}
+  .art-convert{text-align:center;margin:46px 0 8px;padding:34px 26px;border-radius:18px;
+    background:radial-gradient(120% 170% at 0% 0%,#4a3f6e,#2c2647 60%,#1f1b33)}
+  .art-convert h3{font-family:'Cormorant Garamond',serif;font-size:25px;line-height:1.3;color:#ecd29a;margin:0 auto 20px;max-width:440px}
+  .art-convert .btn-gold{display:inline-block;text-decoration:none}
+  .art-more{margin:30px 0 6px;text-align:center}
+  .art-more .art-more-t{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+  .art-more a{display:inline-block;margin:4px 10px;font-size:13px;color:var(--ink-faint);cursor:pointer;border-bottom:1px solid rgba(184,153,90,.3)}
+  .art-more a:hover{color:var(--gold-deep)}
 
   /* ---- promo bar (Nów / Gwiazda Szczęścia) ---- */
   .promo{position:relative;z-index:8;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
@@ -564,15 +581,94 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   .btn-gold:hover{box-shadow:0 12px 30px rgba(154,125,66,.34)}
   /* mobile viewport-stable hero (no jump on iOS Safari) */
   @supports (min-height:100dvh){.hero{min-height:56dvh}}
+  /* Kalkulator w artykule */
+  .art-calc{margin:30px 0;padding:22px 20px;border-radius:20px;background:radial-gradient(120% 120% at 50% 0%, #fffdf6, #f6eedd);border:1px solid rgba(184,153,90,.28);box-shadow:0 14px 40px rgba(120,100,60,.1)}
+  .art-calc-h{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;text-align:center;color:var(--ink);margin-bottom:4px}
+  .art-calc-sub{text-align:center;color:var(--ink-soft);font-size:14px;margin-bottom:16px}
+  .art-calc-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .art-calc-row input{flex:0 1 220px;height:48px;background:#fff;border:1px solid rgba(184,153,90,.4);border-radius:12px;padding:0 16px;font-family:'Lora',serif;font-size:16px;color:var(--ink);text-align:center}
+  .art-calc-row input:focus{outline:none;border-color:var(--gold)}
+  .art-calc-row .btn{height:48px;padding:0 30px}
+  .art-calc-err{text-align:center;color:#b5482f;font-size:13px;min-height:16px;margin-top:8px}
+  .art-calc-out{display:none;margin-top:16px}
+  /* Autouzupełnianie miasta (astrologia) */
+  .cityres-n{position:absolute;top:100%;left:0;right:0;z-index:30;margin-top:4px;background:#fff;border:1px solid rgba(184,153,90,.4);border-radius:11px;box-shadow:0 12px 30px rgba(120,100,50,.18);max-height:240px;overflow-y:auto;display:none}
+  .cityres-n.show{display:block}
+  .cityres-n div{padding:10px 14px;cursor:pointer;font-family:'Lora',serif;font-size:15px;color:var(--ink);border-bottom:1px solid rgba(184,153,90,.12)}
+  .cityres-n div:last-child{border-bottom:0}
+  .cityres-n div:hover{background:#f4ecd7}
+  .cityres-n .reg{font-size:12px;color:var(--ink-faint);margin-left:5px}
+  .tab-eyebrow{font-family:'Lora',serif;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin:0 0 9px 3px}
+  .tabs.tabs-tight{margin-bottom:18px}
+  /* Formuła Finansowa */
+  .fin .fin-kicker{text-align:center;font-family:'Lora',serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+  .fin-buy{max-width:460px;margin:36px auto 0;text-align:center;background:var(--cream-2);border:1px solid rgba(184,153,90,.32);border-radius:20px;padding:28px 24px;box-shadow:0 16px 40px rgba(120,100,60,.1)}
+  .fin-price{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:50px;color:var(--gold-deep);line-height:1;margin-bottom:16px}
+  .fin-buy .btn{font-size:17px;padding:16px 38px}
+  .fin-note{font-size:13px;color:var(--ink-soft);margin-top:14px}
+  .fin-deadline{text-align:center;color:#5e7a4a;font-size:14.5px;font-weight:600;background:rgba(120,150,90,.08);border:1px solid rgba(120,150,90,.22);border-radius:12px;padding:11px 16px;margin:18px auto 0;max-width:560px}
+  .fin-reviews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+  @media(max-width:680px){.fin-reviews{grid-template-columns:1fr}}
+  .rev-card{background:var(--cream-2);border:1px solid rgba(184,153,90,.25);border-radius:16px;padding:18px 20px}
+  .rev-text{font-family:'Lora',serif;font-size:14.5px;line-height:1.62;color:var(--ink);font-style:italic;margin:0}
+  .rev-name{margin-top:11px;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-deep);font-weight:600}
+  .oc-form{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+  .oc-form input,.oc-form textarea{width:100%;padding:13px 16px;border:1px solid rgba(184,153,90,.4);border-radius:12px;background:var(--cream-2);font-family:'Lora',serif;font-size:15px;color:var(--ink);box-sizing:border-box}
+  .oc-form textarea{resize:vertical;line-height:1.55}
+  .oc-stars{display:flex;gap:8px;justify-content:center;font-size:38px;line-height:1;margin:6px 0}
+  .oc-star{cursor:pointer;color:rgba(184,153,90,.32);transition:color .12s,transform .12s}
+  .oc-star:hover{transform:scale(1.12)}
+  .oc-star.on{color:var(--gold-deep)}
+  .oc-thanks{text-align:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-deep);padding:14px}
+  .hero-rating{display:inline-flex;align-items:center;gap:9px;margin:18px auto 0;padding:7px 16px;border-radius:30px;
+    background:rgba(255,253,248,.62);border:1px solid rgba(184,153,90,.4);backdrop-filter:blur(4px);
+    font-family:'Lora',serif;font-size:13.5px;color:var(--ink);cursor:pointer;text-decoration:none;transition:background .2s}
+  .hero-rating:hover{background:rgba(255,253,248,.85)}
+  .hero-rating .hr-stars{color:var(--gold-deep);letter-spacing:1px;font-size:14px}
+  .home-rev{padding:8px 0 4px}
+  .home-rev .eyebrow{text-align:center}
+  .home-rev h2{text-align:center;font-family:'Cormorant Garamond',serif;color:var(--ink);margin:4px 0 22px}
+  .home-rev-cta{text-align:center;margin-top:22px}
+  .solar-offer{margin-top:24px;padding:24px 22px;border-radius:18px;text-align:center;
+    background:radial-gradient(120% 170% at 0% 0%,#4a3f6e,#2c2647 60%,#1f1b33);color:#f3e9d4}
+  .solar-offer .so-eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#ecd29a;margin-bottom:8px}
+  .solar-offer h3{font-family:'Cormorant Garamond',serif;font-size:23px;color:#ecd29a;margin:0 auto 10px;max-width:420px}
+  .solar-offer p{color:#e9e0cb;font-size:14.5px;line-height:1.6;margin:0 auto 14px;max-width:500px}
+  .solar-offer .so-note{color:#ecd29a;font-size:13.5px;margin:6px auto 18px}
+  .hp-overlay{position:fixed;inset:0;z-index:60;background:rgba(40,33,25,.5);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px}
+  .hp-overlay.show{display:flex}
+  .hp-card{background:var(--cream);border:1px solid rgba(184,153,90,.3);border-radius:20px;padding:26px 24px;max-width:380px;width:100%;box-shadow:0 30px 70px rgba(120,100,60,.25)}
+  .hp-title{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--ink);text-align:center;margin-bottom:18px}
+  .hp-opt{display:flex;justify-content:space-between;align-items:center;width:100%;padding:14px 18px;margin-bottom:10px;border:1px solid rgba(184,153,90,.4);border-radius:14px;background:var(--cream-2);font-family:'Lora',serif;font-size:15px;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
+  .hp-opt:hover{background:#f4ecdb;border-color:var(--gold-deep)}
+  .hp-opt b{color:var(--gold-deep);font-size:16px}
+  .hp-note{text-align:center;font-size:13px;color:var(--ink-faint);margin:12px 0 4px}
+  .tp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:560px){.tp-grid{grid-template-columns:1fr}}
+  .tp-card{border:1px solid rgba(184,153,90,.25);border-radius:12px;padding:11px 14px;background:var(--cream-2)}
+  .tp-card.tp-on{border-color:var(--gold-deep);background:radial-gradient(120% 160% at 0% 0%,#fff7e6,#f3e6c6)}
+  .tp-ln{font-size:12.5px;color:var(--ink-faint);margin-bottom:4px}
+  .tp-en{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink)}
+  .tp-card.tp-on .tp-en{color:var(--gold-deep);font-weight:600}
+  .solar-offer .btn-gold{display:inline-block}
+  .mod-item{border:1px solid rgba(184,153,90,.25);border-radius:14px;padding:14px 16px;margin-bottom:12px;background:var(--cream-2)}
+  .mod-item .mi-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:13px;color:var(--ink-faint)}
+  .mod-item .mi-del{cursor:pointer;color:#c0392b;border:1px solid rgba(192,57,43,.4);border-radius:20px;padding:4px 12px;font-size:13px;background:transparent}
+  /* Rozdziały: Matryca Losu / Astrologia */
+  .chapter{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(26px,4vw,38px);color:var(--ink);margin:0 0 18px;letter-spacing:.4px}
+  .astro-section{position:relative;z-index:6;margin-top:54px}
+  .astro-section .calc{padding-top:34px}
+  /* O mnie */
+  .about .ab-kicker{text-align:center;font-family:'Parisienne',cursive;font-size:30px;color:var(--gold);margin-bottom:2px;line-height:1}
+  .about-photo{display:block;width:100%;max-width:560px;margin:8px auto 4px;border-radius:20px;border:1px solid rgba(184,153,90,.45);box-shadow:0 18px 44px rgba(120,100,60,.25)}
+  .about-stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px auto 32px;max-width:560px}
+  .ab-stat{flex:1;min-width:135px;text-align:center;background:var(--cream-2);border:1px solid rgba(184,153,90,.3);border-radius:14px;padding:16px 10px}
+  .ab-stat b{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:33px;color:var(--gold-deep);line-height:1}
+  .ab-stat span{font-size:12.5px;color:var(--ink-soft)}
 </style>
 </head>
 <body>
 <main>
-
-  <div class="promo" id="promo" onclick="buyProduct('star')">
-    <span class="promo-txt"><span class="promo-moon">🌙</span> <span data-i18n-html="promo_txt">Dziś <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.</span> <span class="promo-cta" data-i18n="promo_cta">Odbierz ją →</span></span>
-    <button class="promo-x" aria-label="X" onclick="event.stopPropagation();closePromo()">×</button>
-  </div>
 
   <nav>
     <div class="navbar">
@@ -582,6 +678,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
         <div class="menu">
           <a class="active" data-v="home" data-i18n="nav_calc" onclick="showView('home')">Kalkulator</a>
           <a data-v="method" data-i18n="nav_method" onclick="showView('method')">O metodzie</a>
+          <a data-v="about" data-i18n="nav_about" onclick="showView('about')">O mnie</a>
           <a data-v="articles" data-i18n="nav_articles" onclick="showView('articles')">Artykuły</a>
           <a data-v="reviews" data-i18n="nav_reviews" onclick="showView('reviews')">Opinie</a>
           <a data-v="pricing" data-i18n="nav_pricing" onclick="showView('pricing')">Cennik</a>
@@ -606,6 +703,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
     <div class="hero-inner">
       <h1 data-i18n-html="hero_h1">Poznaj swoją<br><em>Matrycę Losu</em></h1>
       <p data-i18n="hero_sub">Twoja data urodzenia kryje mapę talentów, zadań i przeznaczenia. Oblicz ją za darmo poniżej.</p>
+      <a class="hero-rating" onclick="showView('reviews')"><span class="hr-stars">★★★★★</span><span data-i18n="hero_rating">ponad 2500 analiz · zobacz opinie</span></a>
       <a class="scroll-cue" href="#calc" data-i18n-html="hero_cue">Oblicz swoją matrycę <span>↓</span></a>
     </div>
   </section>
@@ -613,11 +711,64 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   <section class="calc-section" id="calc">
     <div class="wrap">
       <div class="calc">
-        <div class="tabs">
+        <div class="tab-eyebrow">Matryca Losu</div>
+        <div class="tabs tabs-tight">
           <button class="tab active" data-type="full" data-i18n="tab_full" onclick="setType('full')">Matryca Pełna</button>
           <button class="tab" data-type="child" data-i18n="tab_child" onclick="setType('child')">Matryca Dziecka</button>
           <button class="tab" data-type="compat" data-i18n="tab_compat" onclick="setType('compat')">Matryca Zgodności</button>
           <button class="tab" data-type="energy" data-i18n="nav_energy" onclick="setType('energy')">Energia dnia</button>
+        </div>
+        <div class="tab-eyebrow">Astrologia</div>
+        <div class="tabs">
+          <button class="tab" id="tab-natal" onclick="showAstro('natal')">Kosmogram</button>
+          <button class="tab" id="tab-solar" onclick="showAstro('solar')">Solár · rok</button>
+        </div>
+
+        <div id="kosmo-embed" style="display:none">
+          <div class="form" id="astro-form-natal">
+            <div class="prow">
+              <div class="field"><label>Imię</label><input id="a-name" type="text" placeholder="Imię"></div>
+              <div class="field"><label data-i18n="f_plec">Płeć</label>
+                <div class="seg"><button type="button" class="seg-btn active" data-i18n="f_kobieta" onclick="aGender(this,'a')">Kobieta</button><button type="button" class="seg-btn" data-i18n="f_mezczyzna" onclick="aGender(this,'a')">Mężczyzna</button></div>
+              </div>
+              <div class="field p1"><label>Data urodzenia</label><input id="a-date" type="text" inputmode="numeric" placeholder="DD.MM.RRRR" maxlength="10"></div>
+            </div>
+            <div class="prow">
+              <div class="field"><label>Godzina</label><input id="a-time" type="text" inputmode="numeric" placeholder="GG:MM" maxlength="5"></div>
+              <div class="field" style="position:relative"><label>Miasto urodzenia</label><input id="a-city" type="text" autocomplete="off" placeholder="Zacznij pisać…"><div id="a-cityres" class="cityres-n"></div></div>
+            </div>
+            <button class="btn btn-gold" onclick="astroCalc('natal')">Oblicz</button>
+          </div>
+          <div class="form" id="astro-form-solar" style="display:none">
+            <div class="prow">
+              <div class="field"><label>Imię</label><input id="as-name" type="text" placeholder="Imię"></div>
+              <div class="field"><label data-i18n="f_plec">Płeć</label>
+                <div class="seg"><button type="button" class="seg-btn active" data-i18n="f_kobieta" onclick="aGender(this,'as')">Kobieta</button><button type="button" class="seg-btn" data-i18n="f_mezczyzna" onclick="aGender(this,'as')">Mężczyzna</button></div>
+              </div>
+              <div class="field p1"><label>Data urodzenia</label><input id="as-date" type="text" inputmode="numeric" placeholder="DD.MM.RRRR" maxlength="10"></div>
+            </div>
+            <div class="prow">
+              <div class="field"><label>Godzina</label><input id="as-time" type="text" inputmode="numeric" placeholder="GG:MM" maxlength="5"></div>
+              <div class="field" style="position:relative"><label>Miasto urodzenia</label><input id="as-city" type="text" autocomplete="off" placeholder="Zacznij pisać…"><div id="as-cityres" class="cityres-n"></div></div>
+              <div class="field"><label>Rok solára</label><input id="as-year" type="text" inputmode="numeric" placeholder="2026" maxlength="4" style="width:110px"></div>
+            </div>
+            <div class="prow">
+              <div class="field" style="position:relative"><label>Gdzie świętujesz</label><input id="as-here" type="text" autocomplete="off" placeholder="Miasto pobytu…"><div id="as-hereres" class="cityres-n"></div></div>
+              <div class="field"><label>&nbsp;</label><div id="as-tzhint" style="font-size:12.5px;color:var(--gold-deep);min-height:48px;display:flex;align-items:center"></div></div>
+            </div>
+            <button class="btn btn-gold" onclick="astroCalc('solar')">Oblicz</button>
+            <div class="solar-offer">
+              <div class="so-eyebrow" data-i18n="solar_off_eyebrow">Prognoza roczna</div>
+              <h3 data-i18n="solar_off_h">Roczna prognoza astrologiczna — Solár + Tranzyty</h3>
+              <p data-i18n="solar_off_p1">Chcesz dokładnie wiedzieć, co przyniesie Ci najbliższy rok — w karierze, finansach, relacjach i rozwoju osobistym? Spersonalizowana prognoza to szczegółowy rozbiór Twojego osobistego roku: karta solarna na bieżący/nadchodzący rok oraz prognoza tranzytów na 12 miesięcy do przodu.</p>
+              <p data-i18n="solar_off_p2">Otrzymasz jasne odpowiedzi właśnie na Twoje pytania: które sfery będą najważniejsze, gdzie czekają szanse i wyzwania, jak najlepiej działać w karierze, finansach, relacjach, zdrowiu i rodzinie — wraz z praktycznymi wskazówkami na każdy okres.</p>
+              <p data-i18n="solar_off_p3">Po wypełnieniu krótkiej ankiety otrzymasz indywidualny raport PDF z konkretnymi prognozami i radami.</p>
+              <p class="so-note" data-i18n="solar_off_note">✅ Czas przygotowania — do 7 dni · spersonalizowana prognoza i bezpośrednie odpowiedzi na Twoje pytania.</p>
+              <button class="btn btn-gold" onclick="astroProductOrder(event,'solar','Prognoza roczna (solár + tranzyty)')" data-i18n="solar_off_btn">Zamów prognozę roczną — 299 zł</button>
+            </div>
+          </div>
+          <div class="err" id="a-err"></div>
+          <iframe id="kosmo-frame" title="Kosmogram" scrolling="no" style="width:100%;border:0;display:none;min-height:0;margin-top:8px"></iframe>
         </div>
 
         <h2 id="calc-title">Kalkulator Matrycy</h2>
@@ -681,7 +832,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
             <h3 id="sell-title">To dopiero <em>początek</em></h3>
             <p id="sell-text">Pełen rozbiór PDF odczytuje każdą pozycję Twojej matrycy: charakter, talenty, finanse, relacje i przeznaczenie — gotowy dokument od razu po opłacie.</p>
             <div class="price"><span id="price-val">55 zł</span> <small data-i18n="sell_small">· PDF natychmiast</small></div>
-            <div class="sell-bonus" id="sell-bonus" data-i18n="sell_bonus">🎁 W prezencie: Matryca Marki Osobistej — Twój kod sukcesu w pracy i biznesie.</div>
+            <div class="sell-bonus" id="sell-bonus" data-i18n="sell_bonus">🎁 Bonus specjalny: praktyki do pracy z Twoimi energiami — proste ćwiczenia, które pomogą je aktywować i wzmocnić.</div>
             <button class="btn btn-gold" data-i18n="sell_btn" onclick="startCheckout(event)">Zamów pełen rozbiór</button>
             <div class="trust">
               <span>🔒 <b data-i18n="trust1">Bezpieczna płatność</b></span>
@@ -702,6 +853,13 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
       <div class="card" data-reveal><div class="num">II</div><h3 data-i18n="card2_t">Zamów rozbiór</h3><p data-i18n="card2_p">Bezpieczna płatność. Pełen, szczegółowy odczyt Twojej matrycy w formacie PDF.</p></div>
       <div class="card" data-reveal><div class="num">III</div><h3 data-i18n="card3_t">Otrzymaj PDF</h3><p data-i18n="card3_p">Gotowy dokument trafia do Ciebie natychmiast — czytaj w swoim tempie, wracaj kiedy chcesz.</p></div>
     </div>
+  </section>
+
+  <section class="features wrap home-rev">
+    <div class="eyebrow" data-reveal data-i18n="rev_h1">Opinie</div>
+    <h2 data-reveal data-i18n="home_rev_h2">Co mówią klientki</h2>
+    <div class="fin-reviews" id="home-rev-list"></div>
+    <div class="home-rev-cta"><button class="btn btn-gold" onclick="showView('reviews')" data-i18n="home_rev_btn">Zobacz wszystkie opinie</button></div>
   </section>
   </div><!-- /view-home -->
 
@@ -769,6 +927,34 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
     </article>
   </div>
 
+  <!-- O MNIE -->
+  <div id="view-about" class="view">
+    <article class="page about">
+      <div class="ab-kicker" data-i18n="ab_kicker">O mnie</div>
+      <h1 data-i18n="ab_h1">Kim jestem i dlaczego możesz mi zaufać</h1>
+      <img class="about-photo" src="about-kasia.jpg" alt="Kasia" loading="lazy">
+      <div class="about-stats">
+        <div class="ab-stat"><b>10+</b><span data-i18n="ab_st1">lat w astrologii</span></div>
+        <div class="ab-stat"><b>6+</b><span data-i18n="ab_st2">lat z Matrycą</span></div>
+        <div class="ab-stat"><b>2500+</b><span data-i18n="ab_st3">konsultacji</span></div>
+      </div>
+      <p class="lead" data-i18n="ab_lead">Najprawdopodobniej nie trafiłaś tutaj przypadkiem. Coś w analizie z Tobą zarezonowało — a potem pojawiła się naturalna potrzeba, żeby sprawdzić, kto za tym stoi. To zrozumiałe: swojej daty urodzenia i najbardziej wrażliwych tematów nie powierza się pierwszej lepszej stronie.</p>
+      <p data-i18n="ab_p1">Mam na imię Kasia. Przeprowadziłam ponad 2500 indywidualnych konsultacji — to nie liczba na potrzeby reklamy, lecz tysiące historii ludzi, którzy przychodzili z poczuciem „niby wszystko jest dobrze, ale coś nie działa”, a wychodzili ze zrozumieniem, co dokładnie ich zatrzymuje i jak to zmienić.</p>
+      <blockquote data-i18n="ab_quote">„Nie straszę i nie przepowiadam katastrof. Pokazuję przyczynę, przez którą wciąż trafiasz w te same schematy — i konkretne działanie, które ten mechanizm przerywa.”</blockquote>
+      <p data-i18n="ab_p2">Astrologia i Matryca Przeznaczenia to dla mnie dwa odrębne narzędzia i celowo ich nie mieszam. Astrologia pokazuje czas — kiedy i w jakim okresie. Matryca pokazuje strukturę — dlaczego jesteś taka, jaka jesteś, i jakie programy działają w Twoim życiu. Pracuję z obiema, ale zawsze mówię, z której korzystam.</p>
+      <p data-i18n="ab_p3">W pewnym momencie przeszłam od indywidualnej praktyki do nauczania — nigdy nie zależało mi na masowości, ważniejsza była jakość niż liczba certyfikatów. Dziś kobiety, które uczyły się ode mnie, same prowadzą konsultacje i budują własne marki.</p>
+      <p data-i18n="ab_p4">Ta strona to osobna historia. Ostatnie półtora roku poświęciłam, by przenieść swoje doświadczenie do automatycznych analiz — nie szablonów z internetu, lecz moich autorskich interpretacji, zebranych przez lata praktyki. Tak, aby nawet szybka analiza w kilka minut była oparta na realnych przypadkach, a nie na ogólnikach.</p>
+      <p data-i18n="ab_p5">A to dopiero początek. VIBO to mój autorski projekt, który tworzę od podstaw. Wspólnie z zespołem przygotowuję aplikację — osobistego przewodnika po Twojej mapie: medytacje i praktyki dopasowane do Twoich wyników, nagrane przez profesjonalnych lektorów w studiu, a nie przez sztuczną inteligencję.</p>
+      <h2 data-i18n="ab_h2">Od czego zacząć?</h2>
+      <p data-i18n="ab_p6">Jeśli chcesz po prostu spróbować — wybierz pakiet i odbierz analizę swojej Matrycy już teraz, to tylko kilka minut.</p>
+      <div style="text-align:center;margin-top:30px"><button class="btn btn-gold" data-i18n="ab_btn" onclick="showView('home')">Oblicz swoją Matrycę</button></div>
+      <div class="social" style="margin-top:28px">
+        <a href="https://www.instagram.com/matryca_astro_kate/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=100094136262782" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg></a>
+      </div>
+    </article>
+  </div>
+
   <!-- ARTYKUŁY -->
   <div id="view-articles" class="view">
     <div class="page">
@@ -789,23 +975,111 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
       <h1 data-i18n="rev_h1">Opinie</h1>
       <div class="rating">★★★★★</div>
       <p class="rating-sub" data-i18n="rev_sub">Prawdziwe wiadomości od naszych klientów</p>
-      <div class="rev-masonry">
-        <div class="rev-shot"><img src="reviews/matrix-review-1.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-diag-review-1.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-2.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-3.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-diag-review-2.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-4.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-5.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-diag-review-3.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-6.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-7.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-diag-review-4.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-8.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-review-9.png" alt="Opinia" loading="lazy"></div>
-        <div class="rev-shot"><img src="reviews/matrix-diag-review-5.png" alt="Opinia" loading="lazy"></div>
+      <div class="fin-reviews" id="rev-list"></div>
+    </div>
+  </div>
+
+  <!-- OCENA / dodaj opinię -->
+  <div id="view-ocena" class="view">
+    <div class="page" style="max-width:560px">
+      <h1 data-i18n="oc_h1">Oceń nas</h1>
+      <p class="lead" data-i18n="oc_sub">Twoja opinia pomaga innym zaufać i zdecydować się na pierwszy krok. Dziękuję, że poświęcasz chwilę.</p>
+      <div class="oc-form">
+        <div class="oc-stars" id="oc-stars" aria-label="Ocena">
+          <span class="oc-star" data-v="1">★</span><span class="oc-star" data-v="2">★</span><span class="oc-star" data-v="3">★</span><span class="oc-star" data-v="4">★</span><span class="oc-star" data-v="5">★</span>
+        </div>
+        <input id="oc-name" maxlength="40" data-i18n-ph="oc_name" placeholder="Imię">
+        <textarea id="oc-text" rows="5" maxlength="1500" data-i18n-ph="oc_text" placeholder="Napisz kilka słów o swoim doświadczeniu — jak przebiegła cała współpraca i co Ci dała analiza…"></textarea>
+        <div id="oc-err" class="art-calc-err"></div>
+        <button class="btn btn-gold" id="oc-send" onclick="submitReview()" data-i18n="oc_send">Wyślij opinię</button>
+        <div id="oc-thanks" class="oc-thanks" style="display:none" data-i18n="oc_thanks">Dziękuję! Twoja opinia została wysłana. 💛</div>
       </div>
     </div>
+  </div>
+
+  <!-- MODERACJA (ukryta strona dla właścicielki) -->
+  <div id="view-moderacja" class="view">
+    <div class="page" style="max-width:640px">
+      <h1>Moderacja opinii</h1>
+      <div id="mod-gate">
+        <input id="mod-pw" type="password" placeholder="Hasło" style="max-width:280px">
+        <button class="btn btn-gold" onclick="modLoad()">Wejdź</button>
+      </div>
+      <div id="mod-list" style="margin-top:20px"></div>
+    </div>
+  </div>
+
+  <!-- TEST: programy (ukryta strona) -->
+  <div id="view-testprog" class="view">
+    <div class="page" style="max-width:680px">
+      <h1>Twoje programy</h1>
+      <p class="lead">Wpisz datę urodzenia — zobaczysz swoją Matrycę i listę programów (trzy energie w jednej linii).</p>
+      <div class="oc-form" style="max-width:340px;margin:0 auto">
+        <div class="art-calc-row">
+          <input id="tp-dob" inputmode="numeric" maxlength="10" placeholder="DD.MM.RRRR" oninput="coDateFmt(this)">
+          <button class="btn btn-gold" onclick="testCalc()">Oblicz</button>
+        </div>
+        <div id="tp-err" class="art-calc-err"></div>
+      </div>
+      <div class="art-calc-out" style="margin-top:18px"><div class="diagram-panel"><div id="tp-diagram"></div></div></div>
+      <div id="tp-out" style="margin-top:24px"></div>
+    </div>
+  </div>
+
+  <!-- FORMUŁA FINANSOWA -->
+  <div id="view-finance" class="view">
+    <article class="page fin">
+      <div class="fin-kicker">Analiza astrologiczna</div>
+      <h1>Formuła Finansowa</h1>
+      <p class="lead">Chcesz wreszcie przestać walczyć z pieniędzmi i zacząć je przyciągać?</p>
+      <p><b>Formuła Finansowa</b> to spersonalizowana konsultacja astrologiczna — głęboka analiza Twojej karty natalnej z konkretnymi odpowiedziami właśnie na Twoje pytania: dlaczego pieniądze uciekają, gdzie są Twoje główne blokady finansowe, w jakiej sferze i w jaki dokładnie sposób możesz zarabiać więcej.</p>
+      <p>Otrzymasz konkretne wskazówki, jak przekształcić problemy finansowe w stabilny dochód i wzrost. Po wypełnieniu krótkiej ankiety przygotuję dla Ciebie <b>indywidualny raport PDF</b> wraz z bezpośrednimi odpowiedziami na Twoje pytania.</p>
+      <p class="fin-deadline">✅ Czas przygotowania — do 7 dni · indywidualny raport PDF + odpowiedzi na Twoje pytania</p>
+      <div class="fin-buy">
+        <div class="fin-price">144 zł</div>
+        <button class="btn btn-gold" onclick="financeOrder(event)">Zamów analizę finansową</button>
+        <div class="fin-note">🔒 Bezpieczna płatność · analizę wyślę na e-mail po opłacie</div>
+      </div>
+      <h2 style="text-align:center;margin-top:46px">Co piszą kobiety po analizie</h2>
+      <div class="fin-reviews">
+        <div class="rev-card"><p class="rev-text">„To były najlepsze wydane pieniądze. WOW — jaką Pani posiada wiedzę i jak potrafi to opisać. Osoba jak ja, która myślała, że nie zrobiła nic wielkiego — okazuje się, że trygony, domy i strefy wiedziały, że sobie poradzę. Będę wracać, szczególnie jak moja głowa poukłada te 51 stron wiedzy. Cudownie!”</p><div class="rev-name">— Pani K.</div></div>
+        <div class="rev-card"><p class="rev-text">„Popłakałam się ze wzruszenia, czytając tę analizę. Jest tak trafiona i tak dokładnie opisuje to, z czym się mierzę i co czułam od początku — dokąd miałam iść, a byłam tłamszona. Dziękuję sobie, że zdecydowałam się na tę inwestycję u Ciebie.”</p><div class="rev-name">— Anita</div></div>
+        <div class="rev-card"><p class="rev-text">„Jestem pod ogromnym wrażeniem, jak te analizy są trafne. Dziękuję Ci za tę analizę finansową — rozjaśniło mi się bardzo wiele spraw, pojawiły się nowe pomysły i drogi. Wiem, na czym się skupiać, a co odrzucić.”</p><div class="rev-name">— Klaudia</div></div>
+        <div class="rev-card"><p class="rev-text">„Dzięki Twojej analizie finansowej w końcu otwarłam działalność. Moje planety krzyczały, że powinnam pracować na siebie i robić to, co kocham. Dodała mi jeszcze większego kopa do działania.”</p><div class="rev-name">— Gosia</div></div>
+        <div class="rev-card"><p class="rev-text">„Kończę czytać drugi raz… wiesz, co czuję najbardziej? ULGĘ! Wyraźnie widzę, że szukanie i praca z indywidualnym klientem to nie jestem JA. Jestem Ci bardzo wdzięczna.”</p><div class="rev-name">— Karolina</div></div>
+        <div class="rev-card"><p class="rev-text">„Trochę to przerażające, bo zdecydowanie dużo rzeczy się zgadza. I tam, gdzie napisałaś — to jest BARDZO moje, ja dokładnie o tym myślałam.”</p><div class="rev-name">— Anna</div></div>
+        <div class="rev-card"><p class="rev-text">„Wow, rozwala system! Bardzo pięknie dziękuję — dobra robota i na pewno wezmę sobie ją do serca.”</p><div class="rev-name">— Kati</div></div>
+        <div class="rev-card"><p class="rev-text">„Dodała mi odwagi, by ruszyć i wyjść do ludzi z tym, co mam w środku. I tak powstał mój profil na Instagramie. Baaardzo Ci dziękuję za analizę i za wszystkie wskazówki.”</p><div class="rev-name">— Magda</div></div>
+      </div>
+      <div style="text-align:center;margin-top:36px">
+        <button class="btn btn-gold" onclick="financeOrder(event)">Zamów analizę finansową · 144 zł</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- PORTRET RELACJI -->
+  <div id="view-relations" class="view">
+    <article class="page fin">
+      <div class="fin-kicker">Analiza astrologiczna</div>
+      <h1>Astrologiczny Portret Relacji</h1>
+      <p class="lead">Chcesz zrozumieć, dlaczego w związkach wciąż powtarza się to samo? Albo sprawdzić, jak bardzo pasujecie do siebie z partnerem?</p>
+      <p><b>Astrologiczny Portret Relacji</b> to szczegółowa analiza Twojej karty i (w razie potrzeby) karty partnera — ze szczerymi odpowiedziami na najważniejsze pytania: dlaczego przyciągasz określony typ partnerów, jakie wewnętrzne blokady przeszkadzają Ci w szczęśliwej miłości oraz jak przyciągnąć właściwą osobę lub poprawić obecny związek.</p>
+      <p>Otrzymasz jasność, przyczyny problemów i praktyczne rekomendacje, jak wreszcie zbudować harmonijne i głębokie relacje. Po wypełnieniu ankiety przygotuję dla Ciebie <b>indywidualny raport PDF</b> wraz z bezpośrednimi odpowiedziami na Twoje pytania.</p>
+      <p class="fin-deadline">✅ Czas przygotowania — do 7 dni · indywidualny raport PDF + odpowiedzi na Twoje pytania</p>
+      <div class="fin-buy">
+        <div class="fin-price">144 zł</div>
+        <button class="btn btn-gold" onclick="relationOrder(event)">Zamów portret relacji</button>
+        <div class="fin-note">🔒 Bezpieczna płatność · analizę wyślę na e-mail po opłacie</div>
+      </div>
+      <h2 style="text-align:center;margin-top:46px">Co piszą po analizie relacji</h2>
+      <div class="fin-reviews">
+        <div class="rev-card"><p class="rev-text">„Portret relacji kupiłem i czekam na realizację. Dziękuję za przesłanie matrycy — teraz wiem, gdzie popełniałem błędy. Mam nadzieję, że z tymi wskazówkami uda mi się znaleźć partnerkę bez powtarzania tych samych błędów. Momentami trudno było to czytać, ale było trafne — pewnie właśnie dlatego. Jeszcze raz dziękuję.”</p><div class="rev-name">— Irek</div></div>
+        <div class="rev-card"><p class="rev-text">„Brak mi słów. Jak to jest w punkt napisane! To przecież moje słowa w tłumaczeniu planet. Opisałaś dokładnie tak, jak czuję i czułam. Niesamowite — zbieram szczękę z podłogi! Dziękuję ❤️”</p><div class="rev-name">— Klientka</div></div>
+      </div>
+      <div style="text-align:center;margin-top:36px">
+        <button class="btn btn-gold" onclick="relationOrder(event)">Zamów portret relacji · 144 zł</button>
+      </div>
+    </article>
   </div>
 
   <!-- CENNIK -->
@@ -819,6 +1093,9 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
         <div class="price-card"><h3 data-i18n="tab_compat">Matryca Zgodności</h3><div class="amt" id="amt-compat">45 zł</div><p data-i18n="pr_compat_d">Analiza pary: relacje, namiętność, wspólne zadania i wyzwania.</p><button class="btn btn-gold" data-i18n="pr_btn_buy" onclick="buyProduct('compat')">Zamów</button></div>
         <div class="price-card"><h3 data-i18n="pr_month_t">Prognoza na miesiąc</h3><div class="amt" id="amt-month">25 zł</div><p data-i18n="pr_month_d">Osobista prognoza energii na cały miesiąc — na co zwrócić uwagę i jak wykorzystać każdy dzień.</p><button class="btn btn-gold" data-i18n="pr_btn_buy" onclick="buyProduct('month')">Zamów</button></div>
         <div class="price-card"><h3 data-i18n="pr_star_t">Gwiazda Szczęścia</h3><div class="amt" id="amt-star">33 zł</div><p data-i18n="pr_star_d">Twój osobisty talizman szczęścia — obliczony pod Twoją datę urodzenia.</p><button class="btn btn-gold" data-i18n="pr_btn_buy" onclick="buyProduct('star')">Zamów</button></div>
+        <div class="price-card"><h3>Formuła Finansowa</h3><div class="amt">144 zł</div><p>Indywidualna konsultacja astrologiczna: gdzie naprawdę są Twoje pieniądze i co blokuje przepływ. Raport PDF + odpowiedzi na Twoje pytania.</p><button class="btn btn-gold" onclick="showView('finance')">Zobacz</button></div>
+        <div class="price-card"><h3>Astrologiczny Portret Relacji</h3><div class="amt">144 zł</div><p>Szczegółowa analiza Twojej karty (i karty partnera): dlaczego przyciągasz dany typ i jak zbudować szczęśliwy związek.</p><button class="btn btn-gold" onclick="showView('relations')">Zobacz</button></div>
+        <div class="price-card"><h3>Pytanie horarne</h3><div class="amt">od 45 zł</div><p>Konkretna odpowiedź na Twoje pytanie — z karty postawionej na moment zapytania. Wybierz 1 pytanie lub pakiet. Odpowiedź wyślę na e-mail.</p><button class="btn btn-gold" onclick="horaryPick()">Zamów</button></div>
       </div>
     </div>
   </div>
@@ -870,6 +1147,10 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   </div>
 
   <footer>
+    <div class="social">
+      <a href="https://www.instagram.com/matryca_astro_kate/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.facebook.com/profile.php?id=100094136262782" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg></a>
+    </div>
     <span class="logo">vibo</span>
     <span data-i18n="footer_txt">© 2026 · Matryca Losu · Wszystkie prawa zastrzeżone</span>
     <div style="margin-top:10px;font-size:13px">
@@ -877,6 +1158,7 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
       <span style="opacity:.5">·</span>
       <a onclick="showView('terms')" style="color:var(--ink-faint);cursor:pointer;text-decoration:underline" data-i18n="foot_terms">Regulamin</a>
     </div>
+    <div class="foot-pay" data-i18n="foot_pay">Bezpieczne płatności obsługuje Stripe · Visa · Mastercard · BLIK · Klarna · Apple Pay · Google Pay</div>
   </footer>
 
 </main>
@@ -913,8 +1195,22 @@ try{ if(localStorage.getItem('vibo_cookies')==='1'){ fbq('consent','grant'); fbq
   </div>
 </div>
 
+<!-- Pakiety pytań horarnych -->
+<div id="horary-overlay" class="hp-overlay" onclick="if(event.target===this)closeHorary()">
+  <div class="hp-card">
+    <div class="hp-title" data-i18n="hp_title">Wybierz pakiet pytań</div>
+    <button class="hp-opt" onclick="astroProductOrder(event,'horary','Pytanie horarne · 1')"><span data-i18n="hp_1n">1 pytanie</span><b data-i18n="hp_1p">45 zł</b></button>
+    <button class="hp-opt" onclick="astroProductOrder(event,'horary3','Pytania horarne · pakiet 3')"><span data-i18n="hp_3n">3 pytania</span><b data-i18n="hp_3p">80 zł</b></button>
+    <button class="hp-opt" onclick="astroProductOrder(event,'horary5','Pytania horarne · pakiet 5')"><span data-i18n="hp_5n">5 pytań</span><b data-i18n="hp_5p">130 zł</b></button>
+    <button class="hp-opt" onclick="astroProductOrder(event,'horary10','Pytania horarne · pakiet 10')"><span data-i18n="hp_10n">10 pytań</span><b data-i18n="hp_10p">230 zł</b></button>
+    <div class="hp-note" data-i18n="hp_note">Każde kolejne pytanie ze zniżką 15%.</div>
+    <button class="modal-close" data-i18n="modal_close" onclick="closeHorary()">Zamknij</button>
+  </div>
+</div>
+
 <script src="legal.js"></script>
 <script src="articles.js"></script>
+<script src="reviews.js"></script>
 <script>
 /* ============ i18n (PL / EN / DE) ============ */
 const I18N={
@@ -930,7 +1226,7 @@ const I18N={
   leg_o1:'Osoba 1',leg_o2:'Osoba 2',
   h_czakry:'Czakry',h_fizyka:'Fizyka',h_energia:'Energia',h_emocja:'Emocja',h_razem:'Razem',
   pa_sila:'Siła przodków',pa_kod:'Kod siły',
-  sell_small:'· PDF natychmiast',sell_btn:'Zamów pełen rozbiór',sell_bonus:'🎁 W prezencie: Matryca Marki Osobistej — Twój kod sukcesu w pracy i biznesie.',
+  sell_small:'· PDF natychmiast',sell_btn:'Zamów pełen rozbiór',sell_bonus:'🎁 Bonus specjalny: praktyki do pracy z Twoimi energiami — proste ćwiczenia, które pomogą je aktywować i wzmocnić.',
   co_h1:'Twoje dane i zamówienie',co_sub:'Podaj e-mail — na ten adres wyślemy Twój raport.',co_name:'Imię',co_email:'E-mail',co_pass:'Hasło',co_pass2:'Powtórz hasło',co_terms:'Akceptuję <a onclick="goTerms()">regulamin</a> i <a onclick="goPrivacy()">politykę prywatności</a>.',co_order:'Twoje zamówienie',co_total:'Razem',co_pay:'Zapłać',co_err_fields:'Uzupełnij wszystkie pola.',co_err_email:'Podaj poprawny e-mail.',co_err_pass:'Hasła nie są takie same.',co_err_terms:'Zaakceptuj regulamin i politykę.',co_err_dates:'Uzupełnij datę urodzenia (DD.MM.RRRR) dla każdej osoby.',
   trust1:'Bezpieczna płatność',trust2:'✦ PDF natychmiast po opłacie',trust3:'♢ Płatność jednorazowa',
   lock_sub:'odkryjesz w pełnym rozbiorze PDF',lock_btn:'Odblokuj pełny rozbiór · ',lock_count:'Jeszcze {n} rozdziałów',
@@ -940,7 +1236,7 @@ const I18N={
   card3_t:'Otrzymaj PDF',card3_p:'Gotowy dokument trafia do Ciebie natychmiast — czytaj w swoim tempie, wracaj kiedy chcesz.',
   footer_txt:'© 2026 · Matryca Losu · Wszystkie prawa zastrzeżone',
   modal_close:'Zamknij',
-  a_welcome:'Witaj w vibo',a_sub_login:'Zaloguj się, aby zapisać matryce i raporty',a_sub_reg:'Załóż konto i zachowaj swoje matryce',a_tab_login:'Logowanie',a_tab_reg:'Rejestracja',a_email:'E-mail',a_pass:'Hasło',a_pass2:'Powtórz hasło',a_login_btn:'Zaloguj się',a_reg_btn:'Załóż konto',a_or:'lub',a_google:'Kontynuuj z Google',a_terms:'Logując się, akceptujesz <a onclick="goTerms()" style="color:var(--gold-deep);cursor:pointer">regulamin</a> i <a onclick="goPrivacy()" style="color:var(--gold-deep);cursor:pointer">politykę prywatności</a> vibo.',foot_privacy:'Polityka prywatności',foot_terms:'Regulamin',a_title:'Twoje konto',a_matrices:'Twoje matryce',a_new:'+ Nowa matryca',a_open:'Otwórz',a_reports:'Twoje raporty PDF',a_empty:'Nie masz jeszcze pełnych rozbiorów PDF.<br>Oblicz matrycę i zamów pierwszy rozbiór, aby pojawił się tutaj.',a_settings:'Ustawienia konta',a_pass_change:'Zmień hasło',a_newsletter:'Newsletter i nowości',a_session:'Sesja',a_logout:'Wyloguj się',a_demo1_t:'Matryca Pełna · Kasia',a_demo1_s:'12.05.1993 · obliczona 08.06.2026',a_demo2_t:'Matryca Zgodności · Kasia & Tomek',a_demo2_s:'12.05.1993 + 23.11.1987 · obliczona 08.06.2026',
+  a_welcome:'Witaj w vibo',a_sub_login:'Zaloguj się, aby zapisać matryce i raporty',a_sub_reg:'Załóż konto i zachowaj swoje matryce',a_tab_login:'Logowanie',a_tab_reg:'Rejestracja',a_email:'E-mail',a_pass:'Hasło',a_pass2:'Powtórz hasło',a_login_btn:'Zaloguj się',a_reg_btn:'Załóż konto',a_or:'lub',a_google:'Kontynuuj z Google',a_terms:'Logując się, akceptujesz <a onclick="goTerms()" style="color:var(--gold-deep);cursor:pointer">regulamin</a> i <a onclick="goPrivacy()" style="color:var(--gold-deep);cursor:pointer">politykę prywatności</a> vibo.',foot_privacy:'Polityka prywatności',foot_terms:'Regulamin',foot_pay:'Bezpieczne płatności obsługuje Stripe · Visa · Mastercard · BLIK · Klarna · Apple Pay · Google Pay',a_title:'Twoje konto',a_matrices:'Twoje matryce',a_new:'+ Nowa matryca',a_open:'Otwórz',a_reports:'Twoje raporty PDF',a_empty:'Nie masz jeszcze pełnych rozbiorów PDF.<br>Oblicz matrycę i zamów pierwszy rozbiór, aby pojawił się tutaj.',a_settings:'Ustawienia konta',a_pass_change:'Zmień hasło',a_newsletter:'Newsletter i nowości',a_session:'Sesja',a_logout:'Wyloguj się',a_demo1_t:'Matryca Pełna · Kasia',a_demo1_s:'12.05.1993 · obliczona 08.06.2026',a_demo2_t:'Matryca Zgodności · Kasia & Tomek',a_demo2_s:'12.05.1993 + 23.11.1987 · obliczona 08.06.2026',
   alert_account:'Logowanie i rejestracja — wkrótce ✦',alert_stripe:'Tu podłączymy płatność Stripe ✦',
   m_h1:'Czym jest Matryca Losu',m_lead:'Głęboka metoda analizy daty urodzenia, która pomaga naprawdę poznać samego siebie.',
   m_p1:'Matryca Losu to narzędzie samopoznania — pokazuje strukturę osobowości: wrodzony charakter, ukryte talenty, potencjał finansowy, powtarzające się scenariusze w relacjach i wewnętrzne punkty wzrostu.',
@@ -964,8 +1260,12 @@ const I18N={
   m_btn:'Oblicz swoją matrycę',
   age_label:'Wiek',
   back:'Wróć',legal_updated:'Ostatnia aktualizacja: 06.2026.',cookie_ok:'Akceptuję',promo_txt:'Dziś <b>Nów</b> — najlepszy czas, by aktywować swoją <b>Gwiazdę Szczęścia</b>.',promo_cta:'Odbierz ją →',cookie_txt:'Używamy plików cookie, aby strona działała poprawnie i była wygodniejsza. Korzystając z vibo, akceptujesz naszą <a onclick="goPrivacy()">politykę prywatności</a>.',
-  art_h1:'Artykuły',art_lead:'Teksty o Matrycy Losu, energiach i pracy z nimi.',art_read:'Czytaj',art_back:'← Wszystkie artykuły',art_soon:'Wkrótce',art_prep:'Pierwszy artykuł jest w przygotowaniu.',
+  art_h1:'Artykuły',art_lead:'Teksty o Matrycy Losu, energiach i pracy z nimi.',art_read:'Czytaj',art_back:'← Wszystkie artykuły',art_soon:'Wkrótce',art_prep:'Pierwszy artykuł jest w przygotowaniu.',art_cta_t:'Oblicz i odbierz pełny rozbór swojej Matrycy',art_cta_btn:'Kup pełny rozbór',art_more_t:'Pozostałe artykuły',
   rev_h1:'Opinie',rev_sub:'Prawdziwe wiadomości od naszych klientów',rev_place:'Miejsce na opinię klienta.',
+  hero_rating:'ponad 2500 analiz · zobacz opinie',home_rev_h2:'Co mówią klientki',home_rev_btn:'Zobacz wszystkie opinie',
+  solar_off_eyebrow:'Prognoza roczna',solar_off_h:'Roczna prognoza astrologiczna — Solár + Tranzyty',solar_off_p1:'Chcesz dokładnie wiedzieć, co przyniesie Ci najbliższy rok — w karierze, finansach, relacjach i rozwoju osobistym? Spersonalizowana prognoza to szczegółowy rozbiór Twojego osobistego roku: karta solarna na bieżący/nadchodzący rok oraz prognoza tranzytów na 12 miesięcy do przodu.',solar_off_p2:'Otrzymasz jasne odpowiedzi właśnie na Twoje pytania: które sfery będą najważniejsze, gdzie czekają szanse i wyzwania, jak najlepiej działać w karierze, finansach, relacjach, zdrowiu i rodzinie — wraz z praktycznymi wskazówkami na każdy okres.',solar_off_p3:'Po wypełnieniu krótkiej ankiety otrzymasz indywidualny raport PDF z konkretnymi prognozami i radami.',solar_off_note:'✅ Czas przygotowania — do 7 dni · spersonalizowana prognoza i bezpośrednie odpowiedzi na Twoje pytania.',solar_off_btn:'Zamów prognozę roczną — 299 zł',
+  hp_title:'Wybierz pakiet pytań',hp_1n:'1 pytanie',hp_1p:'45 zł',hp_3n:'3 pytania',hp_3p:'80 zł',hp_5n:'5 pytań',hp_5p:'130 zł',hp_10n:'10 pytań',hp_10p:'230 zł',hp_note:'Każde kolejne pytanie ze zniżką 15%.',
+  oc_h1:'Oceń nas',oc_sub:'Twoja opinia pomaga innym zaufać i zdecydować się na pierwszy krok. Dziękuję, że poświęcasz chwilę.',oc_name:'Imię',oc_text:'Napisz kilka słów o swoim doświadczeniu — jak przebiegła cała współpraca i co Ci dała analiza…',oc_send:'Wyślij opinię',oc_thanks:'Dziękuję! Twoja opinia została wysłana. 💛',oc_err_star:'Wybierz ocenę (gwiazdki).',oc_err_fields:'Uzupełnij imię i treść opinii.',oc_err_send:'Coś poszło nie tak. Spróbuj ponownie.',
   pr_h1:'Cennik',pr_lead:'Pełne, autorskie raporty PDF — gotowe od razu po opłacie.',
   pr_full_d:'Pełen rozbiór osobisty: charakter, talenty, finanse, relacje i przeznaczenie.',
   pr_child_d:'Talenty, charakter dziecka i wskazówki dla rodziców.',
@@ -1002,7 +1302,7 @@ const I18N={
   leg_o1:'Person 1',leg_o2:'Person 2',
   h_czakry:'Chakras',h_fizyka:'Physical',h_energia:'Energy',h_emocja:'Emotion',h_razem:'Total',
   pa_sila:'Ancestral power',pa_kod:'Power code',
-  sell_small:'· PDF instantly',sell_btn:'Order the full report',sell_bonus:'🎁 Free gift: your Personal Brand Matrix — your success code at work and in business.',
+  sell_small:'· PDF instantly',sell_btn:'Order the full report',sell_bonus:'🎁 Special bonus: practices for working with your energies — simple exercises to activate and strengthen them.',
   co_h1:'Your details & order',co_sub:'Enter the e-mail where we will send your report.',co_name:'Name',co_email:'E-mail',co_pass:'Password',co_pass2:'Repeat password',co_terms:'I accept the <a onclick="goTerms()">terms</a> and <a onclick="goPrivacy()">privacy policy</a>.',co_order:'Your order',co_total:'Total',co_pay:'Pay',co_err_fields:'Please fill in all fields.',co_err_email:'Enter a valid e-mail.',co_err_pass:'Passwords do not match.',co_err_terms:'Please accept the terms.',co_err_dates:'Enter a date of birth (DD.MM.YYYY) for each person.',
   trust1:'Secure payment',trust2:'✦ PDF right after payment',trust3:'♢ One-time payment',
   lock_sub:'unlock them in the full PDF report',lock_btn:'Unlock the full report · ',lock_count:'{n} more chapters',
@@ -1012,7 +1312,7 @@ const I18N={
   card3_t:'Get the PDF',card3_p:'The ready document reaches you instantly — read at your own pace, come back whenever you like.',
   footer_txt:'© 2026 · Destiny Matrix · All rights reserved',
   modal_close:'Close',
-  a_welcome:'Welcome to vibo',a_sub_login:'Sign in to save your matrices and reports',a_sub_reg:'Create an account and keep your matrices',a_tab_login:'Sign in',a_tab_reg:'Sign up',a_email:'E-mail',a_pass:'Password',a_pass2:'Repeat password',a_login_btn:'Sign in',a_reg_btn:'Create account',a_or:'or',a_google:'Continue with Google',a_terms:'By signing in you accept vibo’s <a onclick="goTerms()" style="color:var(--gold-deep);cursor:pointer">terms</a> and <a onclick="goPrivacy()" style="color:var(--gold-deep);cursor:pointer">privacy policy</a>.',foot_privacy:'Privacy policy',foot_terms:'Terms',a_title:'Your account',a_matrices:'Your matrices',a_new:'+ New matrix',a_open:'Open',a_reports:'Your PDF reports',a_empty:'You don’t have any full PDF reports yet.<br>Calculate a matrix and order your first report to see it here.',a_settings:'Account settings',a_pass_change:'Change password',a_newsletter:'Newsletter and news',a_session:'Session',a_logout:'Log out',a_demo1_t:'Full Matrix · Kasia',a_demo1_s:'12.05.1993 · calculated 08.06.2026',a_demo2_t:'Compatibility Matrix · Kasia & Tomek',a_demo2_s:'12.05.1993 + 23.11.1987 · calculated 08.06.2026',
+  a_welcome:'Welcome to vibo',a_sub_login:'Sign in to save your matrices and reports',a_sub_reg:'Create an account and keep your matrices',a_tab_login:'Sign in',a_tab_reg:'Sign up',a_email:'E-mail',a_pass:'Password',a_pass2:'Repeat password',a_login_btn:'Sign in',a_reg_btn:'Create account',a_or:'or',a_google:'Continue with Google',a_terms:'By signing in you accept vibo’s <a onclick="goTerms()" style="color:var(--gold-deep);cursor:pointer">terms</a> and <a onclick="goPrivacy()" style="color:var(--gold-deep);cursor:pointer">privacy policy</a>.',foot_privacy:'Privacy policy',foot_terms:'Terms',foot_pay:'Secure payments by Stripe · Visa · Mastercard · Klarna · Apple Pay · Google Pay',a_title:'Your account',a_matrices:'Your matrices',a_new:'+ New matrix',a_open:'Open',a_reports:'Your PDF reports',a_empty:'You don’t have any full PDF reports yet.<br>Calculate a matrix and order your first report to see it here.',a_settings:'Account settings',a_pass_change:'Change password',a_newsletter:'Newsletter and news',a_session:'Session',a_logout:'Log out',a_demo1_t:'Full Matrix · Kasia',a_demo1_s:'12.05.1993 · calculated 08.06.2026',a_demo2_t:'Compatibility Matrix · Kasia & Tomek',a_demo2_s:'12.05.1993 + 23.11.1987 · calculated 08.06.2026',
   alert_account:'Login and sign-up — coming soon ✦',alert_stripe:'Stripe payment will be connected here ✦',
   m_h1:'What is the Destiny Matrix',m_lead:'A deep method of birth-date analysis that helps you truly get to know yourself.',
   m_p1:'The Destiny Matrix is a tool for self-discovery — it reveals the structure of your personality: innate character, hidden talents, financial potential, recurring patterns in relationships and inner points of growth.',
@@ -1036,8 +1336,12 @@ const I18N={
   m_btn:'Calculate your matrix',
   age_label:'Age',
   back:'Back',legal_updated:'Last updated: 06.2026.',cookie_ok:'Accept',promo_txt:'Today is the <b>New Moon</b> — the best time to activate your <b>Star of Happiness</b>.',promo_cta:'Get it →',cookie_txt:'We use cookies so the site works properly and feels better. By using vibo you accept our <a onclick="goPrivacy()">privacy policy</a>.',
-  art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, the energies and working with them.',art_read:'Read',art_back:'← All articles',art_soon:'Coming soon',art_prep:'The first article is in preparation.',
+  art_h1:'Articles',art_lead:'Texts about the Destiny Matrix, the energies and working with them.',art_read:'Read',art_back:'← All articles',art_soon:'Coming soon',art_prep:'The first article is in preparation.',art_cta_t:'Calculate and get the full reading of your Matrix',art_cta_btn:'Buy the full reading',art_more_t:'Other articles',
   rev_h1:'Reviews',rev_sub:'Real messages from our clients',rev_place:'Space for a customer review.',
+  hero_rating:'over 2500 analyses · see reviews',home_rev_h2:'What clients say',home_rev_btn:'See all reviews',
+  solar_off_eyebrow:'Yearly forecast',solar_off_h:'Yearly astrological forecast — Solar Return + Transits',solar_off_p1:'Want to know exactly what the coming year holds for you — in career, finances, relationships and personal growth? This personalized forecast is a detailed reading of your personal year: a Solar Return chart for the current/upcoming year plus a 12-month transit forecast.',solar_off_p2:'You will get clear answers to your specific questions: which areas will be central, where opportunities and challenges await, and how best to act in career, finances, relationships, health and family — with practical guidance for each period.',solar_off_p3:'After a short questionnaire you receive an individual PDF report with concrete forecasts and advice.',solar_off_note:'✅ Prepared within 7 days · a personalized forecast and direct answers to your questions.',solar_off_btn:'Order your yearly forecast — $75',
+  hp_title:'Choose a question package',hp_1n:'1 question',hp_1p:'$11',hp_3n:'3 questions',hp_3p:'$20',hp_5n:'5 questions',hp_5p:'$32',hp_10n:'10 questions',hp_10p:'$57',hp_note:'Each additional question 15% off.',
+  oc_h1:'Rate us',oc_sub:'Your review helps others trust and take the first step. Thank you for taking a moment.',oc_name:'Name',oc_text:'Write a few words about your experience — how the whole process went and what the analysis gave you…',oc_send:'Send review',oc_thanks:'Thank you! Your review has been sent. 💛',oc_err_star:'Please choose a rating (stars).',oc_err_fields:'Please fill in your name and review.',oc_err_send:'Something went wrong. Please try again.',
   pr_h1:'Pricing',pr_lead:'Full, authorial PDF reports — ready right after payment.',
   pr_full_d:'A full personal reading: character, talents, finances, relationships and destiny.',
   pr_child_d:'A child’s talents, character and guidance for parents.',
@@ -1074,7 +1378,7 @@ const I18N={
   leg_o1:'Person 1',leg_o2:'Person 2',
   h_czakry:'Chakren',h_fizyka:'Physis',h_energia:'Energie',h_emocja:'Emotion',h_razem:'Gesamt',
   pa_sila:'Ahnenkraft',pa_kod:'Kraftcode',
-  sell_small:'· PDF sofort',sell_btn:'Vollständige Analyse bestellen',sell_bonus:'🎁 Geschenk: deine Persönliche Marken-Matrix — dein Erfolgscode in Beruf und Business.',
+  sell_small:'· PDF sofort',sell_btn:'Vollständige Analyse bestellen',sell_bonus:'🎁 Spezial-Bonus: Praktiken zur Arbeit mit deinen Energien — einfache Übungen, um sie zu aktivieren und zu stärken.',
   co_h1:'Deine Daten & Bestellung',co_sub:'Gib die E-Mail an, an die wir deinen Bericht senden.',co_name:'Name',co_email:'E-Mail',co_pass:'Passwort',co_pass2:'Passwort wiederholen',co_terms:'Ich akzeptiere die <a onclick="goTerms()">AGB</a> und <a onclick="goPrivacy()">Datenschutzerklärung</a>.',co_order:'Deine Bestellung',co_total:'Gesamt',co_pay:'Bezahlen',co_err_fields:'Bitte fülle alle Felder aus.',co_err_email:'Gib eine gültige E-Mail ein.',co_err_pass:'Passwörter stimmen nicht überein.',co_err_terms:'Bitte akzeptiere die AGB.',co_err_dates:'Gib für jede Person ein Geburtsdatum (TT.MM.JJJJ) ein.',
   trust1:'Sichere Zahlung',trust2:'✦ PDF sofort nach der Zahlung',trust3:'♢ Einmalige Zahlung',
   lock_sub:'im vollständigen PDF-Bericht freischalten',lock_btn:'Vollständige Analyse freischalten · ',lock_count:'Noch {n} Kapitel',
@@ -1084,7 +1388,7 @@ const I18N={
   card3_t:'PDF erhalten',card3_p:'Das fertige Dokument erreicht dich sofort — lies in deinem Tempo, komm zurück, wann du willst.',
   footer_txt:'© 2026 · Schicksalsmatrix · Alle Rechte vorbehalten',
   modal_close:'Schließen',
-  a_welcome:'Willkommen bei vibo',a_sub_login:'Melde dich an, um Matrizen und Berichte zu speichern',a_sub_reg:'Erstelle ein Konto und behalte deine Matrizen',a_tab_login:'Anmelden',a_tab_reg:'Registrieren',a_email:'E-Mail',a_pass:'Passwort',a_pass2:'Passwort wiederholen',a_login_btn:'Anmelden',a_reg_btn:'Konto erstellen',a_or:'oder',a_google:'Mit Google fortfahren',a_terms:'Mit der Anmeldung akzeptierst du die <a onclick="goTerms()" style="color:var(--gold-deep);cursor:pointer">AGB</a> und <a onclick="goPrivacy()" style="color:var(--gold-deep);cursor:pointer">Datenschutzerklärung</a> von vibo.',foot_privacy:'Datenschutz',foot_terms:'AGB',a_title:'Dein Konto',a_matrices:'Deine Matrizen',a_new:'+ Neue Matrix',a_open:'Öffnen',a_reports:'Deine PDF-Berichte',a_empty:'Du hast noch keine vollständigen PDF-Berichte.<br>Berechne eine Matrix und bestelle deinen ersten Bericht, damit er hier erscheint.',a_settings:'Kontoeinstellungen',a_pass_change:'Passwort ändern',a_newsletter:'Newsletter und Neuigkeiten',a_session:'Sitzung',a_logout:'Abmelden',a_demo1_t:'Volle Matrix · Kasia',a_demo1_s:'12.05.1993 · berechnet 08.06.2026',a_demo2_t:'Kompatibilitätsmatrix · Kasia & Tomek',a_demo2_s:'12.05.1993 + 23.11.1987 · berechnet 08.06.2026',
+  a_welcome:'Willkommen bei vibo',a_sub_login:'Melde dich an, um Matrizen und Berichte zu speichern',a_sub_reg:'Erstelle ein Konto und behalte deine Matrizen',a_tab_login:'Anmelden',a_tab_reg:'Registrieren',a_email:'E-Mail',a_pass:'Passwort',a_pass2:'Passwort wiederholen',a_login_btn:'Anmelden',a_reg_btn:'Konto erstellen',a_or:'oder',a_google:'Mit Google fortfahren',a_terms:'Mit der Anmeldung akzeptierst du die <a onclick="goTerms()" style="color:var(--gold-deep);cursor:pointer">AGB</a> und <a onclick="goPrivacy()" style="color:var(--gold-deep);cursor:pointer">Datenschutzerklärung</a> von vibo.',foot_privacy:'Datenschutz',foot_terms:'AGB',foot_pay:'Sichere Zahlungen über Stripe · Visa · Mastercard · Klarna · Apple Pay · Google Pay',a_title:'Dein Konto',a_matrices:'Deine Matrizen',a_new:'+ Neue Matrix',a_open:'Öffnen',a_reports:'Deine PDF-Berichte',a_empty:'Du hast noch keine vollständigen PDF-Berichte.<br>Berechne eine Matrix und bestelle deinen ersten Bericht, damit er hier erscheint.',a_settings:'Kontoeinstellungen',a_pass_change:'Passwort ändern',a_newsletter:'Newsletter und Neuigkeiten',a_session:'Sitzung',a_logout:'Abmelden',a_demo1_t:'Volle Matrix · Kasia',a_demo1_s:'12.05.1993 · berechnet 08.06.2026',a_demo2_t:'Kompatibilitätsmatrix · Kasia & Tomek',a_demo2_s:'12.05.1993 + 23.11.1987 · berechnet 08.06.2026',
   alert_account:'Anmeldung und Registrierung — bald ✦',alert_stripe:'Hier wird die Stripe-Zahlung angebunden ✦',
   m_h1:'Was ist die Schicksalsmatrix',m_lead:'Eine tiefe Methode der Geburtsdatumsanalyse, die dir hilft, dich selbst wirklich kennenzulernen.',
   m_p1:'Die Schicksalsmatrix ist ein Werkzeug der Selbsterkenntnis — sie zeigt die Struktur der Persönlichkeit: angeborenen Charakter, verborgene Talente, finanzielles Potenzial, sich wiederholende Muster in Beziehungen und innere Wachstumspunkte.',
@@ -1108,8 +1412,12 @@ const I18N={
   m_btn:'Berechne deine Matrix',
   age_label:'Alter',
   back:'Zurück',legal_updated:'Zuletzt aktualisiert: 06.2026.',cookie_ok:'Akzeptieren',promo_txt:'Heute ist <b>Neumond</b> — die beste Zeit, deinen <b>Stern des Glücks</b> zu aktivieren.',promo_cta:'Jetzt holen →',cookie_txt:'Wir verwenden Cookies, damit die Seite richtig funktioniert und angenehmer ist. Mit der Nutzung von vibo akzeptierst du unsere <a onclick="goPrivacy()">Datenschutzerklärung</a>.',
-  art_h1:'Artikel',art_lead:'Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_read:'Lesen',art_back:'← Alle Artikel',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',
+  art_h1:'Artikel',art_lead:'Texte über die Schicksalsmatrix, die Energien und die Arbeit mit ihnen.',art_read:'Lesen',art_back:'← Alle Artikel',art_soon:'Bald',art_prep:'Der erste Artikel ist in Vorbereitung.',art_cta_t:'Berechne und erhalte die vollständige Auswertung deiner Matrix',art_cta_btn:'Vollständige Auswertung kaufen',art_more_t:'Weitere Artikel',
   rev_h1:'Bewertungen',rev_sub:'Echte Nachrichten unserer Kundinnen',rev_place:'Platz für eine Kundenbewertung.',
+  hero_rating:'über 2500 Analysen · Bewertungen ansehen',home_rev_h2:'Was Kundinnen sagen',home_rev_btn:'Alle Bewertungen ansehen',
+  solar_off_eyebrow:'Jahresprognose',solar_off_h:'Astrologische Jahresprognose — Solar Return + Transite',solar_off_p1:'Willst du genau wissen, was dir das kommende Jahr bringt — in Karriere, Finanzen, Beziehungen und persönlicher Entwicklung? Diese personalisierte Prognose ist eine ausführliche Analyse deines persönlichen Jahres: eine Solar-Return-Karte für das aktuelle/kommende Jahr sowie eine Transit-Prognose für 12 Monate im Voraus.',solar_off_p2:'Du erhältst klare Antworten auf genau deine Fragen: welche Bereiche im Mittelpunkt stehen, wo Chancen und Herausforderungen warten und wie du in Karriere, Finanzen, Beziehungen, Gesundheit und Familie am besten handelst — mit praktischen Empfehlungen für jeden Zeitraum.',solar_off_p3:'Nach einem kurzen Fragebogen erhältst du einen individuellen PDF-Bericht mit konkreten Prognosen und Ratschlägen.',solar_off_note:'✅ Erstellung innerhalb von 7 Tagen · eine personalisierte Prognose und direkte Antworten auf deine Fragen.',solar_off_btn:'Jahresprognose bestellen — 69 €',
+  hp_title:'Wähle ein Fragenpaket',hp_1n:'1 Frage',hp_1p:'10 €',hp_3n:'3 Fragen',hp_3p:'18 €',hp_5n:'5 Fragen',hp_5p:'30 €',hp_10n:'10 Fragen',hp_10p:'53 €',hp_note:'Jede weitere Frage 15% günstiger.',
+  oc_h1:'Bewerte uns',oc_sub:'Deine Bewertung hilft anderen zu vertrauen und den ersten Schritt zu wagen. Danke, dass du dir einen Moment nimmst.',oc_name:'Name',oc_text:'Schreibe ein paar Worte über deine Erfahrung — wie die ganze Zusammenarbeit verlief und was dir die Analyse gebracht hat…',oc_send:'Bewertung senden',oc_thanks:'Danke! Deine Bewertung wurde gesendet. 💛',oc_err_star:'Bitte wähle eine Bewertung (Sterne).',oc_err_fields:'Bitte fülle Name und Bewertung aus.',oc_err_send:'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
   pr_h1:'Preise',pr_lead:'Vollständige PDF-Berichte — fertig direkt nach der Zahlung.',
   pr_full_d:'Eine vollständige persönliche Analyse: Charakter, Talente, Finanzen, Beziehungen und Bestimmung.',
   pr_child_d:'Talente, Charakter des Kindes und Hinweise für die Eltern.',
@@ -1135,6 +1443,10 @@ const I18N={
   }
  }
 };
+// --- O mnie / About me / Über mich ---
+Object.assign(I18N.pl,{nav_about:'O mnie',ab_kicker:'O mnie',ab_h1:'Kim jestem i dlaczego możesz mi zaufać',ab_st1:'lat w astrologii',ab_st2:'lat z Matrycą',ab_st3:'konsultacji',ab_lead:'Najprawdopodobniej nie trafiłaś tutaj przypadkiem. Coś w analizie z Tobą zarezonowało — a potem pojawiła się naturalna potrzeba, żeby sprawdzić, kto za tym stoi. To zrozumiałe: swojej daty urodzenia i najbardziej wrażliwych tematów nie powierza się pierwszej lepszej stronie.',ab_p1:'Mam na imię Kasia. Przeprowadziłam ponad 2500 indywidualnych konsultacji — to nie liczba na potrzeby reklamy, lecz tysiące historii ludzi, którzy przychodzili z poczuciem „niby wszystko jest dobrze, ale coś nie działa”, a wychodzili ze zrozumieniem, co dokładnie ich zatrzymuje i jak to zmienić.',ab_quote:'„Nie straszę i nie przepowiadam katastrof. Pokazuję przyczynę, przez którą wciąż trafiasz w te same schematy — i konkretne działanie, które ten mechanizm przerywa.”',ab_p2:'Astrologia i Matryca Przeznaczenia to dla mnie dwa odrębne narzędzia i celowo ich nie mieszam. Astrologia pokazuje czas — kiedy i w jakim okresie. Matryca pokazuje strukturę — dlaczego jesteś taka, jaka jesteś, i jakie programy działają w Twoim życiu. Pracuję z obiema, ale zawsze mówię, z której korzystam.',ab_p3:'W pewnym momencie przeszłam od indywidualnej praktyki do nauczania — nigdy nie zależało mi na masowości, ważniejsza była jakość niż liczba certyfikatów. Dziś kobiety, które uczyły się ode mnie, same prowadzą konsultacje i budują własne marki.',ab_p4:'Ta strona to osobna historia. Ostatnie półtora roku poświęciłam, by przenieść swoje doświadczenie do automatycznych analiz — nie szablonów z internetu, lecz moich autorskich interpretacji, zebranych przez lata praktyki. Tak, aby nawet szybka analiza w kilka minut była oparta na realnych przypadkach, a nie na ogólnikach.',ab_p5:'A to dopiero początek. VIBO to mój autorski projekt, który tworzę od podstaw. Wspólnie z zespołem przygotowuję aplikację — osobistego przewodnika po Twojej mapie: medytacje i praktyki dopasowane do Twoich wyników, nagrane przez profesjonalnych lektorów w studiu, a nie przez sztuczną inteligencję.',ab_h2:'Od czego zacząć?',ab_p6:'Jeśli chcesz po prostu spróbować — wybierz pakiet i odbierz analizę swojej Matrycy już teraz, to tylko kilka minut.',ab_btn:'Oblicz swoją Matrycę'});
+Object.assign(I18N.en,{nav_about:'About me',ab_kicker:'About me',ab_h1:'Who I am and why you can trust me',ab_st1:'years in astrology',ab_st2:'years with the Matrix',ab_st3:'consultations',ab_lead:'You probably didn’t end up here by chance. Something in the analysis resonated with you — and then came the natural need to check who stands behind it. That’s understandable: you don’t hand your birth date and most sensitive matters to the first website you find.',ab_p1:'My name is Kasia. I’ve carried out more than 2,500 personal consultations — not a number made for an ad, but thousands of stories of people who came feeling “everything seems fine, but something isn’t working”, and left understanding exactly what holds them back and how to change it.',ab_quote:'“I don’t frighten anyone or predict disasters. I show the reason you keep falling into the same patterns — and the concrete action that breaks the mechanism.”',ab_p2:'Astrology and the Matrix of Destiny are two separate tools for me, and I deliberately don’t mix them. Astrology shows time — when, in which period. The Matrix shows structure — why you are the way you are and what programs run in your life. I work with both, but always say which one I’m using.',ab_p3:'At some point I moved from private practice to teaching — I never cared about volume; quality mattered more than the number of certificates. Today the women who learned from me run their own consultations and build their own brands.',ab_p4:'This site is a story of its own. I spent the last year and a half moving my experience into automatic analyses — not templates from the internet, but my own interpretations gathered over years of practice. So that even a quick reading in a few minutes rests on real cases, not generalities.',ab_p5:'And this is only the beginning. VIBO is my own project, built from scratch. With my team I’m preparing an app — a personal guide to your chart: meditations and practices matched to your results, recorded by professional voice artists in a studio, not by AI.',ab_h2:'Where to start?',ab_p6:'If you just want to try — choose a package and get your Matrix analysis right now, it takes only a few minutes.',ab_btn:'Calculate your Matrix'});
+Object.assign(I18N.de,{nav_about:'Über mich',ab_kicker:'Über mich',ab_h1:'Wer ich bin und warum du mir vertrauen kannst',ab_st1:'Jahre in der Astrologie',ab_st2:'Jahre mit der Matrix',ab_st3:'Beratungen',ab_lead:'Wahrscheinlich bist du nicht zufällig hier gelandet. Etwas in der Analyse hat dich berührt — und dann kam der natürliche Wunsch zu prüfen, wer dahintersteht. Das ist verständlich: sein Geburtsdatum und seine empfindlichsten Themen vertraut man nicht der erstbesten Seite an.',ab_p1:'Mein Name ist Kasia. Ich habe über 2500 persönliche Beratungen durchgeführt — keine Zahl für die Werbung, sondern tausende Geschichten von Menschen, die mit dem Gefühl kamen „eigentlich ist alles gut, aber etwas stimmt nicht”, und mit dem Verständnis gingen, was genau sie blockiert und wie sie es ändern können.',ab_quote:'„Ich mache keine Angst und sage keine Katastrophen voraus. Ich zeige den Grund, aus dem du immer wieder in dieselben Muster gerätst — und die konkrete Handlung, die diesen Mechanismus durchbricht.”',ab_p2:'Astrologie und die Matrix des Schicksals sind für mich zwei getrennte Werkzeuge, und ich vermische sie bewusst nicht. Astrologie zeigt die Zeit — wann, in welcher Periode. Die Matrix zeigt die Struktur — warum du so bist, wie du bist, und welche Programme in deinem Leben wirken. Ich arbeite mit beiden, sage aber immer, welches ich gerade nutze.',ab_p3:'Irgendwann wechselte ich von der reinen Praxis zum Unterrichten — Masse war mir nie wichtig, Qualität zählte mehr als die Zahl der Zertifikate. Heute führen die Frauen, die bei mir gelernt haben, eigene Beratungen und bauen eigene Marken auf.',ab_p4:'Diese Seite ist eine eigene Geschichte. Die letzten anderthalb Jahre habe ich darauf verwendet, meine Erfahrung in automatische Analysen zu übertragen — keine Vorlagen aus dem Internet, sondern meine eigenen Deutungen aus Jahren der Praxis. So dass selbst eine schnelle Analyse in wenigen Minuten auf realen Fällen beruht, nicht auf Allgemeinplätzen.',ab_p5:'Und das ist erst der Anfang. VIBO ist mein eigenes Projekt, von Grund auf aufgebaut. Mit meinem Team bereite ich eine App vor — einen persönlichen Begleiter durch deine Karte: Meditationen und Praktiken passend zu deinen Werten, eingesprochen von professionellen Sprechern im Studio, nicht von KI.',ab_h2:'Womit anfangen?',ab_p6:'Wenn du einfach ausprobieren möchtest — wähle ein Paket und erhalte jetzt deine Matrix-Analyse, das dauert nur ein paar Minuten.',ab_btn:'Berechne deine Matrix'});
 let CURLANG='pl';
 function L(){return I18N[CURLANG]||I18N.pl;}
 function applyStatic(){
@@ -1246,7 +1558,7 @@ function val(sets,x,y,size,fill,key){
   return txt(x,y-size*0.46,s,'var(--p1)',1,sets[0][key])+txt(x,y+size*0.46,s,'var(--p2)',1,sets[1][key]);
 }
 
-function buildSVG(sets,simple){
+function buildSVG(sets,simple,highlight){
   YEAR=L().d_year;
   const d=sets[0], compat=sets.length===2;
   const center={x:248.4,y:230.8};
@@ -1361,6 +1673,10 @@ function buildSVG(sets,simple){
   g+=val(sets,362.7,343,14,0,'H1')+val(sets,344,324.5,11,0,'H2')+val(sets,135.4,344,14,0,'I1')+val(sets,155,325,11,0,'I2');
   }
   g+=val(sets,311.8,293,11,0,'R')+val(sets,302.5,325.5,11,0,'R1')+val(sets,343.8,285,11,0,'R2');
+  if(highlight==='money'){
+    // czerwony owal wokół „Arkanu pod dolarem” / linii pieniędzy
+    g+=`<ellipse cx="351" cy="259" rx="68" ry="36" fill="none" stroke="#d4313a" stroke-width="3.2" transform="rotate(-40,351,259)" opacity="0.92"/>`;
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -20 555 510"><g>${g}</g></svg>`;
 }
 
@@ -1577,8 +1893,11 @@ function applyCopy(){
   const sb=document.getElementById('sell-bonus'); if(sb) sb.style.display=(TYPE==='full')?'block':'none';
 }
 function setType(t){
+  ev('zakladka_kalkulatora',{typ:t});
   TYPE=t;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.type===t));
+  const kb=document.getElementById('kosmo-embed'); if(kb)kb.style.display='none';
+  ['calc-title','calc-sub'].forEach(id=>{const el=document.getElementById(id); if(el)el.style.display='';});
   const isEnergy = t==='energy';
   document.getElementById('matrix-form').style.display = isEnergy ? 'none' : 'flex';
   document.getElementById('energy-form').style.display = isEnergy ? 'flex' : 'none';
@@ -1591,6 +1910,77 @@ function setType(t){
   document.getElementById('person2').style.display = t==='compat' ? 'flex' : 'none';
   document.getElementById('legend2').style.display = 'none';
   document.getElementById('result').classList.remove('show');
+}
+// ===== Astrologia: natywny formularz (styl matrycy) + wykres z silnika kosmogram =====
+window.addEventListener('message',e=>{
+  if(e&&e.data&&e.data.kosmoH){ const fr=document.getElementById('kosmo-frame'); if(fr) fr.style.height=(e.data.kosmoH+12)+'px'; }
+  if(e&&e.data&&e.data.astroCta){ if(typeof showView==='function')showView(e.data.astroCta==='finance'?'finance':'relations'); }
+});
+function aGender(btn){ btn.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+function fmtDateInput(el){let v=el.value.replace(/\D/g,'').slice(0,8); if(v.length>=5)v=v.slice(0,2)+'.'+v.slice(2,4)+'.'+v.slice(4); else if(v.length>=3)v=v.slice(0,2)+'.'+v.slice(2); el.value=v;}
+function fmtTimeInput(el){let v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>=3)v=v.slice(0,2)+':'+v.slice(2); el.value=v;}
+function astroTzOff(date,tz){const s=date.toLocaleString('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});const m=s.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);return Math.round((Date.UTC(+m[3],+m[1]-1,+m[2],+m[4]%24,+m[5])-date.getTime())/3600000);}
+function attachGeoN(input,resEl,onPick){
+  let timer=null,last=[],place=null;
+  input.addEventListener('input',()=>{const q=input.value.trim();place=null;clearTimeout(timer);if(q.length<2){resEl.classList.remove('show');return;}
+    timer=setTimeout(async()=>{try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=8&language=pl');const d=await r.json();last=d.results||[];
+      if(!last.length){resEl.innerHTML='<div style="color:#a89a72">Brak wyników…</div>';resEl.classList.add('show');return;}
+      resEl.innerHTML=last.map((x,i)=>{const reg=[x.admin1,x.country].filter(Boolean).join(', ');return '<div data-i="'+i+'">'+x.name+'<span class="reg">'+reg+'</span></div>';}).join('');
+      resEl.classList.add('show');
+      resEl.querySelectorAll('div[data-i]').forEach(el=>el.addEventListener('click',()=>{const x=last[+el.dataset.i];place={name:x.name,lat:x.latitude,lng:x.longitude,tz:x.timezone};input.value=x.name+(x.admin1?', '+x.admin1:'')+(x.country?', '+x.country:'');resEl.classList.remove('show');if(onPick)onPick();}));
+    }catch(e){resEl.classList.remove('show');}},250);
+  });
+  return {get:()=>place||(last.length?{name:last[0].name,lat:last[0].latitude,lng:last[0].longitude,tz:last[0].timezone}:null)};
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.field'))document.querySelectorAll('.cityres-n').forEach(r=>r.classList.remove('show'));});
+const aGeoCity=attachGeoN(document.getElementById('a-city'),document.getElementById('a-cityres'));
+const asGeoCity=attachGeoN(document.getElementById('as-city'),document.getElementById('as-cityres'),updateAstroTz);
+const asGeoHere=attachGeoN(document.getElementById('as-here'),document.getElementById('as-hereres'),updateAstroTz);
+['a-date','as-date'].forEach(id=>document.getElementById(id).addEventListener('input',function(e){fmtDateInput(e.target);if(id==='as-date')updateAstroTz();}));
+['a-time','as-time'].forEach(id=>document.getElementById(id).addEventListener('input',e=>fmtTimeInput(e.target)));
+document.getElementById('as-year').addEventListener('input',updateAstroTz);
+function updateAstroTz(){const el=document.getElementById('as-tzhint');if(!el)return;const hp=asGeoHere.get()||asGeoCity.get();const dm=(document.getElementById('as-date').value||'').match(/^(\d{1,2})\.(\d{1,2})/);const yr=parseInt(document.getElementById('as-year').value,10);if(!hp||!dm||!yr){el.textContent='';return;}const probe=new Date(Date.UTC(yr,(+dm[2])-1,+dm[1],12,0));const off=astroTzOff(probe,hp.tz);el.textContent='Solár: '+hp.name+' (GMT'+(off>=0?'+':'')+off+')';}
+let ASTRO_READY=false;
+function loadAstroEngine(){const fr=document.getElementById('kosmo-frame');if(fr.getAttribute('src'))return;fr.addEventListener('load',()=>{ASTRO_READY=true;});fr.setAttribute('src','kosmogram.html?embed=1');}
+function showAstro(mode){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  const tb=document.getElementById(mode==='solar'?'tab-solar':'tab-natal');if(tb)tb.classList.add('active');
+  ['calc-title','calc-sub','matrix-form','energy-form','err'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  const res=document.getElementById('result');if(res)res.style.display='none';
+  const er=document.getElementById('en-result');if(er)er.classList.remove('show');
+  document.getElementById('kosmo-embed').style.display='';
+  document.getElementById('astro-form-natal').style.display=mode==='solar'?'none':'flex';
+  document.getElementById('astro-form-solar').style.display=mode==='solar'?'flex':'none';
+  document.getElementById('a-err').textContent='';
+  document.getElementById('kosmo-frame').style.display='none';
+  loadAstroEngine();
+  if(mode==='solar')updateAstroTz();
+  if(typeof trackView==='function')trackView('astrologia','vibo — astrologia');
+}
+function astroCalc(mode){
+  ev('oblicz_astro',{tryb:mode});
+  const err=document.getElementById('a-err');err.textContent='';
+  const pre=mode==='solar'?'as':'a';
+  const dm=(document.getElementById(pre+'-date').value||'').trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+  const tm=(document.getElementById(pre+'-time').value||'').trim().match(/^(\d{1,2}):(\d{2})$/);
+  if(!dm){err.textContent='Data w formacie DD.MM.RRRR';return;}
+  if(!tm){err.textContent='Godzina w formacie GG:MM';return;}
+  const bp=(mode==='solar'?asGeoCity:aGeoCity).get();
+  if(!bp){err.textContent='Wybierz miasto urodzenia z listy';return;}
+  const name=document.getElementById(pre+'-name').value.trim();
+  const gsel=document.querySelector('#astro-form-'+(mode==='solar'?'solar':'natal')+' .seg-btn.active');
+  const gender=(gsel&&gsel.textContent.trim()==='Mężczyzna')?'m':'f';
+  const data={name:name,gender:gender,d:+dm[1],mo:+dm[2],y:+dm[3],h:+tm[1],mi:+tm[2],lat:bp.lat,lng:bp.lng,tz:bp.tz,city:bp.name};
+  if(mode==='solar'){
+    const yr=parseInt(document.getElementById('as-year').value,10);
+    if(!yr||yr<1900||yr>2100){err.textContent='Podaj rok solára (np. 2026)';return;}
+    const hp=asGeoHere.get()||bp;data.year=yr;data.hlat=hp.lat;data.hlng=hp.lng;data.htz=hp.tz;data.hcity=hp.name;
+  }
+  const fr=document.getElementById('kosmo-frame');
+  const run=()=>{try{if(mode==='solar')fr.contentWindow.embedSolar(data);else fr.contentWindow.embedNatal(data);fr.style.display='block';}catch(e){err.textContent='Błąd obliczeń';}};
+  loadAstroEngine();
+  if(ASTRO_READY&&fr.contentWindow&&fr.contentWindow.embedNatal)run();
+  else fr.addEventListener('load',function h(){fr.removeEventListener('load',h);run();});
 }
 
 /* date input formatting */
@@ -1716,6 +2106,7 @@ function calcMatrix(){
     sets=[d1];
   }
   err.textContent='';
+  ev('oblicz_matryce',{typ:TYPE});
   CURRENT=sets;
   const d=sets[0];
   const isCompat = TYPE==='compat';
@@ -1732,6 +2123,23 @@ function calcMatrix(){
   r.scrollIntoView({behavior:'smooth',block:'start'});
   warmCheckout();
 }
+// Kalkulator osadzony w artykule — pokazuje TYLKO diagram matrycy (bez czakr i przeznaczenia).
+window.AC_LAST=null; window.AC_GENDER='female';
+function acGender(v,btn){window.AC_GENDER=v;btn.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function articleCalc(hl){
+  ev('oblicz_w_artykule',{kontekst:hl||'matryca'});
+  const inp=document.getElementById('ac-dob'), err=document.getElementById('ac-err'), out=document.getElementById('ac-diagram');
+  if(!inp||!out) return;
+  const v=valid(inp.value);
+  if(!v){ if(err)err.textContent=(L().err_format||'Format: DD.MM.RRRR'); return; }
+  const d=calculateMatrix(v);
+  if(!d){ if(err)err.textContent=(L().err_calc||'Błąd obliczeń'); return; }
+  if(err)err.textContent='';
+  window.AC_LAST=d;
+  // hl===undefined → денежный канал (статья про zawody); '' → чистая матрица без обводок (карма)
+  out.innerHTML=buildSVG([d], false, hl===undefined?'money':hl);
+  out.closest('.art-calc-out').style.display='block';
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeArcana();closeAuth();}});
 
 function setLang(code,el){
@@ -1739,10 +2147,12 @@ function setLang(code,el){
   document.querySelector('.lang-btn').textContent=code+' ▾';
   if(el)el.closest('.lang-dd').classList.remove('open');
   try{localStorage.setItem('vibolang',CURLANG);}catch(e){}
+  setGaLang(); ev('zmiana_jezyka',{jezyk:CURLANG});
   applyStatic();
   applyCopy();
   renderLegal();
   renderArticles();
+  renderReviews();
   if(CURRENT){const d=CURRENT[0],g=GENDER[1]==='male'?'m':'k';
     document.getElementById('diagram').innerHTML=buildSVG(CURRENT,TYPE==='compat');
     if(TYPE!=='compat'){renderPurpose(d);renderHealth(d);}
@@ -1773,15 +2183,82 @@ function renderArticles(){
     `</div>`
   ).join('');
 }
-function openArticle(id){
+function revCard(text,name){ return `<div class="rev-card"><p class="rev-text">„${text}”</p><div class="rev-name">— ${name}</div></div>`; }
+function esc(s){ return String(s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); }
+function renderReviews(){
+  const box=document.getElementById('rev-list'); if(!box)return;
+  const list=(window.REVIEWS&&window.REVIEWS[CURLANG])||(window.REVIEWS&&window.REVIEWS.pl)||[];
+  const curated=list.map(r=>revCard(r.t,r.n)).join('');
+  box.innerHTML=curated;
+  // krótki teaser na stronie głównej — 3 opinie
+  const hbox=document.getElementById('home-rev-list');
+  if(hbox) hbox.innerHTML=list.slice(0,3).map(r=>revCard(r.t,r.n)).join('');
+  // dołącz opinie przysłane przez klientów (Netlify Blobs)
+  fetch('/.netlify/functions/list-reviews',{cache:'no-store'}).then(r=>r.json()).then(arr=>{
+    if(!Array.isArray(arr)||!arr.length) return;
+    const mine=arr.map(r=>revCard(esc(r.text),esc(r.name||'—'))).join('');
+    box.innerHTML=mine+curated;
+  }).catch(()=>{});
+}
+/* ===== Formularz oceny (#ocena) ===== */
+let OC_RATING=0;
+(function(){ document.addEventListener('click',e=>{
+  const s=e.target.closest('.oc-star'); if(!s)return;
+  OC_RATING=parseInt(s.dataset.v,10);
+  document.querySelectorAll('#oc-stars .oc-star').forEach(x=>x.classList.toggle('on',parseInt(x.dataset.v,10)<=OC_RATING));
+});})();
+function submitReview(){
+  const name=(document.getElementById('oc-name').value||'').trim();
+  const text=(document.getElementById('oc-text').value||'').trim();
+  const err=document.getElementById('oc-err'), btn=document.getElementById('oc-send');
+  const T=L();
+  if(!OC_RATING){ err.textContent=T.oc_err_star||'Wybierz ocenę (gwiazdki).'; return; }
+  if(!name||text.length<5){ err.textContent=T.oc_err_fields||'Uzupełnij imię i treść opinii.'; return; }
+  err.textContent=''; btn.disabled=true; btn.style.opacity='.6';
+  fetch('/.netlify/functions/submit-review',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name,text,rating:OC_RATING,lang:CURLANG})})
+    .then(r=>{ if(!r.ok) throw 0;
+      document.querySelector('.oc-form').querySelectorAll('input,textarea,.oc-stars,#oc-send').forEach(x=>x.style.display='none');
+      document.getElementById('oc-thanks').style.display='block';
+    }).catch(()=>{ err.textContent=T.oc_err_send||'Coś poszło nie tak. Spróbuj ponownie.'; btn.disabled=false; btn.style.opacity=''; });
+}
+/* ===== Moderacja (#moderacja) ===== */
+let MOD_PW='';
+function modLoad(){
+  MOD_PW=(document.getElementById('mod-pw').value||'').trim();
+  const box=document.getElementById('mod-list'); if(!box)return;
+  box.innerHTML='…';
+  fetch('/.netlify/functions/list-reviews?all='+encodeURIComponent(MOD_PW),{cache:'no-store'}).then(r=>r.json()).then(arr=>{
+    if(!Array.isArray(arr)){ box.innerHTML='Błąd.'; return; }
+    if(!arr.length){ box.innerHTML='Brak opinii.'; return; }
+    document.getElementById('mod-gate').style.display='none';
+    box.innerHTML=arr.map(r=>
+      `<div class="mod-item"><div class="mi-meta"><span>${'★'.repeat(r.rating||0)} · ${esc(r.name||'')} · ${r.lang||''}</span><button class="mi-del" onclick="modDelete('${r.id}',this)">Usuń</button></div><div>${esc(r.text||'')}</div></div>`
+    ).join('');
+  }).catch(()=>{ box.innerHTML='Błąd połączenia.'; });
+}
+function modDelete(id,btn){
+  fetch('/.netlify/functions/delete-review',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({id,password:MOD_PW})}).then(r=>{ if(r.ok){ const it=btn.closest('.mod-item'); if(it)it.remove(); } });
+}
+function openArticle(id,opts){
   const a=articleList().find(x=>x.id===id)||articleList()[0]; if(!a)return;
   const box=document.getElementById('article-body'); if(!box)return;
+  const others=articleList().filter(x=>x.id!==a.id);
+  const moreLinks=others.length
+    ? `<div class="art-more"><div class="art-more-t">${(L().art_more_t||'Pozostałe artykuły')}</div>`+
+        others.map(x=>`<a onclick="openArticle('${x.id}')">${x.title}</a>`).join('')+
+      `</div>`
+    : '';
   box.innerHTML=
     `<div class="art-cover" style="background-image:url('${a.cover}')"><div class="art-cover-ov">`+
       `<div class="art-eyebrow">${a.kicker||''}</div><h1>${a.title}</h1><p>${a.sub}</p>`+
     `</div></div><div class="art-content">${a.html}</div>`+
+    `<div class="art-convert"><h3>${(L().art_cta_t||'Oblicz i odbierz pełny rozbór swojej Matrycy')}</h3>`+
+      `<button class="btn btn-gold" onclick="showView('pricing')">${(L().art_cta_btn||'Kup pełny rozbór')}</button></div>`+
+    moreLinks+
     `<div class="art-cta"><button class="btn btn-gold" onclick="showView('articles')">${(L().art_back||'← Artykuły')}</button></div>`;
-  showView('article');
+  showView('article',Object.assign({slug:'artykul/'+a.id},opts||{}));
 }
 
 /* ===== Stripe checkout ===== */
@@ -1791,7 +2268,11 @@ function warmCheckout(){
   // «будим» serverless-функцию заранее, чтобы клик по оплате был быстрым
   try{fetch('/.netlify/functions/create-checkout',{method:'GET',cache:'no-store'}).catch(()=>{});}catch(e){}
 }
+function fbCookie(name){ try{ const m=document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)'); return m?m.pop():''; }catch(e){ return ''; } }
 function checkoutFetch(payload,attempt){
+  // прикладываем cookie Facebook, чтобы серверная покупка нашла этого человека
+  if(!payload.fbp) payload.fbp=fbCookie('_fbp');
+  if(!payload.fbc) payload.fbc=fbCookie('_fbc');
   return fetch('/.netlify/functions/create-checkout',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)
   }).then(r=>r.json().catch(()=>null)).then(d=>{
@@ -1803,6 +2284,73 @@ function checkoutFetch(payload,attempt){
     throw err;
   });
 }
+function financeOrder(e){ astroProductOrder(e,'finance','Formuła Finansowa'); }
+function relationOrder(e){ astroProductOrder(e,'relation','Astrologiczny Portret Relacji'); }
+function horaryOrder(e){ astroProductOrder(e,'horary','Pytanie horarne'); }
+/* ===== TEST: programy (linie 3 energii) ===== */
+const TP_LINES=[
+ {n:'A · O · J',k:['A','O','J']},
+ {n:'F · F₁ · F₂',k:['F','F1','F2']},
+ {n:'B · P · K',k:['B','P','K']},
+ {n:'G · G₁ · G₂',k:['G','G1','G2']},
+ {n:'C · Q · L',k:['C','Q','L']},
+ {n:'H · H₁ · H₂',k:['H','H1','H2']},
+ {n:'D · N · M',k:['D','N','M']},
+ {n:'I · I₁ · I₂',k:['I','I1','I2']},
+ {n:'Przeznaczenie 1 (E · L₂ · L₁)',k:['E','L2','L1']},
+ {n:'Przeznaczenie 2 (L · R₂ · R)',k:['L','R2','R']},
+ {n:'Przeznaczenie 3 (M · R₁ · R)',k:['M','R1','R']},
+];
+const TP_CHAKRA_NAMES=['Sahasrara','Ajna','Vishuddha','Anahata','Manipura','Swadhisthana','Muladhara'];
+// lista „sочетań” z metodyki (czakry/kombinacje) — do weryfikacji
+const TP_COMBOS_RAW=`5-14-19 17-5-6 22-17-12 8-13-5 11-18-7 12-8-20 10-20-10 20-6-4 16-9-20 7-10-3 18-22-4 13-18-5 18-5-5 19-8-7 8-7-17 9-14-5 10-11-19 15-21-6 16-5-7 18-8-8 9-8-17 19-9-10 20-7-5 21-8-5 9-20-11 13-21-8 18-6-12 19-7-6 20-4-11 20-9-7 22-4-8 22-4-9 9-6-15 16-8-6 7-21-14 7-6-17 9-16-7 19-9-8 5-17-12 10-15-5 11-9-16 18-10-10 20-3-10 10-5-22 14-22-8 12-11-17 21-9-6 18-7-7 13-6-19 13-7-20 15-22-7 17-22-5 3-18-15 11-6-22 17-20-3 20-5-3 3-14-17 21-5-11 10-8-16 11-3-19 22-22-8 4-21-17 19-5-4 6-22-16 18-11-11 16-21-5 11-16-5 9-13-4 9-22-13 22-3-8 22-11-7 22-10-6 4-17-13 4-19-15 2-6-22 2-9-7 2-10-8 2-13-11 3-6-9 3-6-21 3-11-8 3-19-16 4-4-8 4-11-11 4-20-20 5-10-5 5-16-16 6-3-3 6-12-6 6-18-12 7-5-12 7-7-14 7-8-19 7-20-13 8-2-4 8-10-10 8-10-20 8-11-11 8-13-13 8-19-11 8-20-12 8-22-22 9-5-14 9-7-16 9-8-8 9-14-14 9-16-16 10-6-14 10-9-17 10-14-4 11-4-15 11-4-20 11-19-19 12-5-20 12-6-6 12-9-15 13-3-17 15-7-10 15-10-13 15-15-3 17-10-11 19-6-5 20-9-9 21-6-6 21-11-8 22-11-11`;
+const TP_COMBO_SET=(function(){ const s=new Set(); TP_COMBOS_RAW.split(/\s+/).forEach(t=>{const p=t.split('-').map(Number).filter(x=>x); if(p.length===3) s.add(p.slice().sort((a,b)=>a-b).join('-')); }); return s; })();
+function tpSortedKey(arr){ return arr.slice().sort((a,b)=>a-b).join('-'); }
+function testCalc(){
+  const inp=document.getElementById('tp-dob'), err=document.getElementById('tp-err');
+  const v=valid(inp.value); if(!v){ err.textContent=(L().err_format||'Format: DD.MM.RRRR'); return; }
+  const d=calculateMatrix(v); if(!d){ err.textContent='Błąd obliczeń'; return; }
+  err.textContent='';
+  document.getElementById('tp-diagram').innerHTML=buildSVG([d],false);
+  document.getElementById('tp-out').innerHTML=programyHTML(d);
+}
+function programyHTML(d){
+  const same=[], combo=[];
+  TP_LINES.forEach(L0=>{ const v=L0.k.map(k=>d[k]);
+    if(v[0]===v[1]&&v[1]===v[2]) same.push({n:L0.n,a:v[0]});
+    if(TP_COMBO_SET.has(tpSortedKey(v))) combo.push({n:L0.n,v});
+  });
+  // czakry
+  CHAKRAS.forEach((c,i)=>{ const v=[d[c.phys],d[c.ener],d[c.emo]];
+    if(v[0]===v[1]&&v[1]===v[2]) same.push({n:'Czakra '+TP_CHAKRA_NAMES[i],a:v[0]});
+    if(TP_COMBO_SET.has(tpSortedKey(v))) combo.push({n:'Czakra '+TP_CHAKRA_NAMES[i],v});
+  });
+  const arc=n=>(ARCANA[n]?ARCANA[n][0]:('Arkan '+n));
+  let h='<h2 style="text-align:center">Programy — trzy te same energie</h2>';
+  h+= same.length
+    ? '<div class="tp-grid">'+same.map(p=>`<div class="tp-card tp-on"><div class="tp-ln">${p.n}</div><div class="tp-en">${p.a} · ${arc(p.a)} ×3</div></div>`).join('')+'</div>'
+    : '<p style="text-align:center;color:var(--ink-soft)">Brak linii z trzema identycznymi energiami.</p>';
+  h+='<h2 style="text-align:center;margin-top:26px">Wykryte sочetania (wg listy)</h2><p style="text-align:center;color:var(--ink-faint);font-size:13px;margin-bottom:14px">— do weryfikacji metodyki —</p>';
+  h+= combo.length
+    ? '<div class="tp-grid">'+combo.map(p=>`<div class="tp-card"><div class="tp-ln">${p.n}</div><div class="tp-en">${p.v.join(' · ')}</div></div>`).join('')+'</div>'
+    : '<p style="text-align:center;color:var(--ink-soft)">Brak dopasowanych sочetań.</p>';
+  // pełna lista linii (podgląd)
+  h+='<h2 style="text-align:center;margin-top:26px">Wszystkie linie (podgląd)</h2><div class="tp-grid">'+
+     TP_LINES.map(L0=>{const v=L0.k.map(k=>d[k]);return `<div class="tp-card"><div class="tp-ln">${L0.n}</div><div class="tp-en">${v.join(' · ')}</div></div>`;}).join('')+
+     CHAKRAS.map((c,i)=>{const v=[d[c.phys],d[c.ener],d[c.emo]];return `<div class="tp-card"><div class="tp-ln">Czakra ${TP_CHAKRA_NAMES[i]}</div><div class="tp-en">${v.join(' · ')}</div></div>`;}).join('')+
+     '</div>';
+  return h;
+}
+function horaryPick(){ ev('klik_kup',{produkt:'horary_wybor'}); const o=document.getElementById('horary-overlay'); if(o)o.classList.add('show'); }
+function closeHorary(){ const o=document.getElementById('horary-overlay'); if(o)o.classList.remove('show'); }
+function astroProductOrder(e,type,label){
+  ev('klik_kup',{produkt:type});
+  const b=e&&e.currentTarget; if(b){b.disabled=true;b.style.opacity='.7';}
+  warmCheckout();
+  checkoutFetch({primary:type,primaryQty:1,addons:[],lang:CURLANG,summary:label},0)
+    .catch(()=>{alert(L().alert_pay_err||'Płatność chwilowo niedostępna. Spróbuj ponownie.');})
+    .finally(()=>{if(b){b.disabled=false;b.style.opacity='';}});
+}
 /* «Купить» теперь ведёт на экран регистрации + заказа (view-checkout) */
 function buyProduct(type){ openCheckout(type); }
 function startCheckout(ev){ openCheckout(TYPE); }
@@ -1813,25 +2361,38 @@ const PNUM_ADDON={pl:{full:35,child:25,compat:25,month:25,star:33},en:{full:9,ch
 const ADDON_FOR={full:['compat','child','month','star'],compat:['full','child','month','star'],child:['full','compat','month','star'],month:['full','compat','child','star'],star:['full','compat','child','month']};
 function coMoney(n){return CURLANG==='en'?'$'+n:CURLANG==='de'?'€'+n:n+' zł';}
 function coName(type){const t=L();return ({full:t.tab_full,child:t.tab_child,compat:t.tab_compat,month:t.pr_month_t,star:t.pr_star_t})[type]||type;}
-function coUnit(it){return it.addon?PNUM_ADDON[CURLANG][it.type]:PNUM[CURLANG][it.type];}
+// star (Gwiazda) jako produkt główny NIE daje rabatu na matryce — wtedy dodatki po pełnej cenie
+function coUnit(it){const starPrimary=(CO_CTX&&CO_CTX.primary==='star');return (it.addon&&!starPrimary)?PNUM_ADDON[CURLANG][it.type]:PNUM[CURLANG][it.type];}
+// Suma za pozycję: pierwsza sztuka pełna cena, każda kolejna w cenie dodatku (np. 2. pełna matryca = 35 zł).
+function itemSubtotal(it){
+  const starPrimary=(CO_CTX&&CO_CTX.primary==='star');
+  const full=PNUM[CURLANG][it.type], addonP=PNUM_ADDON[CURLANG][it.type];
+  if(it.addon){ return (starPrimary?full:addonP)*it.qty; }
+  const extra=starPrimary?full:addonP;
+  return full+extra*Math.max(0,it.qty-1);
+}
 function coDateFmt(el){let v=el.value.replace(/\D/g,'').slice(0,8);if(v.length>=5)v=v.slice(0,2)+'.'+v.slice(2,4)+'.'+v.slice(4);else if(v.length>=3)v=v.slice(0,2)+'.'+v.slice(2);el.value=v;}
 function blankPerson(){return {name:'',gender:'female',date:''};}
-function ensurePeople(it){ while(it.people.length<it.qty) it.people.push(blankPerson()); it.people.length=it.qty; }
+function ppu(it){ return (it&&it.type==='compat')?2:1; } // persons per report
+function ensurePeople(it){ const need=it.qty*ppu(it); while(it.people.length<need) it.people.push(blankPerson()); it.people.length=need; }
+const CO_OSOBA={pl:'Osoba',en:'Person',de:'Person'}, CO_PARA={pl:'Para',en:'Pair',de:'Paar'};
 let CO_CTX={primary:'full'}, CO_ITEMS=[];
 function openCheckout(primary){
   if(!PNUM[CURLANG][primary]) primary='full';
+  ev('klik_kup',{produkt:primary});
   CO_CTX={primary};
   const dob=(document.getElementById('dob')||{}).value||'';
-  CO_ITEMS=[{type:primary,locked:true,checked:true,addon:false,qty:1,people:[{name:(document.getElementById('name1')||{}).value||'',gender:GENDER[1]||'female',date:dob}]}];
+  const me={name:(document.getElementById('name1')||{}).value||'',gender:GENDER[1]||'female',date:dob};
+  CO_ITEMS=[{type:primary,locked:true,checked:true,addon:false,qty:1,people:primary==='compat'?[me,blankPerson()]:[me]}];
   (ADDON_FOR[primary]||[]).forEach(t=>CO_ITEMS.push({type:t,locked:false,checked:false,addon:true,qty:1,people:[blankPerson()]}));
   renderCoOrder();
   document.getElementById('co-err').textContent='';
   warmCheckout();
   showView('checkout');
 }
-function personRow(i,j,p){
+function personRow(i,j,p,label){
   const t=L();
-  return `<div class="co-person">`+
+  return (label?`<div class="co-plabel">${label}</div>`:'')+`<div class="co-person">`+
     `<input class="co-pin" placeholder="${t.co_name}" value="${esc(p.name)}" onchange="coSetP(${i},${j},'name',this.value)">`+
     `<div class="co-seg2"><button type="button" class="${p.gender==='female'?'on':''}" onclick="coSetP(${i},${j},'gender','female')">${t.f_kobieta}</button><button type="button" class="${p.gender==='male'?'on':''}" onclick="coSetP(${i},${j},'gender','male')">${t.f_mezczyzna}</button></div>`+
     `<input class="co-pin co-pdate" inputmode="numeric" maxlength="10" placeholder="DD.MM.RRRR" value="${esc(p.date)}" oninput="coDateFmt(this)" onchange="coSetP(${i},${j},'date',this.value)">`+
@@ -1845,10 +2406,16 @@ function renderCoOrder(){
     if(it.checked){
       ensurePeople(it);
       const stepper=`<div class="co-qty"><button type="button" onclick="coQty(${i},-1)">−</button><span>${it.qty}</span><button type="button" onclick="coQty(${i},1)">+</button></div>`;
-      const people=it.people.map((p,j)=>personRow(i,j,p)).join('');
+      const per=ppu(it);
+      const people=it.people.map((p,j)=>{
+        let label='';
+        if(per===2){const unit=Math.floor(j/2)+1, who=(j%2)+1;
+          label=(it.qty>1?`${CO_PARA[CURLANG]||CO_PARA.pl} ${unit} · `:'')+`${CO_OSOBA[CURLANG]||CO_OSOBA.pl} ${who}`;}
+        return personRow(i,j,p,label);
+      }).join('');
       detail=`<div class="co-detail">${stepper}${people}</div>`;
     }
-    return `<div class="co-row"><label class="co-item"><input type="checkbox" ${it.checked?'checked':''} ${it.locked?'disabled':''} onchange="coToggle(${i},this.checked)"><span class="co-nm">${coName(it.type)}${bonus}</span><span class="co-pr">${coMoney(coUnit(it))}</span></label>${detail}</div>`;
+    return `<div class="co-row"><label class="co-item"><input type="checkbox" ${it.checked?'checked':''} ${it.locked?'disabled':''} onchange="coToggle(${i},this.checked)"><span class="co-nm">${coName(it.type)}${bonus}</span><span class="co-pr">${coMoney(it.checked?itemSubtotal(it):coUnit(it))}</span></label>${detail}</div>`;
   }).join('');
   coTotal();
 }
@@ -1856,7 +2423,7 @@ function coToggle(i,checked){ const it=CO_ITEMS[i]; if(!it||it.locked)return; it
 function coQty(i,delta){ const it=CO_ITEMS[i]; if(!it)return; it.qty=Math.max(1,Math.min(10,it.qty+delta)); ensurePeople(it); renderCoOrder(); }
 function coSetP(i,j,field,val){ const it=CO_ITEMS[i]; if(it&&it.people[j]){ it.people[j][field]=val; if(field==='gender') renderCoOrder(); } }
 function coTotal(){
-  const sum=CO_ITEMS.filter(it=>it.checked).reduce((s,it)=>s+coUnit(it)*it.qty,0);
+  const sum=CO_ITEMS.filter(it=>it.checked).reduce((s,it)=>s+itemSubtotal(it),0);
   const tv=document.getElementById('co-total-val'); if(tv)tv.textContent=coMoney(sum);
   const pay=document.getElementById('co-pay'); if(pay)pay.textContent=(L().co_pay||'Zapłać')+' · '+coMoney(sum);
 }
@@ -1891,9 +2458,10 @@ const SUCCESS_COPY={
   en:{h1:'Thank you for your payment!',p:'Your full PDF report is being prepared — we will send it to your e-mail within a few minutes.',btn:'Back to home'},
   de:{h1:'Vielen Dank für Ihre Zahlung!',p:'Ihr vollständiger PDF-Bericht wird vorbereitet — wir senden ihn innerhalb weniger Minuten an Ihre E-Mail.',btn:'Zurück zur Startseite'}
 };
-function trackPurchase(value,currency,type){
+function trackPurchase(value,currency,type,eventId){
   try{ if(window.gtag) gtag('event','purchase',{value:value,currency:currency,items:[{item_id:type||'order'}]}); }catch(e){}
-  try{ if(window.fbq) fbq('track','Purchase',{value:value,currency:currency}); }catch(e){}
+  // eventID = Stripe session id → Facebook склеит браузерное и серверное событие (без двойного счёта)
+  try{ if(window.fbq) fbq('track','Purchase',{value:value,currency:currency}, eventId?{eventID:eventId}:undefined); }catch(e){}
   // Google Ads conversion (label uzupełnić po założeniu konwersji):
   try{ if(window.gtag && window.GADS_CONV) gtag('event','conversion',{send_to:window.GADS_CONV,value:value,currency:currency}); }catch(e){}
 }
@@ -1905,7 +2473,7 @@ function handleReturn(){
     document.getElementById('suc-p').textContent=c.p;
     document.getElementById('suc-btn').textContent=c.btn;
     showView('success');
-    trackPurchase(parseFloat(q.get('val'))||0, q.get('cur')||'PLN', q.get('type')||'');
+    trackPurchase(parseFloat(q.get('val'))||0, q.get('cur')||'PLN', q.get('type')||'', q.get('sid')||'');
     history.replaceState(null,'',location.pathname);
   }else if(q.get('canceled')==='1'){
     history.replaceState(null,'',location.pathname);
@@ -1914,7 +2482,10 @@ function handleReturn(){
 
 /* view switching (menu) */
 /* ===== Analytics: virtual page views for the single-page app ===== */
-const VIEW_SLUG={home:'',method:'o-metodzie',articles:'artykuly',reviews:'opinie',pricing:'cennik',privacy:'polityka-prywatnosci',terms:'regulamin',account:'konto',success:'dziekujemy',checkout:'zamowienie',article:'artykul',energy:'energia-dnia'};
+const VIEW_SLUG={home:'',method:'o-metodzie',about:'o-mnie',finance:'formula-finansowa',relations:'portret-relacji',articles:'artykuly',reviews:'opinie',pricing:'cennik',privacy:'polityka-prywatnosci',terms:'regulamin',account:'konto',success:'dziekujemy',checkout:'zamowienie',article:'artykul',energy:'energia-dnia',ocena:'ocena',moderacja:'moderacja',testprog:'test-programy'};
+// uniwersalne zdarzenie do GA4 — każde zdarzenie niesie język (jezyk)
+function ev(name,params){ try{ if(window.gtag) gtag('event',name,Object.assign({jezyk:CURLANG},params||{})); }catch(e){} }
+function setGaLang(){ try{ if(window.gtag) gtag('set','user_properties',{jezyk:CURLANG}); }catch(e){} }
 function trackView(slug,title){
   const path='/'+(slug||'');
   try{ if(window.gtag) gtag('event','page_view',{page_title:title||document.title,page_location:location.origin+'/'+(slug?('#'+slug):''),page_path:path}); }catch(e){}
@@ -1928,18 +2499,26 @@ function showView(v,opts){
   document.querySelectorAll('.menu a').forEach(a=>a.classList.toggle('active', a.dataset.v===v));
   document.body.classList.toggle('subpage', v!=='home');
   window.scrollTo({top:0,behavior:'smooth'});
-  const slug=VIEW_SLUG[v]!==undefined?VIEW_SLUG[v]:v;
-  if(!opts.noPush){ try{ history.pushState({v:v}, '', slug? ('#'+slug) : location.pathname); }catch(e){} }
+  const slug=opts.slug!==undefined?opts.slug:(VIEW_SLUG[v]!==undefined?VIEW_SLUG[v]:v);
+  if(!opts.noPush){ try{ history.pushState({v:v,slug:slug}, '', slug? ('#'+slug) : location.pathname); }catch(e){} }
   trackView(slug, 'vibo — '+v);
 }
 window.addEventListener('popstate',function(e){
-  const v=(e.state&&e.state.v)|| (location.hash? hashToView(location.hash.slice(1)) : 'home');
-  if(v) showView(v,{noPush:true});
+  routeFromHash(location.hash.slice(1));
 });
 function hashToView(slug){ for(const k in VIEW_SLUG){ if(VIEW_SLUG[k]===slug) return k; } return 'home'; }
+// Открывает нужный экран по хэшу. Поддерживает «artykul/<id>» — отдельная ссылка на каждую статью.
+function routeFromHash(hash){
+  if(hash && hash.indexOf('artykul/')===0){
+    const id=hash.slice('artykul/'.length);
+    if(id){ openArticle(id,{noPush:true}); return; }
+  }
+  const v=hash? hashToView(hash) : 'home';
+  showView(v,{noPush:true});
+}
 function closePromo(){ try{localStorage.setItem('vibo_promo_v2','1');}catch(e){} const p=document.getElementById('promo'); if(p)p.classList.add('hide'); }
 (function(){ let h=false; try{h=localStorage.getItem('vibo_promo_v2')==='1';}catch(e){} const p=document.getElementById('promo'); if(!p)return; p.classList.add('hide'); if(h)return; setTimeout(()=>{p.classList.remove('hide');p.classList.add('promo-in');},4000); })();
-function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted'}); if(window.fbq){ fbq('consent','grant'); fbq('track','PageView'); } const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
+function acceptCookies(){ try{localStorage.setItem('vibo_cookies','1');}catch(e){} if(window.gtag) gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'}); if(window.fbq){ fbq('consent','grant'); fbq('track','PageView'); } const b=document.getElementById('cookie-bar'); if(b)b.classList.remove('show'); }
 /* swipe od lewej krawędzi w prawo = powrót (telefon) */
 let _swX=0,_swY=0;
 document.addEventListener('touchstart',e=>{const t=e.changedTouches[0];_swX=t.clientX;_swY=t.clientY;},{passive:true});
@@ -1964,11 +2543,12 @@ if('IntersectionObserver' in window){
     saved = bl.startsWith('de')?'de' : bl.startsWith('en')?'en' : 'pl';
   }
   if(I18N[saved]){CURLANG=saved;const lb=document.querySelector('.lang-btn');if(lb)lb.textContent=saved.toUpperCase()+' ▾';}
-  applyStatic();applyCopy();renderLegal();renderArticles();
+  setGaLang();
+  applyStatic();applyCopy();renderLegal();renderArticles();renderReviews();
   handleReturn();
   // открытие нужного раздела по ссылке-хэшу (vibo.club/#cennik)
   if(location.hash && location.hash.length>1 && !new URLSearchParams(location.search).get('paid')){
-    const v=hashToView(location.hash.slice(1)); if(v&&v!=='home') showView(v,{noPush:true});
+    routeFromHash(location.hash.slice(1));
   }
 })();
 </script>

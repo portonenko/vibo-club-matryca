@@ -1,0 +1,673 @@
+<!doctype html><html lang="pl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kosmogram i Solár — vibo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#f6f1e4;background-image:linear-gradient(160deg,#f8f3e7 0%,#f3ecda 60%,#efe6d2 100%);
+    color:#3a4030;font-family:'Cormorant Garamond',serif;padding:34px 24px 80px;min-height:100vh}
+  .wrap{max-width:1120px;margin:0 auto}
+  .kerb{font-family:'Lora',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:#b39a55;text-align:center}
+  h1{font-size:42px;font-weight:600;margin:6px 0 4px;color:#39402c;text-align:center}
+  .lead{font-family:'Lora',serif;font-size:13px;color:#9c8f6b;margin-bottom:24px;text-align:center}
+  form{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-start;align-items:flex-end;background:transparent;border:0;box-shadow:none;padding:0;max-width:none;margin:0}
+  .seg{display:flex;height:48px;background:#fff;border:1px solid rgba(184,153,90,.35);border-radius:11px;overflow:hidden}
+  .seg-btn{font-family:'Lora',serif;font-size:14px;color:#7d745f;background:transparent;border:0;padding:0 18px;cursor:pointer;letter-spacing:.3px;text-transform:none}
+  .seg-btn+.seg-btn{border-left:1px solid rgba(184,153,90,.3)}
+  .seg-btn.on{background:linear-gradient(180deg,#d6b878,#bf9c54);color:#3a2f10}
+  .fld{display:flex;flex-direction:column;text-align:left;gap:7px}
+  label{font-family:'Lora',serif;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#9a7d42;white-space:nowrap}
+  input,select{font-family:'Lora',serif;font-size:16px;height:48px;color:#33301f;background:#fff;
+    border:1px solid rgba(184,153,90,.35);border-radius:11px;padding:0 15px;outline:none;min-width:150px}
+  input:focus,select:focus{border-color:#b8995a}
+  button{font-family:'Lora',serif;letter-spacing:.4px;text-transform:none;font-size:15px;height:48px;color:#3a2f10;
+    background:linear-gradient(180deg,#d6b878,#bf9c54);border:0;border-radius:12px;padding:0 30px;cursor:pointer;box-shadow:0 10px 24px rgba(184,153,90,.3)}
+  button:hover{filter:brightness(1.05)}
+  .err{color:#c06a55;font-family:'Lora',serif;font-size:13px;margin-top:14px;text-align:center}
+  .cityres{position:absolute;top:100%;left:0;right:0;z-index:30;margin-top:4px;background:#fffdf7;
+    border:1px solid rgba(176,151,79,.4);border-radius:12px;box-shadow:0 12px 30px rgba(120,100,50,.18);
+    max-height:240px;overflow-y:auto;display:none}
+  .cityres.show{display:block}
+  .cityres div{padding:10px 13px;cursor:pointer;font-size:17px;border-bottom:1px solid rgba(176,151,79,.12)}
+  .cityres div:last-child{border-bottom:0}
+  .cityres div:hover,.cityres div.sel{background:#f4ecd7}
+  .cityres .reg{font-family:'Lora',serif;font-size:11px;color:#a89a72;margin-left:5px}
+  .tabs{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
+  .tab{font-family:'Lora',serif;letter-spacing:.6px;font-size:14px;color:#7d745f;background:#fff;
+    border:1px solid rgba(184,153,90,.28);border-radius:30px;padding:11px 22px;cursor:pointer}
+  .tab.on{background:linear-gradient(180deg,#d6b878,#bf9c54);color:#3a2f10;border-color:transparent}
+  #fp{background:linear-gradient(165deg,#faf6ec,#f5eedd);border:1px solid rgba(176,151,79,.28);border-radius:20px;padding:20px;box-shadow:0 12px 34px rgba(120,100,50,.1);margin:0 auto}
+  .pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;width:100%}
+  @media(max-width:640px){.pair-grid{grid-template-columns:1fr}}
+  .pair-col{display:flex;flex-direction:column;gap:11px;min-width:0}
+  .pair-h{font-size:22px;font-weight:600;color:#39402c;text-align:center;padding-bottom:4px;border-bottom:1px solid rgba(176,151,79,.25)}
+  #fp .fld{gap:4px}
+  #fp input{width:100%}
+  .people{display:flex;align-items:center;justify-content:center;gap:28px;margin-bottom:22px}
+  .person{display:flex;flex-direction:column;align-items:center;min-width:150px}
+  .pglyph{font-size:32px}.her .pglyph{color:#d98c7a}.his .pglyph{color:#7b9bd0}
+  .pname{font-size:24px;font-weight:600;margin-top:2px}
+  .psign{font-family:'Lora',serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#9c8f6b;margin-top:3px}
+  .heart{font-size:24px;color:#d39a8c}
+  .synmain{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .gauge{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:220px}
+  .gv{font-size:58px;font-weight:600;color:#bf9540;line-height:1}
+  .glabel{font-size:23px;font-style:italic;color:#7a6f4c}
+  .gsub{font-family:'Lora',serif;font-size:12px;color:#9c8f6b;max-width:215px;line-height:1.5;text-align:center;margin-top:4px}
+  .cards{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+  .hl{background:linear-gradient(165deg,#faf6ec,#f4ecdb);border:1px solid rgba(176,151,79,.25);border-radius:18px;padding:16px 18px;width:236px;text-align:left}
+  .hl .cat{font-family:'Lora',serif;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#b09a63;display:flex;align-items:center;gap:7px}
+  .hl .cat .dot{width:9px;height:9px;border-radius:50%}
+  .hl .asp2{font-size:21px;margin:7px 0 4px;color:#39402c;font-family:'Apple Symbols','Segoe UI Symbol',serif}
+  .hl .txt{font-family:'Lora',serif;font-size:12.5px;line-height:1.55;color:#6f6a52}
+  #out{display:none;margin-top:34px}
+  h2{font-size:30px;font-weight:600;letter-spacing:.3px;color:#39402c;margin-bottom:14px}
+  .cols{display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap}
+  .col-l{flex:1 1 360px;min-width:260px;max-width:420px}
+  .col-r{flex:1 1 360px;min-width:280px;padding-top:4px}
+  .card{background:linear-gradient(165deg,#faf6ec,#f5eedd);border:1px solid rgba(176,151,79,.28);
+    border-radius:24px;padding:12px;box-shadow:0 14px 40px rgba(120,100,50,.12);max-width:400px;margin:0 auto}
+  .sub{font-family:'Lora',serif;font-size:12px;letter-spacing:1px;color:#9c8f6b;text-transform:uppercase;text-align:center;margin:2px 0 6px}
+  .glyph{font-family:'Apple Symbols','Segoe UI Symbol',serif}
+  table{width:100%;border-collapse:separate;border-spacing:0 8px}
+  .thd td{font-family:'Lora',serif;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#a89a72;padding:0 18px 2px;font-weight:600}
+  .thd td.r{text-align:center}
+  tr.prow td{padding:12px 18px;font-size:20px}
+  tr.prow td:first-child{border-radius:30px 0 0 30px;font-weight:500}
+  tr.prow td:last-child{border-radius:0 30px 30px 0;text-align:center;font-family:'Lora',serif;font-size:15px;color:#6a6450}
+  tr.prow td.mid{text-align:center}
+  tr.prow .pg{font-family:'Apple Symbols','Segoe UI Symbol',serif;font-size:20px;margin-right:9px;color:#7a6a3c}
+  .leg{display:flex;gap:20px;justify-content:center;margin-top:14px;font-family:'Lora',serif;font-size:11px;color:#8f8260;flex-wrap:wrap}
+  .leg span{display:inline-flex;align-items:center;gap:6px}.leg i{width:16px;height:2px;border-radius:2px;display:inline-block}
+  .asp-title{text-align:center;font-size:30px;font-weight:600;color:#39402c;margin:40px 0 16px}
+  .asps{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:840px;margin:0 auto}
+  .asp{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(176,151,79,.22);border-radius:30px;padding:9px 17px;font-size:18px}
+  .asp .g{font-family:'Apple Symbols','Segoe UI Symbol',serif;font-size:17px}
+  .asp .o{font-family:'Lora',serif;font-size:11px;color:#a89a72;margin-left:2px}
+  .acc-title{text-align:center;font-size:32px;font-weight:500;color:#39402c;margin:46px 0 18px}
+  .acc{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:11px}
+  .item{background:linear-gradient(165deg,#fbf8f0,#f6efdf);border:1px solid rgba(176,151,79,.25);border-radius:16px;overflow:hidden}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer}
+  .hd .l{display:flex;align-items:baseline;gap:12px}
+  .hd .num{font-size:24px;font-weight:600;color:#39402c}
+  .hd .sign{font-family:'Lora',serif;font-size:12px;letter-spacing:.6px;color:#9c8f6b}
+  .hd .plg{margin-left:6px;font-family:'Apple Symbols','Segoe UI Symbol',serif;font-size:17px;color:#b78f3e}
+  .hd .arr{font-family:'Lora',serif;color:#b9a05c;font-size:20px;transition:transform .25s}
+  .item.open .arr{transform:rotate(90deg)}
+  .bd{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .item.open .bd{max-height:6000px}
+  .bd-in{padding:2px 22px 20px;font-family:'Lora',serif;font-size:13.5px;line-height:1.7;color:#6a6450}
+  .bd-in .theme{color:#9a7f3c;font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:11px;display:block;margin-bottom:6px}
+  .bd-in .pl{margin-top:8px;color:#5a5440}
+  .bd-in p{margin:0 0 9px}
+  .house-cta{margin-top:14px;padding:15px 16px;border-radius:13px;background:#fff;border:1px solid rgba(176,151,79,.3)}
+  .house-cta.house-cta-rel{background:#fdf5f3;border-color:rgba(212,140,122,.32)}
+  .house-cta p{margin:0 0 8px;color:#5a5440}
+  .house-cta-btn{display:inline-block;margin-top:4px;font-family:'Lora',serif;font-size:13px;letter-spacing:.3px;color:#3a2f10;background:linear-gradient(180deg,#d6b878,#bf9c54);border:0;border-radius:11px;padding:11px 22px;cursor:pointer;text-transform:none;height:auto;box-shadow:0 8px 20px rgba(184,153,90,.28)}
+  .note{font-family:'Lora',serif;font-size:11px;color:#b0a079;margin-top:30px;line-height:1.6;text-align:center}
+</style></head>
+<body><div class="wrap">
+  <h1 id="pageTitle">Twój Kosmogram</h1>
+  <div class="lead" id="lead">Wpisz dane urodzenia, by zobaczyć swoją kartę natalną.</div>
+
+  <div class="tabs">
+    <button type="button" class="tab on" data-mode="natal" onclick="setMode('natal')">Kosmogram</button>
+    <button type="button" class="tab" data-mode="solar" onclick="setMode('solar')">Solár · rok</button>
+  </div>
+
+  <form id="f">
+    <div class="fld"><label>Imię</label><input id="name" placeholder="Imię"></div>
+    <div class="fld"><label>Płeć</label>
+      <div class="seg"><button type="button" class="seg-btn on" onclick="kSeg(this)">Kobieta</button><button type="button" class="seg-btn" onclick="kSeg(this)">Mężczyzna</button></div>
+    </div>
+    <div class="fld"><label>Data (DD.MM.RRRR)</label><input id="date" placeholder="21.11.1999" value="21.11.1999"></div>
+    <div class="fld"><label>Godzina</label><input id="time" placeholder="14:00" value="14:00"></div>
+    <div class="fld" style="position:relative"><label>Miasto urodzenia</label>
+      <input id="city" autocomplete="off" placeholder="Zacznij pisać…" value="Warszawa">
+      <div id="cityres" class="cityres"></div>
+    </div>
+    <button type="submit">Oblicz</button>
+  </form>
+
+  <form id="fs" style="display:none">
+    <div class="fld"><label>Imię</label><input id="s_name" placeholder="Imię"></div>
+    <div class="fld"><label>Płeć</label>
+      <div class="seg"><button type="button" class="seg-btn on" onclick="kSeg(this)">Kobieta</button><button type="button" class="seg-btn" onclick="kSeg(this)">Mężczyzna</button></div>
+    </div>
+    <div class="fld"><label>Data urodzenia</label><input id="s_date" placeholder="21.11.1999" value="21.11.1999"></div>
+    <div class="fld"><label>Godzina urodzenia</label><input id="s_time" placeholder="14:00" value="14:00"></div>
+    <div class="fld" style="position:relative"><label>Miasto urodzenia</label>
+      <input id="s_city" autocomplete="off" placeholder="Zacznij pisać…" value="Warszawa">
+      <div id="s_cityres" class="cityres"></div>
+    </div>
+    <div class="fld"><label>Rok solára</label><input id="s_year" inputmode="numeric" maxlength="4" placeholder="2026" value="2026" style="min-width:90px"></div>
+    <div class="fld" style="position:relative"><label>Gdzie świętujesz urodziny</label>
+      <input id="s_here" autocomplete="off" placeholder="Miasto pobytu…" value="Warszawa">
+      <div id="s_hereres" class="cityres"></div>
+      <div id="s_tzhint" style="font-size:12.5px;color:#9a7d42;margin-top:7px;min-height:15px"></div>
+    </div>
+    <button type="submit">Oblicz solár</button>
+  </form>
+
+  <form id="fp" style="display:none;flex-direction:column;gap:16px;width:100%;max-width:840px">
+    <div class="pair-grid">
+      <div class="pair-col">
+        <div class="pair-h">Osoba 1</div>
+        <div class="fld"><label>Imię</label><input id="p1_name" placeholder="Imię" value="Ona"></div>
+        <div class="fld"><label>Data urodzenia</label><input id="p1_date" placeholder="20.10.2000" value="20.10.2000"></div>
+        <div class="fld"><label>Godzina</label><input id="p1_time" placeholder="18:30" value="18:30"></div>
+        <div class="fld" style="position:relative"><label>Miasto urodzenia</label>
+          <input id="p1_city" autocomplete="off" placeholder="Zacznij pisać…" value="Grodno"><div id="p1_cityres" class="cityres"></div></div>
+      </div>
+      <div class="pair-col">
+        <div class="pair-h">Osoba 2</div>
+        <div class="fld"><label>Imię</label><input id="p2_name" placeholder="Imię" value="On"></div>
+        <div class="fld"><label>Data urodzenia</label><input id="p2_date" placeholder="14.07.1998" value="14.07.1998"></div>
+        <div class="fld"><label>Godzina</label><input id="p2_time" placeholder="09:15" value="09:15"></div>
+        <div class="fld" style="position:relative"><label>Miasto urodzenia</label>
+          <input id="p2_city" autocomplete="off" placeholder="Zacznij pisać…" value="Warszawa"><div id="p2_cityres" class="cityres"></div></div>
+      </div>
+    </div>
+    <button type="submit" style="align-self:center">Sprawdź zgodność</button>
+  </form>
+
+  <div id="err" class="err"></div>
+
+  <div id="out">
+    <div class="cols">
+      <div class="col-l">
+        <h2 style="text-align:center" id="outTitle">Twój Kosmogram</h2>
+        <div class="card">
+          <div class="sub" id="cap"></div>
+          <svg width="100%" viewBox="0 0 900 900"></svg>
+        </div>
+        <div class="leg">
+          <span><i style="background:#cba85e"></i> koniunkcja</span>
+          <span><i style="background:#9ab98a"></i> trygon · sekstyl</span>
+          <span><i style="background:#d39a8c"></i> kwadratura · opozycja</span>
+        </div>
+      </div>
+      <div class="col-r">
+        <h2>Twoje Planety</h2>
+        <table><tbody id="ptab"></tbody></table>
+      </div>
+    </div>
+
+    <div class="asp-title">Aspekty</div>
+    <div class="asps" id="asps"></div>
+
+    <div class="acc-title" id="accTitle">Twoje Domy</div>
+    <div class="acc" id="acc"></div>
+  </div>
+
+  <div id="outSyn" style="display:none;margin-top:34px">
+    <div class="people">
+      <div class="person her"><div class="pglyph glyph">♀</div><div class="pname" id="syn1n">Ona</div><div class="psign" id="syn1s"></div></div>
+      <div class="heart">❤</div>
+      <div class="person his"><div class="pglyph glyph">♂</div><div class="pname" id="syn2n">On</div><div class="psign" id="syn2s"></div></div>
+    </div>
+    <div class="synmain">
+      <div class="card"><svg id="synsvg" width="430" height="430" viewBox="0 0 900 900"></svg></div>
+      <div class="card gauge"><div class="gv" id="gv">—</div><div class="glabel" id="gl">—</div>
+        <div class="gsub">Wasze planety tworzą <b id="gn">—</b> harmonijnych połączeń i kilka napięć, które dają iskrę.</div></div>
+    </div>
+    <div class="leg">
+      <span><i style="background:#9ab98a"></i> harmonia</span>
+      <span><i style="background:#d39a8c"></i> napięcie</span>
+      <span><i style="background:#cba85e"></i> koniunkcja</span>
+    </div>
+    <div class="cards" id="syncards"></div>
+  </div>
+
+</div>
+
+<script src="/astronomy.browser.min.js"></script>
+<script src="/house-texts.js"></script>
+<script>
+function fmtPlace(r){const parts=[r.admin1,r.country].filter(Boolean);return {label:r.name,reg:parts.join(', ')};}
+const WARSAW={name:"Warszawa",lat:52.2297,lng:21.0122,tz:"Europe/Warsaw"};
+// reusable city autocomplete; returns {get(),getLast()}
+function attachGeo(inputEl,resEl,defaultPlace,onPick){
+  let timer=null, last=[], place=defaultPlace||null;
+  inputEl.addEventListener('input',()=>{
+    const q=inputEl.value.trim(); place=null; clearTimeout(timer);
+    if(q.length<2){resEl.classList.remove('show');return;}
+    timer=setTimeout(async()=>{
+      try{
+        const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=pl`);
+        const d=await r.json(); last=d.results||[];
+        if(!last.length){resEl.innerHTML='<div style="color:#a89a72">Brak wyników…</div>';resEl.classList.add('show');return;}
+        resEl.innerHTML=last.map((x,i)=>{const f=fmtPlace(x);return `<div data-i="${i}">${f.label}<span class="reg">${f.reg}</span></div>`;}).join('');
+        resEl.classList.add('show');
+        resEl.querySelectorAll('div[data-i]').forEach(el=>el.addEventListener('click',()=>{
+          const x=last[+el.dataset.i];
+          place={name:x.name,lat:x.latitude,lng:x.longitude,tz:x.timezone};
+          inputEl.value=x.name+(x.admin1?', '+x.admin1:'')+(x.country?', '+x.country:'');
+          resEl.classList.remove('show');
+          if(onPick)onPick();
+        }));
+      }catch(e){resEl.classList.remove('show');}
+    },250);
+  });
+  return {get:()=>place||(last.length?{name:last[0].name,lat:last[0].latitude,lng:last[0].longitude,tz:last[0].timezone}:null)};
+}
+const geoNatal=attachGeo(document.getElementById('city'),document.getElementById('cityres'),WARSAW);
+const geoSbirth=attachGeo(document.getElementById('s_city'),document.getElementById('s_cityres'),WARSAW);
+const geoShere=attachGeo(document.getElementById('s_here'),document.getElementById('s_hereres'),WARSAW,updateSolarTzHint);
+// Podpowiedź dla użytkownika: w jakiej strefie wypadnie solár w wybranym mieście (auto zima/lato).
+function updateSolarTzHint(){
+  const el=document.getElementById('s_tzhint'); if(!el)return;
+  const hp=geoShere.get();
+  const dm=(document.getElementById('s_date').value||'').match(/^(\d{1,2})[.\/](\d{1,2})/);
+  const yr=parseInt(document.getElementById('s_year').value,10);
+  if(!hp||!dm||!yr){el.textContent='';return;}
+  const probe=new Date(Date.UTC(yr,(+dm[2])-1,+dm[1],12,0));
+  const off=tzOffsetH(probe,hp.tz);
+  el.textContent='Miejsce solára: '+hp.name+' (GMT'+(off>=0?'+':'')+off+')';
+}
+const GRODNO={name:"Grodno",lat:53.6694,lng:23.8131,tz:"Europe/Minsk"};
+const geoP1=attachGeo(document.getElementById('p1_city'),document.getElementById('p1_cityres'),GRODNO);
+const geoP2=attachGeo(document.getElementById('p2_city'),document.getElementById('p2_cityres'),WARSAW);
+document.addEventListener('click',e=>{if(!e.target.closest('.fld'))document.querySelectorAll('.cityres').forEach(r=>r.classList.remove('show'));});
+
+const PG={Sun:"☉",Moon:"☽",Mercury:"☿",Venus:"♀",Mars:"♂",Jupiter:"♃",Saturn:"♄",Uranus:"♅",Neptune:"♆",Pluto:"♇"};
+const PN={Sun:"Słońce",Moon:"Księżyc",Mercury:"Merkury",Venus:"Wenus",Mars:"Mars",Jupiter:"Jowisz",Saturn:"Saturn",Uranus:"Uran",Neptune:"Neptun",Pluto:"Pluton"};
+const PCOL={Sun:"#f0d488",Moon:"#d9c9e8",Mercury:"#cfe0c4",Venus:"#f3cbb8",Mars:"#e7a08f",Jupiter:"#c5d8ea",Saturn:"#ddd0b2",Uranus:"#bfe0dc",Neptune:"#c8d4ee",Pluto:"#e3bcd4"};
+const SG=["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
+const SN=["Baran","Byk","Bliźnięta","Rak","Lew","Panna","Waga","Skorpion","Strzelec","Koziorożec","Wodnik","Ryby"];
+const BODIES=['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+const ANAME={conjunction:'koniunkcja',sextile:'sekstyl',square:'kwadratura',trine:'trygon',opposition:'opozycja'};
+const AGLYPH={conjunction:'☌',sextile:'⚹',square:'□',trine:'△',opposition:'☍'};
+const ACOL={conjunction:'#cba85e',trine:'#9ab98a',sextile:'#9ab98a',square:'#d39a8c',opposition:'#d39a8c'};
+const HOUSES=[
+ ["I","Ascendent · Ty sam","Wizerunek, temperament, pierwsze wrażenie i sposób, w jaki wchodzisz w świat. Pierwszy dom to Twój Ascendent — maska, przez którą świat widzi Ciebie po raz pierwszy."],
+ ["II","Zasoby","Pieniądze, wartości, talenty, które przynoszą dochód, i poczucie własnej wartości."],
+ ["III","Umysł","Komunikacja, nauka, rodzeństwo, krótkie podróże i codzienny sposób myślenia."],
+ ["IV","Dom i korzenie","Rodzina, dom, fundament emocjonalny i to, co dziedziczysz po przodkach."],
+ ["V","Miłość i twórczość","Romans, dzieci, ekspresja siebie, radość, gry i wszystko, co tworzysz z serca."],
+ ["VI","Codzienność i zdrowie","Praca, nawyki, rutyna, ciało i troska o siebie oraz innych."],
+ ["VII","Związki","Partnerstwo, małżeństwo, wspólnicy i to, czego szukasz w drugim człowieku."],
+ ["VIII","Transformacja","Kryzysy, intymność, wspólne zasoby, głęboka zmiana i odrodzenie."],
+ ["IX","Sens i podróże","Filozofia, wiara, dalekie podróże, wyższa wiedza i poszukiwanie sensu."],
+ ["X","Kariera i powołanie","Status, cel zawodowy, reputacja i ślad, jaki zostawiasz w świecie."],
+ ["XI","Wspólnota i marzenia","Przyjaźnie, grupy, plany na przyszłość i twoje największe pragnienia."],
+ ["XII","Podświadomość","To, co ukryte, sny, duchowość, samotnia i uzdrawianie tego, co niewidoczne."]
+];
+const norm=l=>((l%360)+360)%360;
+
+function localToUTC(y,mo,d,h,mi,tz){
+  let guess=new Date(Date.UTC(y,mo-1,d,h,mi,0));
+  for(let k=0;k<3;k++){
+    const s=guess.toLocaleString('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const m=s.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);
+    const shown=Date.UTC(+m[3],+m[1]-1,+m[2],+m[4]===24?0:+m[4],+m[5]);
+    const diff=Date.UTC(y,mo-1,d,h,mi)-shown;
+    if(Math.abs(diff)<30000)break;
+    guess=new Date(guess.getTime()+diff);
+  }
+  return guess;
+}
+
+function buildChart(date,lat,lng){
+  const planets=BODIES.map(b=>{
+    const ecl=Astronomy.Ecliptic(Astronomy.GeoVector(b,date,true));
+    const ecl2=Astronomy.Ecliptic(Astronomy.GeoVector(b,new Date(date.getTime()+12*3600*1000),true));
+    let dl=norm(ecl2.elon)-norm(ecl.elon); if(dl>180)dl-=360; if(dl<-180)dl+=360;
+    const lon=norm(ecl.elon);
+    return {n:b,lon,sign:Math.floor(lon/30),deg:lon%30,r:(b!=='Sun'&&b!=='Moon'&&dl<0)};
+  });
+  const e=23.4393*Math.PI/180, gast=Astronomy.SiderealTime(date);
+  let lst=norm((gast+lng/15)*15)*Math.PI/180;
+  let mc=norm(Math.atan2(Math.sin(lst),Math.cos(lst)*Math.cos(e))*180/Math.PI);
+  const f=lat*Math.PI/180;
+  let asc=norm(Math.atan2(Math.cos(lst),-(Math.sin(lst)*Math.cos(e)+Math.tan(f)*Math.sin(e)))*180/Math.PI);
+  const ascSign=Math.floor(asc/30);
+  // Domy Placidus — trysekcja półłuku dobowego (zweryfikowane: ratio 0=MC, 1=ASC/DSC).
+  const ramc=lst*180/Math.PI;
+  function plac(ratio,west){
+    let lam=mc;
+    for(let i=0;i<40;i++){
+      const dec=Math.asin(Math.sin(e)*Math.sin(lam*Math.PI/180));
+      let t=Math.tan(dec)*Math.tan(f); if(t>1)t=1; if(t<-1)t=-1;
+      const SDA=90+Math.asin(t)*180/Math.PI;                       // półłuk dobowy
+      const RAt=(ramc+(west?-1:1)*ratio*SDA)*Math.PI/180;
+      lam=norm(Math.atan2(Math.sin(RAt),Math.cos(e)*Math.cos(RAt))*180/Math.PI);
+    }
+    return norm(lam);
+  }
+  const c11=plac(1/3,false),c12=plac(2/3,false),c9=plac(1/3,true),c8=plac(2/3,true);
+  // houses[0..11] = kuspidy domów 1..12
+  const houses=[asc,norm(c8+180),norm(c9+180),norm(mc+180),norm(c11+180),norm(c12+180),
+                norm(asc+180),c8,c9,mc,c11,c12];
+  planets.forEach(p=>{let h=12;for(let i=0;i<12;i++){const a=houses[i];if(norm(p.lon-a)<norm(houses[(i+1)%12]-a)){h=i+1;break;}}p.house=h;});
+  const AS=[{a:0,t:'conjunction',o:8},{a:60,t:'sextile',o:5},{a:90,t:'square',o:7},{a:120,t:'trine',o:7},{a:180,t:'opposition',o:8}];
+  const aspects=[];
+  for(let i=0;i<planets.length;i++)for(let j=i+1;j<planets.length;j++){
+    let d=Math.abs(planets[i].lon-planets[j].lon)%360; if(d>180)d=360-d;
+    for(const x of AS){if(Math.abs(d-x.a)<=x.o){aspects.push({a:planets[i].n,b:planets[j].n,t:x.t,o:Math.abs(d-x.a)});break;}}
+  }
+  return {planets,houses,asc,mc,ascSign,aspects};
+}
+
+function draw(ch){
+  const svg=document.querySelector('svg'); svg.innerHTML='';
+  const cx=450,cy=450,asc=ch.asc,GOLD="#bfa258";
+  const R={out:425,zin:360,planet:318,houseNum:222,asp:248};
+  const ang=l=>180+(l-asc), pt=(l,r)=>{const a=ang(l)*Math.PI/180;return[cx+r*Math.cos(a),cy-r*Math.sin(a)];};
+  const NS="http://www.w3.org/2000/svg";
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const circ=(r,o)=>svg.appendChild(el('circle',Object.assign({cx,cy,r,fill:'none'},o)));
+  const line=(x1,y1,x2,y2,o)=>svg.appendChild(el('line',Object.assign({x1,y1,x2,y2},o)));
+  const txt=(x,y,s,o)=>{const e=el('text',Object.assign({x,y,'text-anchor':'middle','dominant-baseline':'central'},o));e.textContent=s;svg.appendChild(e);};
+  circ(R.asp,{fill:'#fbf8f0',stroke:GOLD,'stroke-width':1.3,opacity:1});
+  circ(R.out,{stroke:GOLD,'stroke-width':1.8,opacity:1});
+  circ(R.zin,{stroke:GOLD,'stroke-width':1.3,opacity:.85});
+  for(let d=0;d<360;d++){const r2=(d%10===0)?R.zin-12:(d%5===0?R.zin-8:R.zin-4);const[x1,y1]=pt(d,R.zin),[x2,y2]=pt(d,r2);line(x1,y1,x2,y2,{stroke:GOLD,opacity:(d%10===0?.45:.2),'stroke-width':.6});}
+  for(let s=0;s<12;s++){const[bx,by]=pt(s*30,R.out),[bx2,by2]=pt(s*30,R.zin);line(bx,by,bx2,by2,{stroke:GOLD,opacity:.45,'stroke-width':.8});
+    if(s%2===0){let a0=s*30,d=`M ${pt(a0,R.zin)[0]} ${pt(a0,R.zin)[1]} `;for(let k=0;k<=30;k++){const[x,y]=pt(a0+k,R.zin);d+=`L ${x} ${y} `;}for(let k=30;k>=0;k--){const[x,y]=pt(a0+k,R.out);d+=`L ${x} ${y} `;}svg.appendChild(el('path',{d:d+'Z',fill:'rgba(191,162,88,.07)'}));}
+    const[gx,gy]=pt(s*30+15,(R.out+R.zin)/2);txt(gx,gy,SG[s],{class:'glyph','font-size':30,fill:'#8a6d2e','font-weight':600});}
+  ch.houses.forEach((h,i)=>{
+    const axis=(i===3||i===6); // IC (4 dom) i DSC (7 dom) — pogrubione osie jak ASC/MC
+    const[x1,y1]=pt(h,R.asp),[x2,y2]=pt(h, axis?R.out:R.zin);
+    line(x1,y1,x2,y2, axis?{stroke:'#c39f52','stroke-width':1.6,opacity:.85}:{stroke:'#cbbd95','stroke-width':.7,opacity:.5,'stroke-dasharray':'2 5'});
+    const mid=h+norm(ch.houses[(i+1)%12]-h)/2; // środek (nierównego) domu
+    const[hx,hy]=pt(mid,R.houseNum);txt(hx,hy,i+1,{'font-size':15,fill:'#8f7a42','font-family':'Lora,serif','font-weight':600});});
+  [['ASC',ch.asc],['MC',ch.mc]].forEach(([lab,l])=>{const[x1,y1]=pt(l,R.asp),[x2,y2]=pt(l,R.out);
+    line(x1,y1,x2,y2,{stroke:'#c39f52','stroke-width':1.6,opacity:.85});
+    const[tx,ty]=pt(l,R.out+16);txt(tx,ty,lab,{'font-size':13,fill:'#9a7d2e','font-family':'Lora,serif','font-weight':700});});
+  ch.aspects.forEach(a=>{const pa=ch.planets.find(x=>x.n===a.a),pb=ch.planets.find(x=>x.n===a.b);
+    const[x1,y1]=pt(pa.lon,R.asp-3),[x2,y2]=pt(pb.lon,R.asp-3);
+    line(x1,y1,x2,y2,{stroke:ACOL[a.t],'stroke-width':a.t==='conjunction'?1.5:1,opacity:.55});});
+  const ps=[...ch.planets].sort((a,b)=>a.lon-b.lon);let ll=-99,lr=R.planet;
+  ps.forEach(p=>{let d=Math.abs(p.lon-ll);if(d>180)d=360-d;p._r=(d<9)?lr-30:R.planet;ll=p.lon;lr=p._r;});
+  const PR={};ch.planets.forEach(p=>PR[p.n]=ps.find(q=>q.n===p.n)._r);
+  ch.planets.forEach(p=>{const r=PR[p.n];const[tx,ty]=pt(p.lon,R.zin-3),[mx,my]=pt(p.lon,r+15);line(tx,ty,mx,my,{stroke:GOLD,opacity:.35,'stroke-width':.7});
+    const[px,py]=pt(p.lon,r);
+    svg.appendChild(el('circle',{cx:px,cy:py,r:17,fill:PCOL[p.n],stroke:'#fff','stroke-width':2}));
+    svg.appendChild(el('circle',{cx:px,cy:py,r:17,fill:'none',stroke:GOLD,'stroke-width':.8,opacity:.7}));
+    txt(px,py,PG[p.n],{class:'glyph','font-size':20,fill:'#3a352a'});
+    const[dx,dy]=pt(p.lon,r-25);txt(dx,dy,(p.r?'℞':'')+Math.round(p.deg)+'°',{'font-size':13,fill:'#6f6440','font-family':'Lora,serif','font-weight':600});});
+  txt(cx,cy,"✦",{'font-size':20,fill:'#c0a45a',opacity:.7});
+}
+
+let CHART_GENDER='f';
+function astroCTA(t){try{parent.postMessage({astroCta:t},'*');}catch(e){}}
+function houseBannerFin(){const e=CHART_GENDER==='m';
+  return `<div class="house-cta house-cta-fin"><p>${e?'Poznałeś':'Poznałaś'}, jak przychodzą do Ciebie pieniądze. Ale nie poznał${e?'eś':'aś'} najważniejszego — gdzie dokładnie leżą one właśnie dla Ciebie.</p>`+
+  `<p>Znak na tym domu pokazuje tylko charakter pieniędzy. A sfery, przez które dochód płynie właśnie do Ciebie, kryją się we władcy domu i w planetach — często to coś zupełnie innego niż w ogólnym opisie.</p>`+
+  `<p>Na analizie finansowej rozkładam całą Twoją kartę i pokazuję, gdzie są Twoje prawdziwe pieniądze i co teraz blokuje przepływ.</p>`+
+  `<button class="house-cta-btn" onclick="astroCTA('finance')">Chcę analizę finansową</button></div>`;}
+function houseBannerRel(){const e=CHART_GENDER==='m';
+  return `<div class="house-cta house-cta-rel"><p>${e?'Poznałeś':'Poznałaś'}, jakiego partnera przyciągasz. Ale nie wiesz, czy pasuje do Ciebie konkretna osoba.</p>`+
+  `<p>Znak na tym domu pokazuje tylko typ. A czy związek naprawdę się ułoży, widać dopiero, gdy porównuję dwie karty — Twoją i jego.</p>`+
+  `<p>Na analizie relacji pokazuję, gdzie jest między wami prawdziwe przyciąganie, gdzie będziecie się ścierać i czy para ma perspektywę.</p>`+
+  `<button class="house-cta-btn" onclick="astroCTA('relation')">Chcę analizę relacji</button></div>`;}
+function houseBanner(n){let h='';if([2,6,8,10].indexOf(n)>=0)h+=houseBannerFin();if([5,7,8].indexOf(n)>=0)h+=houseBannerRel();return h;}
+function render(ch,mode){
+  document.getElementById('outTitle').textContent = mode==='solar' ? 'Twój Solár' : 'Twój Kosmogram';
+  document.getElementById('accTitle').textContent = mode==='solar' ? 'Tematy roku' : 'Twoje Domy';
+  draw(ch);
+  // planet table (Karta Zdrowia style)
+  document.getElementById('ptab').innerHTML=
+    `<tr class="thd"><td>Planeta</td><td class="r">Znak</td><td class="r">Dom</td></tr>`+
+    ch.planets.map(p=>{const g=`linear-gradient(90deg, ${PCOL[p.n]}, #f3ecda)`;
+      return `<tr class="prow"><td style="background:${g}"><span class="pg">${PG[p.n]}</span>${PN[p.n]} ${p.r?'℞':''}</td>
+      <td class="mid" style="background:${g}">${SN[p.sign]} ${Math.round(p.deg)}°</td>
+      <td style="background:${g}">${p.house}</td></tr>`;}).join('');
+  // aspects
+  document.getElementById('asps').innerHTML=ch.aspects.map(a=>
+    `<div class="asp" style="background:linear-gradient(90deg,${ACOL[a.t]}22,#faf6ec)">
+      <span class="g" style="color:#7a6a3c">${PG[a.a]}</span>
+      <span class="g" style="color:${ACOL[a.t]}">${AGLYPH[a.t]}</span>
+      <span class="g" style="color:#7a6a3c">${PG[a.b]}</span>
+      <span class="o">${ANAME[a.t]} · ${a.o.toFixed(0)}°</span></div>`).join('');
+  // houses accordion
+  document.getElementById('acc').innerHTML=HOUSES.map((h,i)=>{
+    const houseNum=i+1;
+    const sign=Math.floor(ch.houses[i]/30); // znak na kuspidzie domu (Placidus)
+    const inHouse=ch.planets.filter(p=>p.house===houseNum);
+    const plg=inHouse.map(p=>`<span title="${PN[p.n]}">${PG[p.n]}</span>`).join(' ');
+    const plLine=inHouse.length?`<div class="pl"><b>Planety:</b> ${inHouse.map(p=>PN[p.n]+(p.r?' ℞':'')).join(', ')}.</div>`
+      :`<div class="pl">Brak planet — obszar prowadzony przez znak <b>${SN[sign]}</b>.</div>`;
+    let bodyTxt=h[2];
+    if(mode==='solar'){
+      if(window.SOLAR_TEXTS && window.SOLAR_TEXTS[houseNum]){ const t=window.SOLAR_TEXTS[houseNum][sign]; if(t) bodyTxt=t; }
+    } else {
+      if(window.HOUSE_TEXTS && window.HOUSE_TEXTS[houseNum]){ const gset=window.HOUSE_TEXTS[houseNum], t=(gset[CHART_GENDER]||gset.f||[])[sign]; if(t) bodyTxt=t; }
+    }
+    const banner = (mode==='solar') ? '' : houseBanner(houseNum);
+    return `<div class="item"><div class="hd" onclick="this.parentNode.classList.toggle('open')">
+      <div class="l"><span class="num">${h[0]} Dom</span><span class="sign">${SN[sign]} · ${h[1]}</span></div>
+      <span class="arr">›</span></div>
+      <div class="bd"><div class="bd-in">${bodyTxt}${plLine}${banner}</div></div></div>`;
+  }).join('');
+}
+
+// auto-format inputs
+function fmtTime(e){let v=e.target.value.replace(/\D/g,'').slice(0,4);if(v.length>2)v=v.slice(0,2)+':'+v.slice(2);e.target.value=v;}
+function fmtDate(e){let v=e.target.value.replace(/\D/g,'').slice(0,8),o=v.slice(0,2);if(v.length>2)o+='.'+v.slice(2,4);if(v.length>4)o+='.'+v.slice(4,8);e.target.value=o;}
+['time','s_time'].forEach(id=>document.getElementById(id).addEventListener('input',fmtTime));
+['date','s_date'].forEach(id=>document.getElementById(id).addEventListener('input',fmtDate));
+['s_date','s_year'].forEach(id=>document.getElementById(id).addEventListener('input',updateSolarTzHint));
+updateSolarTzHint();
+document.getElementById('s_year').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,4);});
+
+function parseDT(dateStr,timeStr){
+  const dm=dateStr.trim().match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})$/);
+  const tm=timeStr.trim().match(/^(\d{1,2}):(\d{2})$/);
+  if(!dm)throw{m:'Data w formacie DD.MM.RRRR'};
+  if(!tm)throw{m:'Godzina w formacie HH:MM'};
+  return {d:+dm[1],mo:+dm[2],y:+dm[3],h:+tm[1],mi:+tm[2]};
+}
+
+// ---- NATAL ----
+document.getElementById('f').addEventListener('submit',ev=>{
+  ev.preventDefault();
+  const err=document.getElementById('err'); err.textContent='';
+  try{
+    const p=parseDT(document.getElementById('date').value,document.getElementById('time').value);
+    const place=geoNatal.get(); if(!place){err.textContent='Wybierz miasto z listy';return;}
+    const date=localToUTC(p.y,p.mo,p.d,p.h,p.mi,place.tz);
+    const ch=buildChart(date,place.lat,place.lng);
+    const nm=document.getElementById('name').value.trim();
+    document.getElementById('cap').textContent=(nm?nm+' · ':'')+document.getElementById('date').value+' · '+document.getElementById('time').value+' · '+place.name;
+    render(ch,'natal');
+    document.getElementById('out').style.display='block';
+  }catch(e){err.textContent=e.m||('Błąd obliczeń: '+e.message);}
+});
+
+// ---- SOLAR RETURN ----
+function buildSolarReturn(birthDate,birthLat,birthLng,year,hereLat,hereLng){
+  const sunNatal=norm(Astronomy.Ecliptic(Astronomy.GeoVector('Sun',birthDate,true)).elon);
+  // search the Sun-return moment within ±25 dni wokół urodzin w danym roku
+  const approx=new Date(Date.UTC(year,birthDate.getUTCMonth(),Math.max(1,birthDate.getUTCDate()-25)));
+  const sr=Astronomy.SearchSunLongitude(sunNatal, Astronomy.MakeTime(approx), 60);
+  if(!sr)throw{m:'Nie znaleziono momentu solára'};
+  const ch=buildChart(sr.date,hereLat,hereLng);
+  ch.srMoment=sr.date;
+  return ch;
+}
+document.getElementById('fs').addEventListener('submit',ev=>{
+  ev.preventDefault();
+  const err=document.getElementById('err'); err.textContent='';
+  try{
+    const p=parseDT(document.getElementById('s_date').value,document.getElementById('s_time').value);
+    const yr=parseInt(document.getElementById('s_year').value,10);
+    if(!yr||yr<1900||yr>2100){err.textContent='Podaj rok solára (np. 2026)';return;}
+    const bp=geoSbirth.get(); if(!bp){err.textContent='Wybierz miasto urodzenia';return;}
+    const hp=geoShere.get()||bp; // miasto świętowania opcjonalne — wpływa tylko na domy
+    const birth=localToUTC(p.y,p.mo,p.d,p.h,p.mi,bp.tz);
+    const ch=buildSolarReturn(birth,bp.lat,bp.lng,yr,hp.lat,hp.lng);
+    const nm=document.getElementById('s_name').value.trim();
+    // Solár = relokacja do miasta świętowania (np. PL). Moment liczymy w UTC,
+    // a pokazujemy w strefie TEGO miasta — auto CET/CEST (+1 zimą, +2 latem) wg daty solára.
+    const m=ch.srMoment, mm=localToUTCstr(m,hp.tz), off=tzOffsetH(m,hp.tz);
+    const gmt='GMT'+(off>=0?'+':'')+off;
+    document.getElementById('cap').textContent=(nm?nm+' · ':'')+'Solár '+yr+' · '+mm+' · '+hp.name+' ('+gmt+')';
+    render(ch,'solar');
+    document.getElementById('out').style.display='block';
+  }catch(e){err.textContent=e.m||('Błąd obliczeń: '+e.message);}
+});
+// ---- API dla osadzonego formularza (rodzic przekazuje dane, my rysujemy wykres) ----
+const pad2=n=>String(n).padStart(2,'0');
+window.embedNatal=function(p){
+  CHART_GENDER=(p.gender==='m')?'m':'f';
+  const date=localToUTC(p.y,p.mo,p.d,p.h,p.mi,p.tz);
+  const ch=buildChart(date,p.lat,p.lng);
+  document.getElementById('cap').textContent=(p.name?p.name+' · ':'')+pad2(p.d)+'.'+pad2(p.mo)+'.'+p.y+' · '+pad2(p.h)+':'+pad2(p.mi)+' · '+p.city;
+  render(ch,'natal');
+  document.getElementById('out').style.display='block';
+};
+window.embedSolar=function(p){
+  const birth=localToUTC(p.y,p.mo,p.d,p.h,p.mi,p.tz);
+  const ch=buildSolarReturn(birth,p.lat,p.lng,p.year,p.hlat,p.hlng);
+  const m=ch.srMoment, mm=localToUTCstr(m,p.htz), off=tzOffsetH(m,p.htz);
+  document.getElementById('cap').textContent=(p.name?p.name+' · ':'')+'Solár '+p.year+' · '+mm+' · '+p.hcity+' (GMT'+(off>=0?'+':'')+off+')';
+  render(ch,'solar');
+  document.getElementById('out').style.display='block';
+};
+// format a UTC instant into local wall time of tz (DD.MM HH:MM)
+function localToUTCstr(date,tz){
+  const s=date.toLocaleString('pl-PL',{timeZone:tz,day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  return s.replace(',','');
+}
+// Realny offset strefy (godziny) NA DANĄ DATĘ — z bazy IANA, więc auto CET/CEST (+1 zimą, +2 latem).
+function tzOffsetH(date,tz){
+  const s=date.toLocaleString('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  const m=s.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);
+  const asUTC=Date.UTC(+m[3],+m[1]-1,+m[2],+m[4]%24,+m[5]);
+  return Math.round((asUTC-date.getTime())/3600000);
+}
+function kSeg(btn){btn.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+
+// ---- SYNASTRY (pair) ----
+['p1_time','p2_time'].forEach(id=>document.getElementById(id).addEventListener('input',fmtTime));
+['p1_date','p2_date'].forEach(id=>document.getElementById(id).addEventListener('input',fmtDate));
+
+function crossAspects(A,B){
+  const AS=[{a:0,t:'conjunction',o:8},{a:60,t:'sextile',o:5},{a:90,t:'square',o:7},{a:120,t:'trine',o:7},{a:180,t:'opposition',o:8}];
+  const out=[];
+  A.forEach(pa=>B.forEach(pb=>{let d=Math.abs(pa.lon-pb.lon)%360;if(d>180)d=360-d;
+    for(const x of AS){if(Math.abs(d-x.a)<=x.o){out.push({a:pa.n,b:pb.n,t:x.t,o:Math.abs(d-x.a)});break;}}}));
+  return out;
+}
+function synScore(asp){
+  let harm=0,tens=0,bonus=0;
+  asp.forEach(x=>{if(x.t==='trine'||x.t==='sextile'||x.t==='conjunction')harm++;else tens++;});
+  const has=(p,q)=>asp.some(x=>(x.a===p&&x.b===q)||(x.a===q&&x.b===p));
+  if(has('Sun','Moon')||has('Moon','Sun'))bonus+=6;
+  if(asp.some(x=>x.a==='Venus'||x.b==='Venus'))bonus+=4;
+  if(asp.some(x=>x.a==='Mars'||x.b==='Mars'))bonus+=3;
+  let raw=48+harm*2.4-tens*1.1+bonus;
+  return {score:Math.max(45,Math.min(94,Math.round(raw))),harm};
+}
+function synHighlights(asp){
+  const pick=[]; const used=new Set();
+  const rules=[
+    {cat:'Bliskość',c:'#f3cbb8',pair:['Sun','Moon'],txt:'Emocje jednej osoby spotykają rdzeń drugiej — głęboka, instynktowna bliskość.'},
+    {cat:'Namiętność',c:'#e7a08f',pair:['Venus','Mars'],txt:'Magnetyczne przyciąganie — chemia, której trudno zignorować.'},
+    {cat:'Czułość',c:'#cfe0c4',pair:['Sun','Venus'],txt:'Ciepło, sympatia i wzajemny zachwyt. Lubicie się, nie tylko kochacie.'},
+    {cat:'Więź serc',c:'#d9c9e8',pair:['Moon','Venus'],txt:'Łagodność i opiekuńczość — czujecie się przy sobie bezpiecznie.'},
+    {cat:'Komunikacja',c:'#c5d8ea',pair:['Mercury','Mercury'],txt:'Sposób, w jaki myślicie i rozmawiacie — wspólny język lub ciekawe różnice.'},
+    {cat:'Lekcja',c:'#c8d4ee',pair:['Moon','Saturn'],txt:'Wymaga dojrzałości i cierpliwości — to, co buduje, jeśli oboje zostają.'},
+    {cat:'Lekcja',c:'#c8d4ee',pair:['Sun','Saturn'],txt:'Poczucie obowiązku i struktury — poważna, trwała energia między wami.'}
+  ];
+  for(const r of rules){
+    if(pick.length>=4)break;
+    if(used.has(r.cat))continue;
+    const hit=asp.find(x=>(x.a===r.pair[0]&&x.b===r.pair[1])||(x.a===r.pair[1]&&x.b===r.pair[0]));
+    if(hit){used.add(r.cat);pick.push({...r,asp:`${PG[hit.a]} ${AGLYPH[hit.t]} ${PG[hit.b]}`});}
+  }
+  return pick;
+}
+function drawSynastry(Apl,Bpl,asp,asc){
+  const svg=document.getElementById('synsvg'); svg.innerHTML='';
+  const cx=450,cy=450,GOLD="#bfa258";
+  const R={out:425,zin:360,his:322,her:280,asp:250};
+  const ang=l=>180+(l-asc), pt=(l,r)=>{const a=ang(l)*Math.PI/180;return[cx+r*Math.cos(a),cy-r*Math.sin(a)];};
+  const NS="http://www.w3.org/2000/svg";
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const circ=(r,o)=>svg.appendChild(el('circle',Object.assign({cx,cy,r,fill:'none'},o)));
+  const line=(x1,y1,x2,y2,o)=>svg.appendChild(el('line',Object.assign({x1,y1,x2,y2},o)));
+  const txt=(x,y,s,o)=>{const e=el('text',Object.assign({x,y,'text-anchor':'middle','dominant-baseline':'central'},o));e.textContent=s;svg.appendChild(e);};
+  circ(R.asp,{fill:'#fbf8f0',stroke:GOLD,'stroke-width':1,opacity:.9});
+  circ(R.out,{stroke:GOLD,'stroke-width':1.4,opacity:.85});circ(R.zin,{stroke:GOLD,'stroke-width':1,opacity:.55});
+  for(let s=0;s<12;s++){const[bx,by]=pt(s*30,R.out),[bx2,by2]=pt(s*30,R.zin);line(bx,by,bx2,by2,{stroke:GOLD,opacity:.4,'stroke-width':.8});
+    if(s%2===0){let a0=s*30,d=`M ${pt(a0,R.zin)[0]} ${pt(a0,R.zin)[1]} `;for(let k=0;k<=30;k++){const[x,y]=pt(a0+k,R.zin);d+=`L ${x} ${y} `;}for(let k=30;k>=0;k--){const[x,y]=pt(a0+k,R.out);d+=`L ${x} ${y} `;}svg.appendChild(el('path',{d:d+'Z',fill:'rgba(191,162,88,.07)'}));}
+    const[gx,gy]=pt(s*30+15,(R.out+R.zin)/2);txt(gx,gy,SG[s],{class:'glyph','font-size':25,fill:'#a98f4e'});}
+  asp.forEach(x=>{const pa=Apl.find(p=>p.n===x.a),pb=Bpl.find(p=>p.n===x.b);if(!pa||!pb)return;
+    const[x1,y1]=pt(pa.lon,R.her-19),[x2,y2]=pt(pb.lon,R.his-19);
+    line(x1,y1,x2,y2,{stroke:ACOL[x.t],'stroke-width':x.t==='conjunction'?1.5:1.05,opacity:.5});});
+  function ring(arr,r,ringC){const ps=[...arr].sort((u,v)=>u.lon-v.lon);let ll=-99,lr=r;
+    ps.forEach(p=>{let d=Math.abs(p.lon-ll);if(d>180)d=360-d;p._r=(d<9)?lr-28:r;ll=p.lon;lr=p._r;});
+    const PR={};arr.forEach(p=>PR[p.n]=ps.find(q=>q.n===p.n)._r);
+    arr.forEach(p=>{const rr=PR[p.n];const[px,py]=pt(p.lon,rr);
+      svg.appendChild(el('circle',{cx:px,cy:py,r:16,fill:PCOL[p.n],stroke:ringC,'stroke-width':2.4}));
+      txt(px,py,PG[p.n],{class:'glyph','font-size':17,fill:'#4a4530'});});}
+  ring(Bpl,R.his,'#7b9bd0'); ring(Apl,R.her,'#d98c7a');
+  txt(cx,cy,"❤",{'font-size':26,fill:'#d39a8c',opacity:.85});
+}
+document.getElementById('fp').addEventListener('submit',ev=>{
+  ev.preventDefault();
+  const err=document.getElementById('err'); err.textContent='';
+  try{
+    const d1=parseDT(document.getElementById('p1_date').value,document.getElementById('p1_time').value);
+    const d2=parseDT(document.getElementById('p2_date').value,document.getElementById('p2_time').value);
+    const c1=geoP1.get(), c2=geoP2.get();
+    if(!c1){err.textContent='Wybierz miasto Osoby 1';return;}
+    if(!c2){err.textContent='Wybierz miasto Osoby 2';return;}
+    const A=buildChart(localToUTC(d1.y,d1.mo,d1.d,d1.h,d1.mi,c1.tz),c1.lat,c1.lng);
+    const B=buildChart(localToUTC(d2.y,d2.mo,d2.d,d2.h,d2.mi,c2.tz),c2.lat,c2.lng);
+    const asp=crossAspects(A.planets,B.planets);
+    const sc=synScore(asp);
+    const n1=document.getElementById('p1_name').value.trim()||'Osoba 1';
+    const n2=document.getElementById('p2_name').value.trim()||'Osoba 2';
+    document.getElementById('syn1n').textContent=n1;
+    document.getElementById('syn2n').textContent=n2;
+    document.getElementById('syn1s').textContent='Słońce w '+SN[A.planets[0].sign];
+    document.getElementById('syn2s').textContent='Słońce w '+SN[B.planets[0].sign];
+    drawSynastry(A.planets,B.planets,asp,A.asc);
+    const lab= sc.score>=85?'Bratnie dusze':sc.score>=72?'Silne przyciąganie':sc.score>=60?'Obiecująca więź':'Wyzwanie i wzrost';
+    document.getElementById('gv').textContent=sc.score+'%';
+    document.getElementById('gl').textContent=lab;
+    document.getElementById('gn').textContent=sc.harm;
+    document.getElementById('syncards').innerHTML=synHighlights(asp).map(h=>
+      `<div class="hl"><div class="cat"><span class="dot" style="background:${h.c}"></span>${h.cat}</div>
+       <div class="asp2">${h.asp}</div><div class="txt">${h.txt}</div></div>`).join('')
+      || '<div class="note">Brak wyraźnych aspektów między planetami — para o niezależnych energiach.</div>';
+    document.getElementById('outSyn').style.display='block';
+  }catch(e){err.textContent=e.m||('Błąd obliczeń: '+e.message);}
+});
+
+function setMode(mode){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.mode===mode));
+  document.getElementById('f').style.display = mode==='natal'?'flex':'none';
+  document.getElementById('fs').style.display = mode==='solar'?'flex':'none';
+  document.getElementById('fp').style.display = mode==='syn'?'flex':'none';
+  const titles={natal:'Twój Kosmogram',solar:'Twój Solár',syn:'Wasza Zgodność'};
+  document.getElementById('pageTitle').textContent=titles[mode];
+  const leads={natal:'Wpisz dane urodzenia, by zobaczyć swoją kartę natalną.',
+    solar:'Karta roku — Słońce wraca do swojego miejsca. Wpisz dane urodzenia, rok i miasto, gdzie świętujesz.',
+    syn:'Nałożymy wasze karty na siebie i pokażemy aspekty między planetami.'};
+  document.getElementById('lead').textContent=leads[mode];
+  document.getElementById('out').style.display='none';
+  document.getElementById('outSyn').style.display='none';
+  document.getElementById('err').textContent='';
+}
+
+if(new URLSearchParams(location.search).get('embed')!=='1') document.getElementById('f').dispatchEvent(new Event('submit'));
+</script>
+<script>
+// Tryb osadzony (?embed=1): przezroczyste tło + auto-wysokość do strony nadrzędnej.
+if(new URLSearchParams(location.search).get('embed')==='1'){
+  document.documentElement.style.background='transparent';
+  document.body.style.background='transparent';
+  ['pageTitle','lead','f','fs','fp'].forEach(id=>{const el=document.getElementById(id); if(el)el.style.display='none';});
+  const _t=document.querySelector('.tabs'); if(_t)_t.style.display='none'; // formularzem i zakładkami steruje strona nadrzędna
+  const postH=()=>{ try{ parent.postMessage({kosmoH:Math.ceil(document.body.scrollHeight)},'*'); }catch(e){} };
+  try{ new ResizeObserver(postH).observe(document.body); }catch(e){}
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+  setTimeout(postH,300); setTimeout(postH,1200);
+}
+</script>
+</body></html>

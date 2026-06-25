@@ -1,4 +1,6 @@
 # Branded short links for paid social (carry UTM for GA4)
-/ig   /?utm_source=instagram&utm_medium=paid&utm_campaign=matryca   302
-/fb   /?utm_source=facebook&utm_medium=paid&utm_campaign=matryca    302
-/tt   /?utm_source=tiktok&utm_medium=paid&utm_campaign=matryca      302
+/ig    /?utm_source=instagram&utm_medium=paid&utm_campaign=matryca     302
+/ig2   /?utm_source=instagram_2&utm_medium=paid&utm_campaign=matryca   302
+/fb    /?utm_source=facebook&utm_medium=paid&utm_campaign=matryca      302
+/tt    /?utm_source=tiktok&utm_medium=paid&utm_campaign=matryca        302
+/th    /?utm_source=threads&utm_medium=paid&utm_campaign=matryca       302
